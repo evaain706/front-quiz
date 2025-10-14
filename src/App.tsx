@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <div>
-      <h2>메인</h2>
+      <h2>메인.</h2>
       </div>
     </>
   );
