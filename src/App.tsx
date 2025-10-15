@@ -1,17 +1,27 @@
 
-import Header from './Components/Header';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
+import Main from './page/Main';
+import Layout from './Components/Layout';
+
 
 function App() {
-
+  const router = createBrowserRouter([
+    {
+    
+      element: <Layout />,
+      children: [
+        {
+          path: '/', 
+          element: <Main />
+        },
+    
+      ]
+    }
+  ]);
 
   return (
-    <>
-      <div>
-        <Header/>
-      <h2>메인.</h2>
-      </div>
-    </>
+    <RouterProvider router={router} />
   );
 }
 
