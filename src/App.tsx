@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 import Main from './page/Main';
 import Layout from './components/Layout';
+import OptionSelect from './page/OptionSelect';
 
 
 function App() {
@@ -15,6 +16,10 @@ function App() {
           path: '/', 
           element: <Main />
         },
+        {
+          path: '/select',
+          element: <OptionSelect/>
+        }
     
       ]
     }
