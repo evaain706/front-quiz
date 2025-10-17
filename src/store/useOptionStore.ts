@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-interface QuizState {
+interface OptionState {
   category: string;
   level: string;
   setCategory: (category: string) => void; 
@@ -9,7 +9,7 @@ interface QuizState {
   resetLevel: () => void;
 }
 
-export const useOptionStore = create<QuizState>((set) => ({
+export const useOptionStore = create<OptionState>((set) => ({
   category: '',
   level: '',
 

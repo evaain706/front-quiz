@@ -25,17 +25,17 @@ const OptionSelect = () => {
 
 
 
-  const handleCategorySelect = (selectedCat) => {
+  const handleCategorySelect = (selectedCat: string) => {
    
-    if (category === selectedCat.text) {
+    if (category === selectedCat) {
       setCategory('');
     } else {
-      setCategory(selectedCat.text);
+      setCategory(selectedCat);
     }
   };
 
 
-  const handleLevelSelect = (level) => {
+  const handleLevelSelect = (level :string) => {
     setLevel(level); 
     navigate('/quiz'); 
   };
@@ -75,7 +75,7 @@ const OptionSelect = () => {
                 text={cat.text}
                
                 isSelected={category === cat.text}
-                onClick={() => handleCategorySelect(cat)}
+                onClick={() => handleCategorySelect(cat.text)}
               />
             ))}
           </div>
