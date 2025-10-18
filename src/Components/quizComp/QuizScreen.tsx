@@ -1,63 +1,48 @@
+import { useEffect } from "react";
 import Button from "../Button";
 import { useQuiz } from "./useQuiz";
 import { useQuizStore } from "../../store/useQuizStore";
+import { useOptionStore } from "../../store/useOptionStore";
+import QuestionCard from "./QuestionCard";
+import OptionsCard from "./OptionCard";
 
 const QuizScreen = () => {
 
     const {fetchQuiz,handleSubmit} = useQuiz();
-    const {isLoading,quiz,setUserAnswer,userAnswer} = useQuizStore();
+    const {isLoading,quiz,setUserAnswer,userAnswer,isGrading} = useQuizStore();
+    const {category} = useOptionStore();
+
+
+    // useEffect(() => {
+
+    // fetchQuiz();
+
+    // },[])
 
 
     return(
-        <>
-        <div className="bg-gray-200 flex flex-col justify-center items-center rounded-2xl mx-3 ">
+        <div className="mx-3 flex flex-col gap-3 ">
+        <div className="flex flex-col justify-center items-center">
+        <h2 className="text-[3rem] md:text-[5rem] font-bold">{category}</h2>
+        
 
-        <h2 className="font-bold text-[1.8rem]">문제</h2>
+        </div>
 
-    
-        {quiz && 
-        <div className="py-[3rem]">
-         <h2 className="text-[1.4rem] font-bold mx-3 md:text-[1.6rem]">{quiz.question}</h2>
 
+        <div >
+         <QuestionCard/>
+        </div>
        
 
-        </div>    
-        
-        }
+     <OptionsCard/>
+
+      <div className="flex justify-between items-center">
+        <Button onClick={fetchQuiz} disabled={isLoading}>문제받기</Button>
+        <Button onClick={handleSubmit} disabled={isGrading}>채점</Button>
+      </div>
     
-        </div>  
-
-
-        <div className="bg-yellow-200">
-           {quiz && (
-        <div className='mt-4 w-full'>
-          <p className='mb-3 text-lg font-medium'>{quiz.question}</p>
-          {Object.entries(quiz.options).map(([key, value]) => (
-            <label
-              key={key}
-              className={`block cursor-pointer rounded border px-3 py-2 ${
-                userAnswer === key ? 'bg-blue-200' : ''
-              }`}
-            >
-              <input
-                type='radio'
-                name='answer'
-                value={key}
-                checked={userAnswer === key}
-                onChange={() => setUserAnswer(key)}
-                className='mr-2'
-              />
-              {key}. {value}
-            </label>
-          ))}
-        </div>
-      )}
-
-
-        </div>
-
         
-        </>
+        </div>
       
 
     )

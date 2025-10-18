@@ -5,13 +5,13 @@ import { instance } from "../../apis/instance";
 
 export const useQuiz = () => {
 
-const {quiz,setQuiz,userAnswer,setUserAnswer,setResult,setIsLoading} = useQuizStore();
+const {quiz,setQuiz,userAnswer,setUserAnswer,setResult,setIsLoading,setIsGrading} = useQuizStore();
 const {category,level} = useOptionStore();
 
  const fetchQuiz = async () => {
     setIsLoading(true);
     setQuiz(null);
-    setResult('');
+    setResult(null);
     setUserAnswer('');
 
     try {
@@ -30,17 +30,18 @@ const {category,level} = useOptionStore();
   const handleSubmit = async () => {
     if (!quiz || !userAnswer) return;
 
-    setIsLoading(true);
+    setIsGrading(true);
     try {
       const response = await instance.post('/api/grade-answer', {
         quiz,
         userAnswer,
       });
-      setResult(response.data.result);
+      console.log(response.data)
+      setResult(response.data);
     } catch (error) {
       console.error('채점 실패:', error);
     } finally {
-      setIsLoading(false);
+      setIsGrading(false);
     }
   };
 

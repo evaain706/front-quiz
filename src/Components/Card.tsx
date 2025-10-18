@@ -4,6 +4,7 @@ interface CardProps {
     text: string;
     onClick? : () => void;
     isSelected? : boolean
+    
 }
 
 
@@ -13,9 +14,9 @@ interface CardProps {
     return(
     <div
     onClick={onClick}
-    className={`p-4 rounded-lg cursor-pointer transition-all py-[4rem] ${
+    className={`p-4 rounded-lg cursor-pointer transition-all py-[4rem]  ${
       isSelected
-        ? 'bg-blue-500 text-white ring-2 ring-blue-500'
+        ? 'bg-blue-500 text-white ring-2 ring-blue-500 animate-pulse'
         : 'bg-gray-200 hover:bg-gray-300'
     }`}
   >

@@ -1,3 +1,4 @@
+import ReactLogo from "../assets/svg/reactIcon";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 
@@ -13,6 +14,13 @@ return(
 
     <Button size="xl" variant="primary" onClick={() => navigate('/select')}>안녕</Button>
 
+
+        <div className="w-40 h-40">
+          <ReactLogo/>
+        </div>
+       
+    
+    
 
 
     </div>

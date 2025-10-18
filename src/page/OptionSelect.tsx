@@ -68,7 +68,7 @@ const OptionSelect = () => {
       {step === 0 && (
         <div className="w-full text-center">
           <h2 className="text-2xl md:text-3xl font-bold mb-8">주제를 선택해주세요</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full ">
             {categorylist.map((cat) => (
               <Card
                 key={cat.id}
@@ -89,7 +89,7 @@ const OptionSelect = () => {
             주제: {category}
           </h2>
           <h3 className="text-xl md:text-2xl mb-8">난이도를 선택해주세요</h3>
-          <div className="flex gap-4 justify-center">
+          <div className="flex gap-4 justify-center flex-col md:flex-row">
           
             <Button size="md" onClick={() => handleLevelSelect('쉬움')}>쉬움</Button>
             <Button size="md" onClick={() => handleLevelSelect('보통')}>보통</Button>

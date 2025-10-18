@@ -4,11 +4,11 @@ import Header from './Header';
 
 const Layout = () => {
   return (
-    <div>
+    <div className='bg-white h-screen'>
    
       <Header />
       
-      <div className='max-w-[120rem] flex justify-center items-center mx-auto '>
+      <div className='max-w-[120rem] flex justify-center items-center mx-auto  '>
         <Outlet /> 
       </div>
       
