@@ -83,7 +83,7 @@ const OptionSelect = () => {
       )}
 
       {step === 1 && (
-        <div className="text-center">
+        <div className="w-full text-center">
           <h2 className="text-2xl md:text-3xl font-bold mb-2">
            
             주제: {category}

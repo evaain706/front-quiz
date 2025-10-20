@@ -1,10 +1,24 @@
-import { useQuizStore } from "../../store/useQuizStore";
+
 import ReactMarkdown from 'react-markdown'
+import type { Quiz } from "../../types/quizTypes";
 
 
-const QuestionCard = () => {
+interface QuestionCardProps {
+    error: Error | null;
+    isLoading: boolean;
+    quiz: Quiz | null;
+}
 
-const {quiz,isLoading} = useQuizStore();
+
+const QuestionCard = ({error,isLoading,quiz}:QuestionCardProps) => {
+
+
+
+if(error){
+    throw error;
+}
+
+
 
 if(isLoading){
     return(
@@ -20,17 +34,16 @@ const markdownContnet = quiz?.question;
 
 return(
 
-     <div className=" md:w-[70rem] lg:w-[90rem] min-h-[15rem]  border-5 border-gray-500 rounded-md bg-white flex items-center justify-center ">
-    
-      <div className="flex flex-col text-[1.4rem] md:text-[1.6rem] font-bold  leading-[3rem] md:leading-[5rem] px-5">
-         <ReactMarkdown>
-        {markdownContnet}
-        </ReactMarkdown>
-      </div>
-   
-        {/* <h2 className="text-[1.4rem] md:text-[1.6rem] font-bold  leading-[3rem] md:leading-[5rem] px-5">{quiz?.question}</h2> */}
-     
-    </div>
+    <div className="md:w-[70rem] lg:w-[90rem] min-h-[15rem] border-5 border-gray-500 rounded-md bg-navy-black flex items-center justify-center p-6 scanline-overlay ">
+
+
+  <div className="w-full max-h-[30rem] overflow-auto text-[1.2rem] md:text-[1.6rem] font-bold leading-[3rem] md:leading-[4rem] text-glow-green animate-flicker text-green-400">
+    <ReactMarkdown>
+      {markdownContnet}
+    </ReactMarkdown>
+  </div>
+  
+</div>
 
 
 )
