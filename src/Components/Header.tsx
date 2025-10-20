@@ -4,7 +4,7 @@ import LogoImg from '/logo.png'
 const Header = () => {
 
 return(
-    <div className="w-full py-[1rem] px-[4rem] bg-gray-200 mb-[2rem] flex items-center justify-between ">
+    <div className="w-full py-[1rem] px-[4rem] bg-gray-200 mb-[2rem] flex items-center justify-between fixed top-0 ">
         
         
         <img src={LogoImg} className='w-50 h-20 aspect-auto'/>

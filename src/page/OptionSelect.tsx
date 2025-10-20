@@ -64,7 +64,7 @@ const OptionSelect = () => {
   ];
 
   return (
-    <div className="w-full p-4 md:p-8 flex flex-col items-center justify-center gap-10 md:gap-16">
+    <div className="w-full p-4 md:p-8 flex flex-col items-center justify-center gap-10 md:gap-16 ">
       {step === 0 && (
         <div className="w-full text-center">
           <h2 className="text-2xl md:text-3xl font-bold mb-8">주제를 선택해주세요</h2>

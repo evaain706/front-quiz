@@ -4,7 +4,7 @@ import Header from './Header';
 
 const Layout = () => {
   return (
-    <div className='bg-white h-screen'>
+    <div className='bg-white h-screen flex flex-col items-center justify-center'>
    
       <Header />
       
