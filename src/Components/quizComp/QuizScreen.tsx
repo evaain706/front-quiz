@@ -5,6 +5,7 @@ import { useQuizStore } from "../../store/useQuizStore";
 import { useOptionStore } from "../../store/useOptionStore";
 import QuestionCard from "./QuestionCard";
 import OptionsCard from "./OptionCard";
+import { Suspense } from "react";
 
 const QuizScreen = () => {
 
@@ -28,10 +29,12 @@ const QuizScreen = () => {
 
         </div>
 
-
+     
         <div >
          <QuestionCard/>
         </div>
+
+       
        
 
      <OptionsCard/>

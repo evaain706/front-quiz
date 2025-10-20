@@ -6,7 +6,34 @@ const OptionsCard = () => {
  
   const { quiz, userAnswer, setUserAnswer, result } = useQuizStore()
 
-  if (!quiz) return null
+  if(!quiz){
+    return(
+       <div className="md:w-[70rem] lg:w-[90rem] min-h-[15rem] mb-8 mt-8">
+      <div className="bg-white border border-gray-200 rounded-md p-6 shadow-sm">
+      
+        <div className="space-y-3 animate-pulse">
+         
+          {[...Array(4)].map((_, index) => (
+           
+            <div
+              key={index}
+              className="flex items-center gap-4 p-4 rounded-lg border-2 border-gray-200"
+            >
+            
+              <div className="w-6 h-6 bg-gray-300 rounded-full flex-shrink-0"></div>
+              
+          
+              <div className="h-5 bg-gray-300 rounded w-4/5"></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+    )
+  }
+
+  
+  
 
  
   const isSubmitted = !!result;
