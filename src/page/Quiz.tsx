@@ -1,4 +1,4 @@
-import QuizScreen from '../components/quizComp/QuizScreen';
+import QuizScreen from '../features/quizComp/QuizScreen';
 
 const Quiz = () => {
   return (

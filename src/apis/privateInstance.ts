@@ -1,0 +1,34 @@
+import axios from 'axios';
+import type { AxiosInstance } from 'axios';
+
+import { API_HEADERS, API_TIMEOUT } from '../constants/apiConstants';
+
+const privateInstance: AxiosInstance = axios.create({
+  baseURL: 'http://localhost:5000',
+  timeout: API_TIMEOUT,
+  headers: API_HEADERS.JSON,
+  withCredentials: true,
+});
+
+privateInstance.interceptors.response.use(
+  (res) => res,
+  async (error) => {
+    const originalRequest = error.config;
+
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+
+      try {
+        await privateInstance.post('/api/auth/refresh', {});
+
+        return privateInstance(originalRequest);
+      } catch (refreshError) {
+        return Promise.reject(refreshError);
+      }
+    }
+
+    return Promise.reject(error);
+  },
+);
+
+export { privateInstance };

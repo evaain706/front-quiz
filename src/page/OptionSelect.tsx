@@ -40,6 +40,7 @@ const OptionSelect = () => {
     [setLevel, navigate],
   );
 
+
   return (
     <div className='flex w-full flex-col items-center justify-center gap-10 p-4 md:gap-16 md:p-8'>
       {step === 0 && (
