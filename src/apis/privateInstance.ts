@@ -1,5 +1,6 @@
 import axios from 'axios';
 import type { AxiosInstance } from 'axios';
+import { instance } from './instance';
 
 import { API_HEADERS, API_TIMEOUT } from '../constants/apiConstants';
 
@@ -19,7 +20,7 @@ privateInstance.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        await privateInstance.post('/api/auth/refresh', {});
+        await instance.post('/api/auth/refresh', {}, { withCredentials: true });
 
         return privateInstance(originalRequest);
       } catch (refreshError) {

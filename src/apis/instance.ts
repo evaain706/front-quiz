@@ -7,7 +7,6 @@ const instance: AxiosInstance = axios.create({
   baseURL: 'http://localhost:5000',
   timeout: API_TIMEOUT,
   headers: API_HEADERS.JSON,
-  withCredentials: true,
 });
 
 const getErrorMessage = (error: unknown): string => {

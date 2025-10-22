@@ -1,9 +1,9 @@
-// page/KakaoCallback.tsx
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import useUserStore from '../store/useUserStore';
 import { instance } from '../apis/instance';
+import KakaoLoading from '../components/KakaoLoading';
 
 const KakaoCallback = () => {
   const location = useLocation();
@@ -16,13 +16,13 @@ const KakaoCallback = () => {
     if (code) {
       const sendCodeToBackend = async () => {
         try {
-          const response = await instance.post('/api/auth/kakao', {
-            code: code,
-          });
+          const response = await instance.post(
+            '/api/auth/kakao',
+            { code: code },
+            { withCredentials: true },
+          );
 
-          const { accessToken, user } = response.data;
-
-          localStorage.setItem('Accesstoken', accessToken);
+          const { user } = response.data;
 
           setUser(user);
 
@@ -38,7 +38,7 @@ const KakaoCallback = () => {
     }
   }, [location, navigate]);
 
-  return <div>카카오 로그인 처리 중...</div>;
+  return <KakaoLoading />;
 };
 
 export default KakaoCallback;

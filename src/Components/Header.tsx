@@ -1,6 +1,7 @@
 import LogoImg from '/logo.png';
 import { Link } from 'react-router-dom';
 import useUserStore from '../store/useUserStore';
+import OauthLogin from '../page/OauthLogin';
 
 const Header = () => {
   const { user } = useUserStore();
@@ -12,7 +13,7 @@ const Header = () => {
       </Link>
 
       <div className='flex gap-20 md:gap-50'>
-        <Link to='/oauth'>로그인</Link>
+        <OauthLogin />
 
         <h2>{user?.nickname}</h2>
       </div>

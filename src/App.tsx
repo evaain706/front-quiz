@@ -5,6 +5,8 @@ import Layout from './components/Layout';
 import OptionSelect from './page/OptionSelect';
 import Quiz from './page/Quiz';
 import KakaoCallback from './page/KakaoCallback';
+import ProtectedRoute from './components/ProtectedRoute';
+import MyPage from './page/MyPage';
 
 function App() {
   const router = createBrowserRouter([
@@ -27,6 +29,14 @@ function App() {
         {
           path: '/quiz',
           element: <Quiz />,
+        },
+        {
+          path: '/mypage',
+          element: (
+            <ProtectedRoute>
+              <MyPage />
+            </ProtectedRoute>
+          ),
         },
       ],
     },
