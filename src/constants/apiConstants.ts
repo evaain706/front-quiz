@@ -1,6 +1,4 @@
-
 const API_TIMEOUT = 5000;
-
 
 const API_HEADERS = {
   JSON: {

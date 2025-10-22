@@ -1,41 +1,34 @@
-import { Component } from "react";
-import type { ErrorInfo,ReactNode } from "react";
-
+import { Component } from 'react';
+import type { ErrorInfo, ReactNode } from 'react';
 
 interface Props {
-  fallback: ReactNode; 
-  children: ReactNode; 
+  fallback: ReactNode;
+  children: ReactNode;
 }
 
-
 interface State {
-  hasError: boolean; 
+  hasError: boolean;
 }
 
 class ErrorBoundary extends Component<Props, State> {
-
   public state: State = {
     hasError: false,
   };
-
 
   public static getDerivedStateFromError(): State {
     return { hasError: true };
   }
 
-
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error("Uncaught error:", error, errorInfo);
+    console.error('Uncaught error:', error, errorInfo);
   }
 
-   resetError = () => {
+  resetError = () => {
     this.setState({ hasError: false });
   };
 
- 
   public render() {
-  
-     if (this.state.hasError) {
+    if (this.state.hasError) {
       return (
         <div>
           {this.props.fallback}
@@ -44,7 +37,6 @@ class ErrorBoundary extends Component<Props, State> {
       );
     }
 
-   
     return this.props.children;
   }
 }

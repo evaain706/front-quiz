@@ -1,38 +1,26 @@
-
+import React from 'react';
 
 interface CardProps {
-    text: string;
-    onClick? : () => void;
-    isSelected? : boolean
-    
+  text: string;
+  onClick?: () => void;
+  isSelected?: boolean;
 }
 
-
- const Card = ({text,onClick,isSelected}:CardProps) => {
-
-
-    return(
+const Card = ({ text, onClick, isSelected }: CardProps) => {
+  return (
     <div
-    onClick={onClick}
-    className={`p-4 rounded-lg cursor-pointer transition-all py-[4rem]  ${
-      isSelected
-        ? 'bg-blue-500 text-white ring-2 ring-blue-500 animate-pulse'
-        : 'bg-gray-200 hover:bg-gray-300'
-    }`}
-  >
-
-        <div className="flex flex-col items-center justify-center">
-      
-         <h2 className="font-bold text-[1.2rem]">{text}</h2>
-        </div>
-       
-
+      onClick={onClick}
+      className={`cursor-pointer rounded-lg p-4 py-[4rem] transition-all ${
+        isSelected
+          ? 'animate-pulse bg-blue-500 text-white ring-2 ring-blue-500'
+          : 'bg-gray-200 hover:bg-gray-300'
+      }`}
+    >
+      <div className='flex flex-col items-center justify-center'>
+        <h2 className='text-[1.2rem] font-bold'>{text}</h2>
+      </div>
     </div>
+  );
+};
 
-    )
- 
-
- }
-
- export default Card;
-
+export default React.memo(Card);

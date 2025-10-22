@@ -1,79 +1,57 @@
-import { useState,useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import Card from "../components/Card";
-import Button from "../components/Button";
-import { useOptionStore } from "../store/useOptionStore";
-
-
+import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Card from '../components/Card';
+import Button from '../components/Button';
+import { useOptionStore } from '../store/useOptionStore';
+import { categorylist } from '../constants/categoryList';
 
 const OptionSelect = () => {
   const [step, setStep] = useState(0);
 
-
-
-  const {category,setCategory,setLevel,resetCategory,resetLevel} = useOptionStore();
-
-
+  const category = useOptionStore((s) => s.category);
+  const setCategory = useOptionStore((s) => s.setCategory);
+  const setLevel = useOptionStore((s) => s.setLevel);
+  const resetCategory = useOptionStore((s) => s.resetCategory);
+  const resetLevel = useOptionStore((s) => s.resetLevel);
 
   const navigate = useNavigate();
-
 
   useEffect(() => {
     resetCategory();
     resetLevel();
-  }, [resetCategory, resetLevel]); 
+  }, [resetCategory, resetLevel]);
 
+  const handleCategorySelect = useCallback(
+    (selectedCat: string) => {
+      if (category === selectedCat) {
+        setCategory('');
+      } else {
+        setCategory(selectedCat);
+      }
+    },
+    [setCategory],
+  );
 
-
-  const handleCategorySelect = (selectedCat: string) => {
-   
-    if (category === selectedCat) {
-      setCategory('');
-    } else {
-      setCategory(selectedCat);
-    }
-  };
-
-
-  const handleLevelSelect = (level :string) => {
-    setLevel(level); 
-    navigate('/quiz'); 
-  };
-
-  const categorylist = [
-    { id: 1, text: 'React 기본 개념' },
-    { id: 2, text: 'React Hooks' },
-    { id: 3, text: 'React 렌더링 원리' },
-    { id: 4, text: 'React 상태 관리' },
-    { id: 5, text: 'React 라우팅' },
-    { id: 6, text: 'React 성능 최적화' },
-    { id: 7, text: 'TypeScript 기본 문법' },
-    { id: 8, text: 'TypeScript 타입과 인터페이스' },
-    { id: 9, text: 'TypeScript 제네릭' },
-    { id: 10, text: 'React와 TypeScript 함께 사용하기' },
-    { id: 11, text: 'JavaScript ES6+' },
-    { id: 12, text: 'JavaScript 비동기 처리' },
-    { id: 13, text: 'JavaScript 이벤트 루프와 호이스팅' },
-    { id: 14, text: 'Redux / Redux Toolkit' },
-    { id: 15, text: 'Recoil / Zustand' },
-    { id: 16, text: '웹 브라우저 동작 원리' },
-    { id: 17, text: '웹 접근성과 SEO' },
-    { id: 18, text: 'Webpack / Vite' },
-    { id: 19, text: 'Git & GitHub' },
-    { id: 20, text: 'HTTP와 REST API' },
-  ];
+  const handleLevelSelect = useCallback(
+    (level: string) => {
+      setLevel(level);
+      navigate('/quiz');
+    },
+    [setLevel, navigate],
+  );
 
   return (
-    <div className="w-full p-4 md:p-8 flex flex-col items-center justify-center gap-10 md:gap-16 ">
+    <div className='flex w-full flex-col items-center justify-center gap-10 p-4 md:gap-16 md:p-8'>
       {step === 0 && (
-        <div className="w-full text-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-8">주제를 선택해주세요</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full ">
+        <div className='w-full text-center'>
+          <h2 className='mb-8 text-2xl font-bold md:text-3xl'>
+            주제를 선택해주세요
+          </h2>
+          <div className='grid w-full grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4'>
             {categorylist.map((cat) => (
               <Card
                 key={cat.id}
                 text={cat.text}
-               
                 isSelected={category === cat.text}
                 onClick={() => handleCategorySelect(cat.text)}
               />
@@ -83,25 +61,29 @@ const OptionSelect = () => {
       )}
 
       {step === 1 && (
-        <div className="w-full text-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-2">
-           
+        <div className='w-full text-center'>
+          <h2 className='mb-2 text-2xl font-bold md:text-3xl'>
             주제: {category}
           </h2>
-          <h3 className="text-xl md:text-2xl mb-8">난이도를 선택해주세요</h3>
-          <div className="flex gap-4 justify-center flex-col md:flex-row">
-          
-            <Button size="md" onClick={() => handleLevelSelect('쉬움')}>쉬움</Button>
-            <Button size="md" onClick={() => handleLevelSelect('보통')}>보통</Button>
-            <Button size="md" onClick={() => handleLevelSelect('어려움')}>어려움</Button>
+          <h3 className='mb-8 text-xl md:text-2xl'>난이도를 선택해주세요</h3>
+          <div className='flex flex-col justify-center gap-4 md:flex-row'>
+            <Button size='md' onClick={() => handleLevelSelect('쉬움')}>
+              쉬움
+            </Button>
+            <Button size='md' onClick={() => handleLevelSelect('보통')}>
+              보통
+            </Button>
+            <Button size='md' onClick={() => handleLevelSelect('어려움')}>
+              어려움
+            </Button>
           </div>
         </div>
       )}
 
       {step === 0 ? (
         <Button
-          variant="primary"
-          size="md"
+          variant='primary'
+          size='md'
           disabled={!category}
           onClick={() => setStep(1)}
         >
@@ -109,11 +91,7 @@ const OptionSelect = () => {
         </Button>
       ) : (
         <div>
-          <Button
-            variant="secondary"
-            size="md"
-            onClick={() => setStep(0)}
-          >
+          <Button variant='secondary' size='md' onClick={() => setStep(0)}>
             뒤로 가기
           </Button>
         </div>

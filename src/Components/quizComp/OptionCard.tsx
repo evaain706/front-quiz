@@ -1,5 +1,6 @@
 import { useQuizStore } from "../../store/useQuizStore"
 import ResultDisplay from "./ResultDisplay"
+import React from "react"
 
 
 const OptionsCard = () => {
@@ -128,4 +129,4 @@ const OptionsCard = () => {
   )
 }
 
-export default OptionsCard;
+export default React.memo(OptionsCard);

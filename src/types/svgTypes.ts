@@ -1,6 +1,5 @@
-
-export interface SvgType  {
-    color: string;
-    width: number;
-    height: number;
+export interface SvgType {
+  color: string;
+  width: number;
+  height: number;
 }

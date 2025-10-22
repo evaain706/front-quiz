@@ -1,15 +1,13 @@
 import axios from 'axios';
 import type { AxiosInstance } from 'axios';
 
-import { API_HEADERS,API_TIMEOUT } from '../constants/apiConstants';
-
+import { API_HEADERS, API_TIMEOUT } from '../constants/apiConstants';
 
 const instance: AxiosInstance = axios.create({
   baseURL: 'http://localhost:5000',
   timeout: API_TIMEOUT,
   headers: API_HEADERS.JSON,
 });
-
 
 const getErrorMessage = (error: unknown): string => {
   if (axios.isAxiosError(error)) {
@@ -42,18 +40,14 @@ const getErrorMessage = (error: unknown): string => {
   return '🚨 알 수 없는 오류가 발생했습니다.';
 };
 
-
 const MAX_RETRY = 3;
 
-
 const retryCounts = new Map<string, number>();
-
 
 instance.interceptors.response.use(
   (res) => res,
   async (err) => {
     const config = err.config;
-
 
     if (!config || !config.url) {
       return Promise.reject(new Error(getErrorMessage(err)));
@@ -61,17 +55,16 @@ instance.interceptors.response.use(
 
     const currentRetry = retryCounts.get(config.url) || 0;
 
- 
     if (
       (err.message === 'Network Error' ||
         (err.response && err.response.status >= 500)) &&
       currentRetry < MAX_RETRY
     ) {
       retryCounts.set(config.url, currentRetry + 1);
-      return instance(config); 
+      return instance(config);
     }
 
-    retryCounts.delete(config.url); 
+    retryCounts.delete(config.url);
     return Promise.reject(new Error(getErrorMessage(err)));
   },
 );
