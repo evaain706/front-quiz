@@ -38,7 +38,7 @@ type UserStore = {
  * // 컴포넌트에서 import 후 사용
  * import useUserStore from '@/stores/Auth-store/authStore';
  */
-const useUserStore = create<UserStore>()(
+export const useUserStore = create<UserStore>()(
   devtools(
     persist(
       (set) => ({
@@ -57,5 +57,3 @@ const useUserStore = create<UserStore>()(
     ),
   ),
 );
-
-export default useUserStore;

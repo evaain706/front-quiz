@@ -1,58 +1,35 @@
-
-import ReactMarkdown from 'react-markdown'
-import type { Quiz } from "../../types/quizTypes";
+import ReactMarkdown from 'react-markdown';
+import type { Quiz } from '../../types/quizTypes';
 import React from 'react';
 
-
 interface QuestionCardProps {
-    error: Error | null;
-    isLoading: boolean;
-    quiz: Quiz | null;
+  error: Error | null;
+  isLoading: boolean;
+  quiz: Quiz | null;
 }
 
-
-const QuestionCard = ({error,isLoading,quiz}:QuestionCardProps) => {
-
-
-
-if(error){
+const QuestionCard = ({ error, isLoading, quiz }: QuestionCardProps) => {
+  if (error) {
     throw error;
-}
+  }
 
+  if (isLoading) {
+    return (
+      <div className='flex min-h-[15rem] w-[40rem] items-center justify-center rounded-md border-5 border-gray-500 bg-white md:w-[70rem] lg:w-[90rem]'>
+        <div className='h-[3rem] w-1/2 animate-pulse rounded-md bg-gray-300' />
+      </div>
+    );
+  }
 
+  const markdownContnet = quiz?.question;
 
-if(isLoading){
-    return(
-        <div className="w-[40rem] md:w-[70rem] lg:w-[90rem] min-h-[15rem]  border-5 border-gray-500 rounded-md bg-white flex items-center justify-center ">
-            <div className="animate-pulse bg-gray-300 w-1/2 h-[3rem] rounded-md "/>
+  return (
+    <div className='bg-navy-black scanline-overlay flex min-h-[15rem] items-center justify-center rounded-md border-5 border-gray-500 p-6 md:w-[70rem] lg:w-[90rem]'>
+      <div className='text-glow-green animate-flicker max-h-[30rem] w-full overflow-auto text-[1.2rem] leading-[3rem] font-bold text-green-400 md:text-[1.6rem] md:leading-[4rem]'>
+        <ReactMarkdown>{markdownContnet}</ReactMarkdown>
+      </div>
     </div>
-
-
-    )
-}
-
-const markdownContnet = quiz?.question;
-
-return(
-
-    <div className="md:w-[70rem] lg:w-[90rem] min-h-[15rem] border-5 border-gray-500 rounded-md bg-navy-black flex items-center justify-center p-6 scanline-overlay ">
-
-
-  <div className="w-full max-h-[30rem] overflow-auto text-[1.2rem] md:text-[1.6rem] font-bold leading-[3rem] md:leading-[4rem] text-glow-green animate-flicker text-green-400">
-    <ReactMarkdown>
-      {markdownContnet}
-    </ReactMarkdown>
-  </div>
-  
-</div>
-
-
-)
-
-
-}
-
-
-
+  );
+};
 
 export default React.memo(QuestionCard);

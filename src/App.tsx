@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import './index.css';
 import Main from './page/Main';
 import Layout from './components/Layout';
@@ -7,6 +8,8 @@ import Quiz from './page/Quiz';
 import KakaoCallback from './page/KakaoCallback';
 import ProtectedRoute from './components/ProtectedRoute';
 import MyPage from './page/MyPage';
+
+const queryClient = new QueryClient();
 
 function App() {
   const router = createBrowserRouter([
@@ -42,7 +45,11 @@ function App() {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
+  );
 }
 
 export default App;

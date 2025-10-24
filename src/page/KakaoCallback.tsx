@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import useUserStore from '../store/useUserStore';
+import { useUserStore } from '../store/useUserStore';
 import { instance } from '../apis/instance';
 import KakaoLoading from '../components/KakaoLoading';
 

@@ -1,6 +1,6 @@
 import LogoImg from '/logo.png';
 import { Link } from 'react-router-dom';
-import useUserStore from '../store/useUserStore';
+import { useUserStore } from '../store/useUserStore';
 import OauthLogin from '../page/OauthLogin';
 
 const Header = () => {
