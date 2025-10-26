@@ -29,7 +29,7 @@ const MyPageMain = () => {
   if (error) return <>에러발생: {(error as Error).message}</>;
 
   return (
-    <div className='flex flex-col gap-4 px-10'>
+    <div className='flex max-h-[50rem] overflow-auto flex-col gap-4 px-10'>
       {data?.map((item) => (
         <div key={item.id} onClick={() => handleOpenModal(item)}>
           <AnswerHistoryCard data={item} />

@@ -3,10 +3,10 @@ import Header from './Header';
 
 const Layout = () => {
   return (
-    <div className='bg-navy-black flex min-h-screen flex-col items-center justify-center'>
+    <div className='bg-navy-black min-h-screen'>
       <Header />
 
-      <div className='mx-auto flex max-w-[120rem] items-center justify-center'>
+      <div className='mx-auto flex h-screen max-w-[120rem] items-center justify-center pt-[7rem]'>
         <Outlet />
       </div>
     </div>

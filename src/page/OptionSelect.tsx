@@ -40,7 +40,6 @@ const OptionSelect = () => {
     [setLevel, navigate],
   );
 
-
   return (
     <div className='flex w-full flex-col items-center justify-center gap-10 p-4 md:gap-16 md:p-8'>
       {step === 0 && (
@@ -48,7 +47,7 @@ const OptionSelect = () => {
           <h2 className='mb-8 text-2xl font-bold md:text-3xl'>
             주제를 선택해주세요
           </h2>
-          <div className='grid w-full grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4'>
+          <div className='grid max-h-[50rem] w-full grid-cols-2 gap-4 overflow-auto md:h-full md:grid-cols-3 lg:grid-cols-4'>
             {categorylist.map((cat) => (
               <Card
                 key={cat.id}
