@@ -28,12 +28,12 @@ const Main = () => {
             >
               안녕
             </Button>
-            <OauthLogin />
+            <OauthLogin />*{' '}
           </div>
         </div>
       </section>
 
-      <section className='flex h-screen snap-center items-center justify-center bg-black text-3xl font-bold text-white'>
+      <section className='flex h-screen snap-center flex-col items-center justify-center bg-black text-3xl font-bold text-white'>
         <FrontCloud />
       </section>
     </div>
