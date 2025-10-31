@@ -8,6 +8,7 @@ import Quiz from './page/Quiz';
 import KakaoCallback from './page/KakaoCallback';
 import ProtectedRoute from './components/ProtectedRoute';
 import MyPage from './page/MyPage';
+import NotFound from './page/NotFound';
 
 const queryClient = new QueryClient();
 
@@ -42,6 +43,10 @@ function App() {
           ),
         },
       ],
+    },
+    {
+      path: '*',
+      element: <NotFound />,
     },
   ]);
 

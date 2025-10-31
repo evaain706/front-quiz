@@ -1,6 +1,5 @@
 import Button from '../components/Button';
 import { useNavigate } from 'react-router-dom';
-import OauthLogin from './OauthLogin';
 import { motion } from 'motion/react';
 import { FrontCloud } from '../components/ui/IconCloud/FrontCloud';
 
@@ -19,23 +18,18 @@ const Main = () => {
           >
             FRONTQUIZ
           </motion.h1>
-
-          <div className='flex flex-col gap-4'>
-            <Button
-              size='sm'
-              variant='primary'
-              onClick={() => navigate('/select')}
-            >
-              안녕
-            </Button>
-            <OauthLogin />*{' '}
-          </div>
         </div>
       </section>
 
       <section className='flex h-screen snap-center flex-col items-center justify-center bg-black text-3xl font-bold text-white'>
         <FrontCloud />
       </section>
+
+      <div className='sticky bottom-10 flex justify-center pb-6'>
+        <Button size='md' variant='primary' onClick={() => navigate('/select')}>
+          안녕
+        </Button>
+      </div>
     </div>
   );
 };
