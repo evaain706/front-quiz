@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import './index.css';
-import Main from './page/Main';
+import Main from './page/LandingPage';
 import Layout from './components/Layout';
 import OptionSelect from './page/OptionSelect';
 import Quiz from './page/Quiz';
@@ -9,6 +9,9 @@ import KakaoCallback from './page/KakaoCallback';
 import ProtectedRoute from './components/ProtectedRoute';
 import MyPage from './page/MyPage';
 import NotFound from './page/NotFound';
+import LandingPage from './page/LandingPage';
+import MainPage from './page/MainPage';
+import ToastContainer from './components/ui/Toast/ToastContainer';
 
 const queryClient = new QueryClient();
 
@@ -16,7 +19,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Main />,
+      element: <LandingPage />,
     },
     {
       path: '/oauth',
@@ -35,6 +38,11 @@ function App() {
           element: <Quiz />,
         },
         {
+          path: '/main',
+          element: <MainPage />,
+        },
+
+        {
           path: '/mypage',
           element: (
             <ProtectedRoute>
@@ -52,6 +60,7 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <ToastContainer />
       <RouterProvider router={router} />
     </QueryClientProvider>
   );

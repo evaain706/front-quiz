@@ -2,9 +2,12 @@ import Button from '../components/Button';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { FrontCloud } from '../components/ui/IconCloud/FrontCloud';
+import { useToastStore } from '../store/useToastStore';
 
-const Main = () => {
+const LandingPage = () => {
   const navigate = useNavigate();
+
+  const addToast = useToastStore((state) => state.addToast);
 
   return (
     <div className='h-screen snap-y snap-mandatory overflow-y-scroll bg-gray-100 font-sans text-gray-800'>
@@ -26,7 +29,14 @@ const Main = () => {
       </section>
 
       <div className='sticky bottom-10 flex justify-center pb-6'>
-        <Button size='md' variant='primary' onClick={() => navigate('/select')}>
+        <Button size='md' variant='primary' onClick={() => navigate('/main')}>
+          안녕
+        </Button>
+        <Button
+          size='md'
+          variant='primary'
+          onClick={() => addToast('success', '테스트입니다')}
+        >
           안녕
         </Button>
       </div>
@@ -34,4 +44,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default LandingPage;

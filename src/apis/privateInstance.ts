@@ -3,6 +3,7 @@ import type { AxiosInstance } from 'axios';
 import { instance } from './instance';
 
 import { API_HEADERS, API_TIMEOUT } from '../constants/apiConstants';
+import { useUserStore } from '../store/useUserStore';
 
 const privateInstance: AxiosInstance = axios.create({
   baseURL: 'http://localhost:5000',
@@ -24,6 +25,10 @@ privateInstance.interceptors.response.use(
 
         return privateInstance(originalRequest);
       } catch (refreshError) {
+        const { clearUser } = useUserStore();
+        clearUser();
+        console.log('토큰만료');
+        
         return Promise.reject(refreshError);
       }
     }

@@ -44,7 +44,7 @@ const OptionSelect = () => {
     <div className='flex w-full flex-col items-center justify-center gap-10 p-4 md:gap-16 md:p-8'>
       {step === 0 && (
         <div className='w-full text-center'>
-          <h2 className='mb-8 text-2xl font-bold md:text-3xl'>
+          <h2 className='mb-8 text-2xl font-bold text-white md:text-[4rem]'>
             주제를 선택해주세요
           </h2>
           <div className='grid max-h-[50rem] w-full grid-cols-2 gap-4 overflow-auto md:h-full md:grid-cols-3 lg:grid-cols-4'>
@@ -61,19 +61,33 @@ const OptionSelect = () => {
       )}
 
       {step === 1 && (
-        <div className='w-full text-center'>
-          <h2 className='mb-2 text-2xl font-bold md:text-3xl'>
+        <div className='flex w-full flex-col items-center justify-center text-center'>
+          <h2 className='mb-2 text-2xl font-bold text-white md:text-3xl'>
             주제: {category}
           </h2>
-          <h3 className='mb-8 text-xl md:text-2xl'>난이도를 선택해주세요</h3>
+          <h3 className='mb-8 text-xl text-white md:text-2xl'>
+            난이도를 선택해주세요
+          </h3>
           <div className='flex flex-col justify-center gap-4 md:flex-row'>
-            <Button size='md' onClick={() => handleLevelSelect('쉬움')}>
+            <Button
+              size='md'
+              className='bg-amber-100 font-bold text-black'
+              onClick={() => handleLevelSelect('쉬움')}
+            >
               쉬움
             </Button>
-            <Button size='md' onClick={() => handleLevelSelect('보통')}>
+            <Button
+              size='md'
+              className='bg-green-200 font-bold text-black'
+              onClick={() => handleLevelSelect('보통')}
+            >
               보통
             </Button>
-            <Button size='md' onClick={() => handleLevelSelect('어려움')}>
+            <Button
+              size='md'
+              className='bg-red-400 font-bold text-black'
+              onClick={() => handleLevelSelect('어려움')}
+            >
               어려움
             </Button>
           </div>

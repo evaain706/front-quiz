@@ -10,12 +10,14 @@ const Header = () => {
   const navigate = useNavigate();
 
   return (
-    <div className='fixed top-0 flex w-full items-center justify-between bg-gray-200 px-[20rem] py-[1rem]'>
-      <Link to='/'>
-        <img src={LogoImg} className='aspect-auto h-20 w-50' />
-      </Link>
+    <div className='fixed top-0 flex w-full items-center justify-between bg-slate-200 px-[5rem] py-[1rem] md:px-[10rem]'>
+      <div>
+        <Link to='/'>
+          <h2 className='text-[2rem] font-bold md:text-[4rem]'>FrontQuiz</h2>
+        </Link>
+      </div>
 
-      <div className='flex gap-20 md:gap-50'>
+      <div className='flex gap-10 md:gap-50'>
         {user ? (
           <>
             <div className='relative'>
