@@ -26,7 +26,7 @@ const MyPageMain = () => {
   };
 
   if (isPending) return <>로딩중..</>;
-  if (error) return <>에러발생: {(error as Error).message}</>;
+  if (error) return <>에러발생: {error.message}</>;
 
   return (
     <div className='flex max-h-[50rem] overflow-auto flex-col gap-4 px-10'>

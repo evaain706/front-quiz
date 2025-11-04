@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <div className='fixed top-0 flex w-full items-center justify-between bg-slate-200 px-[5rem] py-[1rem] md:px-[10rem]'>
       <div>
-        <Link to='/'>
+        <Link to='/main'>
           <h2 className='text-[2rem] font-bold md:text-[4rem]'>FrontQuiz</h2>
         </Link>
       </div>

@@ -1,7 +1,9 @@
+import MainMenu from '../components/ui/MainPage/MainMenu';
+
 const MainPage = () => {
   return (
     <div>
-      <h2>메인페이지</h2>
+      <MainMenu />
     </div>
   );
 };

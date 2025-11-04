@@ -4,6 +4,8 @@ import { useUserStore } from '../../../store/useUserStore';
 import { instance } from '../../../apis/instance';
 import { privateInstance } from '../../../apis/privateInstance';
 import { useState } from 'react';
+import { useToastStore } from '../../../store/useToastStore';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export const useQuiz = () => {
   const {
@@ -18,6 +20,9 @@ export const useQuiz = () => {
   } = useQuizStore();
   const { category, level } = useOptionStore();
   const { user } = useUserStore();
+  const { addToast } = useToastStore();
+
+  const queryClient = useQueryClient();
 
   const [error, setError] = useState<Error | null>(null);
 
@@ -29,7 +34,7 @@ export const useQuiz = () => {
     setError(null);
 
     try {
-      const response = await instance.post('/api/generate-quiz', {
+      const response = await instance.post('/api/quiz/generate-quiz', {
         topic: category,
         level,
       });
@@ -47,7 +52,7 @@ export const useQuiz = () => {
 
     setIsGrading(true);
     try {
-      const response = await instance.post('/api/grade-answer', {
+      const response = await instance.post('/api/quiz/grade-answer', {
         quiz,
         userAnswer,
       });
@@ -63,7 +68,7 @@ export const useQuiz = () => {
   const handleAddInCorrect = async () => {
     try {
       const response = await privateInstance.post(
-        '/api/save-incorrect-answer',
+        '/api/quiz/save-incorrect-answer',
         {
           userId: user?.id,
           quiz: quiz,
@@ -73,16 +78,40 @@ export const useQuiz = () => {
           topic: category,
         },
       );
-
+      addToast('success', '오답이 등록되었습니다.');
       console.log(response.data);
     } catch (err) {
-      console.log('오답등록 에러');
+      addToast('error', '오답등록중 오류가 발생했습니다');
     }
   };
 
+  const handleDeleteIncorrect = useMutation({
+    mutationFn: async (incorrectId: string) => {
+      const response = await privateInstance.delete(
+        '/api/mypage/delete-incorrect-answer',
+        {
+          data: {
+            userId: user?.id,
+            id: incorrectId,
+          },
+        },
+      );
+      return response.data;
+    },
+    onSuccess: () => {
+      addToast('success', '오답이 삭제되었습니다.');
+      queryClient.invalidateQueries({ queryKey: ['incorrectAnswer'] });
+    },
+    onError: () => {
+      addToast('error', '오답삭제중 오류가 발생했습니다');
+    },
+  });
+
   const getIncorrectAnswers = async () => {
     try {
-      const response = await privateInstance.get('/api/incorrect-answers');
+      const response = await privateInstance.get(
+        '/api/mypage/incorrect-answers',
+      );
       return response.data;
     } catch (err) {
       console.log(err);
@@ -94,6 +123,7 @@ export const useQuiz = () => {
     handleSubmit,
     handleAddInCorrect,
     getIncorrectAnswers,
+    handleDeleteIncorrect,
     error,
   };
 };

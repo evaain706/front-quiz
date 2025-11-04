@@ -1,5 +1,7 @@
+import Button from '../../../components/Button';
 import type { IncorrectQuiz } from '../../../types/quizTypes';
 import { cn } from '../../../utils/cn';
+import { useQuiz } from '../../quizComp/hooks/useQuiz';
 
 interface AnswerHistoryCardProps {
   data: IncorrectQuiz;
@@ -8,6 +10,12 @@ interface AnswerHistoryCardProps {
 const AnswerHistoryCard = ({ data }: AnswerHistoryCardProps) => {
   let topicClassName = '';
   let levelClassName = '';
+
+  const { handleDeleteIncorrect } = useQuiz();
+
+  const handleDelete = () => {
+    handleDeleteIncorrect.mutate(data.id);
+  };
 
   if (data.topic?.includes('React')) {
     topicClassName = 'text-blue-800';
@@ -31,9 +39,11 @@ const AnswerHistoryCard = ({ data }: AnswerHistoryCardProps) => {
 
   return (
     <div className='w-full rounded-xl border border-gray-300 bg-white px-10 py-5 shadow-sm hover:animate-pulse hover:cursor-pointer'>
-      <h3 className='text-2xl font-bold text-black'>{data.question}</h3>
+      <h3 className='text-[1.2rem] font-bold text-black md:text-[1.4rem]'>
+        {data.question}
+      </h3>
 
-      <div className='mt-2 space-y-1 text-gray-700'>
+      <div className='mt-2 flex justify-between space-y-1 text-gray-700'>
         <div className='text-md mt-2 flex flex-col gap-3 font-bold text-gray-500'>
           <p className={cn('text-xl font-bold text-black', topicClassName)}>
             {data.topic}
@@ -41,6 +51,15 @@ const AnswerHistoryCard = ({ data }: AnswerHistoryCardProps) => {
           <p className={cn(`text-xl font-bold`, levelClassName)}>
             {data.level}
           </p>
+        </div>
+
+        <div>
+          <Button
+            onClick={() => handleDelete()}
+            className='w-[6rem] py-[1rem] md:w-[10rem]'
+          >
+            삭제
+          </Button>
         </div>
       </div>
     </div>
