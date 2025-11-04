@@ -3,7 +3,7 @@ import MyPageMain from '../features/myPage/MyPageMain';
 
 const MyPage = () => {
   return (
-    <div>
+    <div className='flex w-full items-center justify-center p-10 md:h-[90rem]'>
       <MyPageMain />
     </div>
   );

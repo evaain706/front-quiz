@@ -29,20 +29,28 @@ const MyPageMain = () => {
   if (error) return <>에러발생: {error.message}</>;
 
   return (
-    <div className='flex max-h-[50rem] overflow-auto flex-col gap-4 px-10'>
-      {data?.map((item) => (
-        <div key={item.id} onClick={() => handleOpenModal(item)}>
-          <AnswerHistoryCard data={item} />
-        </div>
-      ))}
+    <div>
+      <div className='mb-5 flex items-center justify-center'>
+        <h2 className='text-[1.8rem] font-bold text-white md:text-[4rem]'>
+          저장된 오답문제
+        </h2>
+      </div>
 
-      {selectedQuiz && (
-        <IncorrectModal
-          data={selectedQuiz}
-          isOpen={open}
-          setIsopen={handleCloseModal}
-        />
-      )}
+      <div className='flex h-[50rem] flex-col gap-4 overflow-auto px-10 md:h-[70rem] lg:h-full'>
+        {data?.map((item) => (
+          <div key={item.id} onClick={() => handleOpenModal(item)}>
+            <AnswerHistoryCard data={item} />
+          </div>
+        ))}
+
+        {selectedQuiz && (
+          <IncorrectModal
+            data={selectedQuiz}
+            isOpen={open}
+            setIsopen={handleCloseModal}
+          />
+        )}
+      </div>
     </div>
   );
 };
