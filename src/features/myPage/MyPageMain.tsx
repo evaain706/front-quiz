@@ -36,7 +36,7 @@ const MyPageMain = () => {
         </h2>
       </div>
 
-      <div className='flex h-[50rem] flex-col gap-4 overflow-auto px-10 md:h-[70rem] lg:h-full'>
+      <div className='flex h-[50rem] flex-col gap-4 overflow-auto p-10 md:h-[70rem]'>
         {data?.map((item) => (
           <div key={item.id} onClick={() => handleOpenModal(item)}>
             <AnswerHistoryCard data={item} />

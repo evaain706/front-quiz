@@ -6,8 +6,8 @@ import { motion } from 'motion/react';
 
 const items = [
   { color: 'bg-amber-300', label: '마이페이지', path: '/mypage' },
-  { color: 'bg-red-300', label: '퀴즈', path: '/settings' },
-  { color: 'bg-blue-300', label: '내 기록 보기', path: '/history' },
+  { color: 'bg-red-300', label: '퀴즈', path: '/select' },
+  { color: 'bg-blue-300', label: '커뮤니티', path: '/community' },
   { color: 'bg-green-300', label: '도움말 보기', path: '/help' },
 ];
 

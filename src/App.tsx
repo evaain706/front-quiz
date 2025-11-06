@@ -12,6 +12,8 @@ import NotFound from './page/NotFound';
 import LandingPage from './page/LandingPage';
 import MainPage from './page/MainPage';
 import ToastContainer from './components/ui/Toast/ToastContainer';
+import CommunityPage from './page/CommunityPage';
+import CommunityForm from './features/Community/CommunityForm';
 
 const queryClient = new QueryClient();
 
@@ -40,6 +42,14 @@ function App() {
         {
           path: '/main',
           element: <MainPage />,
+        },
+        {
+          path: '/community',
+          element: <CommunityPage />,
+        },
+        {
+          path: '/community/create',
+          element: <CommunityForm />,
         },
 
         {
