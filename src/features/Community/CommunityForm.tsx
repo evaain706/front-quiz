@@ -25,7 +25,6 @@ const CreatePost = () => {
     >
       <h2 className='mb-4 text-xl font-bold'>게시글 작성</h2>
 
-      {/* 카테고리 선택 */}
       <select
         {...register('category')}
         className='mb-3 w-full rounded border p-2'
@@ -34,7 +33,6 @@ const CreatePost = () => {
         <option value='information'>정보</option>
       </select>
 
-      {/* 제목 */}
       <input
         {...register('title', { required: '제목을 입력해주세요.' })}
         placeholder='제목'
@@ -44,7 +42,6 @@ const CreatePost = () => {
         <p className='mb-3 text-sm text-red-500'>{errors.title?.message}</p>
       )}
 
-      {/* 내용 */}
       <textarea
         {...register('content', { required: '내용을 입력해주세요.' })}
         placeholder='내용'
@@ -55,7 +52,6 @@ const CreatePost = () => {
         <p className='mb-3 text-sm text-red-500'>{errors.content.message}</p>
       )}
 
-      {/* 닉네임 */}
       <input
         {...register('nickname', { required: '닉네임을 입력해주세요.' })}
         placeholder='닉네임'
@@ -65,7 +61,6 @@ const CreatePost = () => {
         <p className='mb-3 text-sm text-red-500'>{errors.nickname.message}</p>
       )}
 
-      {/* 비밀번호 */}
       <input
         {...register('password', {
           required: '비밀번호를 입력해주세요.',
@@ -82,7 +77,6 @@ const CreatePost = () => {
         <p className='mb-4 text-sm text-red-500'>{errors.password.message}</p>
       )}
 
-      {/* 제출 버튼 */}
       <button className='w-full rounded bg-blue-500 py-2 text-white hover:bg-blue-600'>
         작성하기
       </button>

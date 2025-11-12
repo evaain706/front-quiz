@@ -4,8 +4,7 @@ import { instance } from '../../apis/instance';
 
 const CommunityMain = () => {
   const navigate = useNavigate();
-
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -16,9 +15,12 @@ const CommunityMain = () => {
         console.error('데이터를 불러오지 못했습니다:', error);
       }
     };
-
     fetchPosts();
   }, []);
+
+  const handleNavigateDetail = (post: any) => {
+    navigate(`/community/detail/${post._id}`);
+  };
 
   return (
     <div className='flex w-[120rem] flex-col items-center justify-center gap-5 p-10'>
@@ -33,8 +35,9 @@ const CommunityMain = () => {
 
         {data.map((post: any) => (
           <div
-            key={post.id}
-            className='grid grid-cols-3 border-b px-4 py-3 transition hover:bg-gray-50'
+            key={post._id}
+            className='grid cursor-pointer grid-cols-3 border-b px-4 py-3 transition hover:bg-gray-50'
+            onClick={() => handleNavigateDetail(post)}
           >
             <span
               className={`${
@@ -50,11 +53,12 @@ const CommunityMain = () => {
           </div>
         ))}
       </div>
+
       <button
-        className='text-white'
+        className='rounded bg-blue-500 px-4 py-2 text-white transition hover:bg-blue-600'
         onClick={() => navigate('/community/create')}
       >
-        이동
+        새 글 작성
       </button>
     </div>
   );

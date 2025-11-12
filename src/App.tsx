@@ -14,6 +14,7 @@ import MainPage from './page/MainPage';
 import ToastContainer from './components/ui/Toast/ToastContainer';
 import CommunityPage from './page/CommunityPage';
 import CommunityForm from './features/Community/CommunityForm';
+import CommunityDetail from './features/Community/CommunityDetail';
 
 const queryClient = new QueryClient();
 
@@ -50,6 +51,10 @@ function App() {
         {
           path: '/community/create',
           element: <CommunityForm />,
+        },
+        {
+          path: '/community/detail/:id',
+          element: <CommunityDetail />,
         },
 
         {
