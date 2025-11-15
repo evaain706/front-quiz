@@ -30,7 +30,7 @@ export const useCommunity = () => {
     },
   });
 
-  const handleAddComment = useMutation({
+  const handleAddCommentMutate = useMutation({
     mutationFn: async ({
       postId,
       nickname,
@@ -40,12 +40,15 @@ export const useCommunity = () => {
       nickname: string;
       content: string;
     }) => {
-      const res = await instance.post(`/api/community/${postId}/comments`, {
-        nickname,
-        password,
-        content,
-      });
-      return res.data;
+      const response = await instance.post(
+        `/api/community/${postId}/comments`,
+        {
+          nickname,
+          password,
+          content,
+        },
+      );
+      return response.data;
     },
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ['post', variables.postId] });
@@ -57,11 +60,40 @@ export const useCommunity = () => {
     },
   });
 
+  const handleDeleteCommentMutate = useMutation({
+    mutationFn: async ({
+      postId,
+      commentId,
+      password,
+    }: {
+      postId: string;
+      commentId: string;
+      password: string;
+    }) => {
+      const response = await instance.delete(
+        `/api/community/${postId}/comments/${commentId}`,
+        {
+          data: { password },
+        },
+      );
+      return response.data;
+    },
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: ['post', variables.postId] });
+      addToast('success', '댓글이 삭제되었습니다.');
+      setPassword('');
+    },
+    onError: (error: any) => {
+      addToast('error', error.message || '댓글 삭제 중 오류가 발생했습니다.');
+    },
+  });
+
   return {
     password,
     setPassword,
     handleDeletePost,
-    handleAddComment,
+    handleAddCommentMutate,
+    handleDeleteCommentMutate,
     error,
   };
 };
