@@ -1,31 +1,67 @@
-import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { instance } from '../../apis/instance';
+import { useQuery } from '@tanstack/react-query';
+import { useCommunity } from './hooks/useCommunity';
+import { useState } from 'react';
+import Pagination from '../../components/ui/Pagination/Pagination';
+import Button from '../../components/Button';
+import type { Post, PostResponse } from '../../types/communityTypes';
 
 const CommunityMain = () => {
   const navigate = useNavigate();
-  const [data, setData] = useState<any[]>([]);
+  const [page, setPage] = useState(1);
+  const [category, setCategory] = useState<string | null>(null);
+  const { fetchPosts } = useCommunity();
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await instance.get('/api/community/getPost');
-        setData(response.data);
-      } catch (error) {
-        console.error('데이터를 불러오지 못했습니다:', error);
-      }
-    };
-    fetchPosts();
-  }, []);
+  const { data, isPending, error } = useQuery<PostResponse, Error>({
+    queryKey: ['post', page, category],
+    queryFn: () => fetchPosts(page, 5, category || undefined),
+    staleTime: 5 * 60 * 1000,
+  });
 
-  const handleNavigateDetail = (post: any) => {
+  if (isPending) return <>로딩중..</>;
+  if (error) return <>에러발생: {error.message}</>;
+
+  const handleNavigateDetail = (post: Post) => {
     navigate(`/community/detail/${post._id}`);
   };
 
   return (
     <div className='flex w-[120rem] flex-col items-center justify-center gap-5 p-10'>
-      <h1 className='mb-6 text-2xl font-bold'>커뮤니티 게시판</h1>
+      <h1 className='mb-6 text-2xl font-bold text-white'>커뮤니티 게시판</h1>
 
+      <div className='mb-4 flex gap-2'>
+        <Button
+          onClick={() => {
+            setCategory(null);
+            setPage(1);
+          }}
+          className={category === null ? 'font-bold text-blue-500' : ''}
+        >
+          전체
+        </Button>
+
+        <Button
+          onClick={() => {
+            setCategory('question');
+            setPage(1);
+          }}
+          className={category === 'question' ? 'font-bold text-blue-500' : ''}
+        >
+          질문
+        </Button>
+
+        <Button
+          onClick={() => {
+            setCategory('information');
+            setPage(1);
+          }}
+          className={
+            category === 'information' ? 'font-bold text-blue-500' : ''
+          }
+        >
+          정보
+        </Button>
+      </div>
       <div className='w-full rounded-xl border border-gray-300 bg-white shadow'>
         <div className='grid grid-cols-3 border-b bg-gray-100 px-4 py-2 font-semibold'>
           <span>카테고리</span>
@@ -33,7 +69,7 @@ const CommunityMain = () => {
           <span>제목</span>
         </div>
 
-        {data.map((post: any) => (
+        {data.posts.map((post: Post) => (
           <div
             key={post._id}
             className='grid cursor-pointer grid-cols-3 border-b px-4 py-3 transition hover:bg-gray-50'
@@ -52,6 +88,14 @@ const CommunityMain = () => {
             <span className='truncate text-gray-900'>{post.title}</span>
           </div>
         ))}
+      </div>
+      <div className='justify-end'>
+        <Pagination
+          currentPage={data.currentPage}
+          totalPages={data.totalPages}
+          totalItems={data.totalCount}
+          onPageChange={setPage}
+        />
       </div>
 
       <button

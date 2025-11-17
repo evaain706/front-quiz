@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useUserStore } from '../store/useUserStore';
+import { useToastStore } from '../store/useToastStore';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -7,10 +9,16 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const { user } = useUserStore();
+  const { addToast } = useToastStore();
+
+  useEffect(() => {
+    if (!user) {
+      addToast('warn', '로그인이 필요한 페이지입니다');
+    }
+  }, [user, addToast]);
 
   if (!user) {
-    console.log('로그인안됨(접근불가)');
-    return <Navigate to='/' replace />;
+    return <Navigate to='/main' replace />;
   }
 
   return <>{children}</>;

@@ -5,6 +5,7 @@ import Button from '../../components/Button';
 import { useState } from 'react';
 import DeleteModal from '../../components/DeleteModal/DeleteModal';
 import { useCommunity } from './hooks/useCommunity';
+import type { Post, Comment } from '../../types/communityTypes';
 
 const CommunityDetail = () => {
   const { id } = useParams();
@@ -23,7 +24,7 @@ const CommunityDetail = () => {
     handleDeleteCommentMutate,
   } = useCommunity();
 
-  const { data: post, isLoading } = useQuery({
+  const { data: post, isLoading } = useQuery<Post, Error>({
     queryKey: ['post', id],
     queryFn: async () => {
       const res = await instance.get(`/api/community/getPost/${id}`);
@@ -88,7 +89,7 @@ const CommunityDetail = () => {
       <div className='mt-10 border-t pt-4'>
         <h3 className='mb-2 text-lg font-semibold'>댓글</h3>
         {post.comments.length > 0 ? (
-          post.comments.map((c: any) => (
+          post.comments.map((c: Comment) => (
             <div
               key={c._id}
               className='mb-3 flex items-center justify-between border-b pb-2'

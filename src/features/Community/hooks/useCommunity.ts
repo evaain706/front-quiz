@@ -13,6 +13,24 @@ export const useCommunity = () => {
 
   const queryClient = useQueryClient();
 
+  const fetchPosts = async (
+    page: number,
+    limit: number = 5,
+    category?: string,
+  ) => {
+    const query = new URLSearchParams({
+      page: String(page),
+      limit: String(limit),
+    });
+
+    if (category) {
+      query.append('category', category);
+    }
+
+    const response = await instance.get(`/api/community/getPost?${query}`);
+    return response.data;
+  };
+
   const handleDeletePost = useMutation({
     mutationFn: async (postId: string) => {
       const response = await instance.delete(`/api/community/${postId}`, {
@@ -89,6 +107,7 @@ export const useCommunity = () => {
   });
 
   return {
+    fetchPosts,
     password,
     setPassword,
     handleDeletePost,
