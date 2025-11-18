@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { instance } from '../../../apis/instance';
 import { useToastStore } from '../../../store/useToastStore';
 import { useNavigate } from 'react-router-dom';
+import type { PostForm } from '../../../types/communityTypes';
 
 export const useCommunity = () => {
   const [password, setPassword] = useState('');
@@ -45,6 +46,23 @@ export const useCommunity = () => {
     },
     onError: (error: any) => {
       addToast('error', error.message || '삭제 중 오류가 발생했습니다.');
+    },
+  });
+
+  const handleAddPostMutate = useMutation({
+    mutationFn: async (data: PostForm) => {
+      const response = await instance.post('/api/community/createPost', data);
+      return response.data;
+    },
+
+    onSuccess: () => {
+      addToast('success', '게시글이 등록되었습니다.');
+      queryClient.invalidateQueries({ queryKey: ['post'] });
+      navigate('/community');
+    },
+
+    onError: (error: any) => {
+      addToast('error', error.message || '게시글 등록 중 오류가 발생했습니다.');
     },
   });
 
@@ -110,6 +128,7 @@ export const useCommunity = () => {
     fetchPosts,
     password,
     setPassword,
+    handleAddPostMutate,
     handleDeletePost,
     handleAddCommentMutate,
     handleDeleteCommentMutate,

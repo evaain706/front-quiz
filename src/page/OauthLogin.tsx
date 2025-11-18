@@ -1,3 +1,5 @@
+import Button from '../components/Button';
+
 const OauthLogin = () => {
   const KAKAO_REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
   const KAKAO_REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI;
@@ -9,7 +11,7 @@ const OauthLogin = () => {
 
   return (
     <div>
-      <button onClick={handleKakaoLogin}>눌러</button>
+      <Button onClick={handleKakaoLogin}>로그인</Button>
     </div>
   );
 };

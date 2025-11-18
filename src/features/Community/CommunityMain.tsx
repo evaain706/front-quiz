@@ -3,8 +3,9 @@ import { useQuery } from '@tanstack/react-query';
 import { useCommunity } from './hooks/useCommunity';
 import { useState } from 'react';
 import Pagination from '../../components/ui/Pagination/Pagination';
-import Button from '../../components/Button';
+
 import type { Post, PostResponse } from '../../types/communityTypes';
+import PostGrid from './components/PostGrid';
 
 const CommunityMain = () => {
   const navigate = useNavigate();
@@ -21,74 +22,37 @@ const CommunityMain = () => {
   if (isPending) return <>로딩중..</>;
   if (error) return <>에러발생: {error.message}</>;
 
-  const handleNavigateDetail = (post: Post) => {
-    navigate(`/community/detail/${post._id}`);
-  };
-
   return (
-    <div className='flex w-[120rem] flex-col items-center justify-center gap-5 p-10'>
-      <h1 className='mb-6 text-2xl font-bold text-white'>커뮤니티 게시판</h1>
+    <div className='flex w-full flex-col items-center gap-5 p-6 md:gap-10 md:p-14'>
+      <h2 className='text-[2rem] font-extrabold text-white md:text-[3rem]'>
+        커뮤니티 게시판
+      </h2>
 
-      <div className='mb-4 flex gap-2'>
-        <Button
-          onClick={() => {
-            setCategory(null);
-            setPage(1);
-          }}
-          className={category === null ? 'font-bold text-blue-500' : ''}
-        >
-          전체
-        </Button>
-
-        <Button
-          onClick={() => {
-            setCategory('question');
-            setPage(1);
-          }}
-          className={category === 'question' ? 'font-bold text-blue-500' : ''}
-        >
-          질문
-        </Button>
-
-        <Button
-          onClick={() => {
-            setCategory('information');
-            setPage(1);
-          }}
-          className={
-            category === 'information' ? 'font-bold text-blue-500' : ''
-          }
-        >
-          정보
-        </Button>
-      </div>
-      <div className='w-full rounded-xl border border-gray-300 bg-white shadow'>
-        <div className='grid grid-cols-3 border-b bg-gray-100 px-4 py-2 font-semibold'>
-          <span>카테고리</span>
-          <span>작성자</span>
-          <span>제목</span>
-        </div>
-
-        {data.posts.map((post: Post) => (
-          <div
-            key={post._id}
-            className='grid cursor-pointer grid-cols-3 border-b px-4 py-3 transition hover:bg-gray-50'
-            onClick={() => handleNavigateDetail(post)}
+      <div className='flex gap-3 rounded-full bg-white p-2 shadow-md'>
+        {[
+          { label: '전체', value: null },
+          { label: '질문', value: 'question' },
+          { label: '정보', value: 'information' },
+        ].map((c) => (
+          <button
+            key={c.label}
+            onClick={() => {
+              setCategory(c.value);
+              setPage(1);
+            }}
+            className={`rounded-full px-5 py-2 text-sm font-semibold transition ${
+              category === c.value
+                ? 'bg-blue-500 text-white shadow-md'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            } `}
           >
-            <span
-              className={`${
-                post.category === 'question'
-                  ? 'text-blue-500'
-                  : 'text-green-500'
-              } font-medium`}
-            >
-              {post.category === 'question' ? '질문' : '정보'}
-            </span>
-            <span className='text-gray-700'>{post.nickname}</span>
-            <span className='truncate text-gray-900'>{post.title}</span>
-          </div>
+            {c.label}
+          </button>
         ))}
       </div>
+
+      <PostGrid data={data} />
+
       <div className='justify-end'>
         <Pagination
           currentPage={data.currentPage}

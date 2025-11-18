@@ -13,6 +13,7 @@ const MyPageMain = () => {
   const { isPending, error, data } = useQuery<IncorrectQuiz[]>({
     queryKey: ['incorrectAnswer'],
     queryFn: getIncorrectAnswers,
+    staleTime: 5 * 60 * 1000,
   });
 
   const handleOpenModal = (quiz: IncorrectQuiz) => {

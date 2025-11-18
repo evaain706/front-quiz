@@ -1,4 +1,3 @@
-import LogoImg from '/logo.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { useUserStore } from '../store/useUserStore';
 import OauthLogin from '../page/OauthLogin';
@@ -39,7 +38,7 @@ const Header = () => {
           </>
         ) : (
           <div>
-            어허 <OauthLogin />
+            <OauthLogin />
           </div>
         )}
       </div>

@@ -24,3 +24,11 @@ export interface PostResponse {
   limit: number;
   posts: Post[];
 }
+
+export interface PostForm {
+  category: 'question' | 'information';
+  title: string;
+  content: string;
+  nickname: string;
+  password: string;
+}

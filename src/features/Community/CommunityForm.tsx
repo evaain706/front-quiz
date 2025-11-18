@@ -1,7 +1,6 @@
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { instance } from '../../apis/instance';
-import type { Post } from '../../types/communityTypes';
+import type { PostForm } from '../../types/communityTypes';
+import { useCommunity } from './hooks/useCommunity';
 
 const CreatePost = () => {
   const {
@@ -9,14 +8,13 @@ const CreatePost = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm<PostForm>();
 
-  const navigate = useNavigate();
+  const { handleAddPostMutate } = useCommunity();
 
-  const onSubmit = async (data: any) => {
-    await instance.post('/api/community/createPost', data);
+  const onSubmit = async (data: PostForm) => {
+    handleAddPostMutate.mutate(data);
     reset();
-    navigate('/community');
   };
 
   return (
