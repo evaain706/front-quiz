@@ -7,7 +7,7 @@ import type { PostForm } from '../../../types/communityTypes';
 
 export const useCommunity = () => {
   const [password, setPassword] = useState('');
-  const [error, setError] = useState<Error | null>(null);
+
   const { addToast } = useToastStore();
 
   const navigate = useNavigate();
@@ -132,6 +132,5 @@ export const useCommunity = () => {
     handleDeletePost,
     handleAddCommentMutate,
     handleDeleteCommentMutate,
-    error,
   };
 };

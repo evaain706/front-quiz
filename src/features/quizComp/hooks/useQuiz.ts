@@ -107,11 +107,17 @@ export const useQuiz = () => {
     },
   });
 
-  const getIncorrectAnswers = async () => {
+  const getIncorrectAnswers = async (category?: string, level?: string) => {
     try {
+      const query = new URLSearchParams();
+
+      if (category) query.append('category', category);
+      if (level) query.append('level', level);
+
       const response = await privateInstance.get(
-        '/api/mypage/incorrect-answers',
+        `/api/mypage/incorrect-answers?${query.toString()}`,
       );
+
       return response.data;
     } catch (err) {
       console.log(err);

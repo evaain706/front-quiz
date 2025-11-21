@@ -19,7 +19,8 @@ const OptionSelect = () => {
   useEffect(() => {
     resetCategory();
     resetLevel();
-  }, [resetCategory, resetLevel]);
+    setStep(0);
+  }, []);
 
   const handleCategorySelect = useCallback(
     (selectedCat: string) => {
@@ -29,7 +30,7 @@ const OptionSelect = () => {
         setCategory(selectedCat);
       }
     },
-    [setCategory],
+    [category, setCategory],
   );
 
   const handleLevelSelect = useCallback(
@@ -39,6 +40,12 @@ const OptionSelect = () => {
     },
     [setLevel, navigate],
   );
+
+  useEffect(() => {
+    if (step === 1 && !category) {
+      setStep(0);
+    }
+  }, [step, category]);
 
   return (
     <div className='flex w-full flex-col items-center justify-center gap-10 p-4 md:gap-16 md:p-8'>
