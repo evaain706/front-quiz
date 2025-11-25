@@ -7,7 +7,7 @@ export type User = {
   nickname: string;
   createdAt: string;
   updatedAt: string;
-  image: string | null;
+  profileImage: string | null;
 };
 
 type UserStore = {
@@ -16,6 +16,8 @@ type UserStore = {
   setUser: (user: User | null) => void;
   clearUser: () => void;
   setHasHydrated: (state: boolean) => void;
+  updateUser: (nickname: string) => void;
+  updateProfileImage: (profileImage: string) => void;
 };
 
 /**
@@ -47,6 +49,14 @@ export const useUserStore = create<UserStore>()(
         setUser: (user: User | null) => set({ user }),
         clearUser: () => set({ user: null }),
         setHasHydrated: (state: boolean) => set({ hasHydrated: state }),
+        updateUser: (nickname) =>
+          set((state) => ({
+            user: state.user ? { ...state.user, nickname } : null,
+          })),
+        updateProfileImage: (profileImage) =>
+          set((state) => ({
+            user: state.user ? { ...state.user, profileImage } : null,
+          })),
       }),
       {
         name: 'user-storage',

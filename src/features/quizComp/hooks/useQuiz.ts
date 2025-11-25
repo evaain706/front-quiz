@@ -58,6 +58,9 @@ export const useQuiz = () => {
       });
       console.log(response.data);
       setResult(response.data);
+      if (user) {
+        handleAddStatistics(response.data.isCorrect);
+      }
     } catch (error) {
       console.error('채점 실패:', error);
     } finally {
@@ -65,6 +68,18 @@ export const useQuiz = () => {
     }
   };
 
+  const handleAddStatistics = async (isCorrect: boolean) => {
+    try {
+      const response = await privateInstance.post('/api/quiz/add-statistics', {
+        isCorrect,
+        category,
+        level,
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.log('저장실패');
+    }
+  };
   const handleAddInCorrect = async () => {
     try {
       const response = await privateInstance.post(
@@ -124,11 +139,22 @@ export const useQuiz = () => {
     }
   };
 
+  const getUserStatistics = async () => {
+    try {
+      const response = await privateInstance.get('/api/quiz/statistics');
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  };
+
   return {
     fetchQuiz,
     handleSubmit,
     handleAddInCorrect,
     getIncorrectAnswers,
+    getUserStatistics,
     handleDeleteIncorrect,
     error,
   };

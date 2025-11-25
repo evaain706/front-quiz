@@ -3,6 +3,7 @@ import { useUserStore } from '../store/useUserStore';
 import OauthLogin from '../page/OauthLogin';
 import NickName from './ui/NickName';
 import Dropdown from './ui/Dropdown';
+import ProfileImage from './ui/ProfileImage';
 
 const Header = () => {
   const { user } = useUserStore();
@@ -22,7 +23,7 @@ const Header = () => {
             <div className='relative'>
               <Dropdown>
                 <Dropdown.Trigger>
-                  <NickName name={user.nickname} />
+                  <ProfileImage src={user.profileImage}/>
                 </Dropdown.Trigger>
                 <Dropdown.Content>
                   <Dropdown.Item onClick={() => navigate('/mypage')}>

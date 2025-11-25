@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import useUserStore from '../../store/useUserStore';
+import { useUserStore } from '../store/useUserStore';
 import { useNavigate } from 'react-router-dom';
 
 export const useCheckIsLogin = () => {
