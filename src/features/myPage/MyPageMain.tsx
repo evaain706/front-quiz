@@ -1,115 +1,28 @@
-import { useQuery } from '@tanstack/react-query';
-import { useQuiz } from '../quizComp/hooks/useQuiz';
-import type { IncorrectQuiz } from '../../types/quizTypes';
-import AnswerHistoryCard from './IncorrectAnswers/AnswerHistoryCard';
-import IncorrectModal from '../../components/IncorrectModal/IncorrectModal';
-import { useState } from 'react';
-import { categorylist } from '../../constants/categoryList';
 import Button from '../../components/Button';
+import { useNavigate } from 'react-router-dom';
 
 const MyPageMain = () => {
-  const { getIncorrectAnswers } = useQuiz();
-  const [open, setOpen] = useState(false);
-  const [category, setCategory] = useState<string>('');
-  const [level, setLevel] = useState('');
-  const [selectedQuiz, setSelectedQuiz] = useState<IncorrectQuiz | null>(null);
-
-  const { isPending, error, data } = useQuery<IncorrectQuiz[]>({
-    queryKey: ['incorrectAnswer', category, level],
-    queryFn: () => getIncorrectAnswers(category, level),
-    staleTime: 5 * 60 * 1000,
-  });
-
-  const handleOpenModal = (quiz: IncorrectQuiz) => {
-    setSelectedQuiz(quiz);
-    setOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setOpen(false);
-    setSelectedQuiz(null);
-  };
-
-  if (isPending)
-    return (
-      <div>
-        <h2 className='text-[2rem] font-bold text-white'>로딩중...</h2>
-      </div>
-    );
-  if (error) return <>에러발생: {error.message}</>;
-
+  const navigate = useNavigate();
   return (
-    <div className='w-full'>
-      <div className='mb-5 flex items-center justify-center'>
-        <h2 className='text-[1.8rem] font-bold text-white md:text-[4rem]'>
-          저장된 오답문제
-        </h2>
-      </div>
-      <div className='flex flex-col items-center gap-4 px-10 md:flex-row md:justify-between'>
-        <div className='flex flex-col gap-4 md:flex-row'>
-          <select
-            className='bg-white py-4'
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <option value='' disabled selected>
-              카테고리를 선택하세요
-            </option>
-
-            {categorylist.map((item) => (
-              <option key={item.id} value={item.text}>
-                {item.text}
-              </option>
-            ))}
-          </select>
-
-          <select
-            className='bg-white px-5 py-4'
-            value={level}
-            onChange={(e) => setLevel(e.target.value)}
-          >
-            <option value='' disabled selected>
-              난이도 선택
-            </option>
-
-            <option value='쉬움'>쉬움</option>
-            <option value='보통'>보통</option>
-            <option value='어려움'>어려움</option>
-          </select>
-        </div>
-
-        <Button
-          size='sm'
-          className='text-center md:w-auto'
-          onClick={() => {
-            setCategory('');
-            setLevel('');
-          }}
-        >
-          초기화
-        </Button>
-      </div>
-
-      <div className='mt-4 flex h-[40rem] flex-col gap-4 overflow-auto p-10 md:h-[70rem]'>
-        {(!data || data.length === 0) && (
-          <div className='py-10 text-center text-[2rem] font-bold text-white'>
-            저장된 문제가 없습니다
-          </div>
-        )}
-        {data?.map((item) => (
-          <div key={item.id} onClick={() => handleOpenModal(item)}>
-            <AnswerHistoryCard data={item} />
-          </div>
-        ))}
-
-        {selectedQuiz && (
-          <IncorrectModal
-            data={selectedQuiz}
-            isOpen={open}
-            setIsopen={handleCloseModal}
-          />
-        )}
-      </div>
+    <div className='flex flex-col gap-5 text-white'>
+      <Button
+        className='w-[30rem] bg-white p-10 text-[2rem] font-bold text-black'
+        onClick={() => navigate('/mypage/setting')}
+      >
+        유저정보수정
+      </Button>
+      <Button
+        className='w-[30rem] bg-white p-10 text-[2rem] font-bold text-black'
+        onClick={() => navigate('/mypage/statistics')}
+      >
+        통계보기
+      </Button>
+      <Button
+        className='w-[30rem] bg-white p-10 text-[2rem] font-bold text-black'
+        onClick={() => navigate('/mypage/IncorrectAnswer')}
+      >
+        오답문제에 저장된 문제 조회
+      </Button>
     </div>
   );
 };

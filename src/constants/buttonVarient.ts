@@ -13,7 +13,8 @@ const BUTTON_ROUND = {
 };
 
 const BUTTON_VARIANTS = {
-  primary: 'bg-gray-100 text-white border border-primary-100',
+  primary:
+    'bg-white  font-bold text-black border-gray-200 border-3 hover:bg-slate-100',
   secondary: 'bg-gray-200 text-white border border-primary-10',
   outline:
     'bg-white text-gray-800 border border-gray-300 enabled:hover:bg-gray-50',

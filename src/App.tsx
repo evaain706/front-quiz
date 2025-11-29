@@ -15,6 +15,9 @@ import ToastContainer from './components/ui/Toast/ToastContainer';
 import CommunityPage from './page/CommunityPage';
 import CommunityForm from './features/Community/CommunityForm';
 import CommunityDetail from './features/Community/CommunityDetail';
+import UserStatisticPage from './features/myPage/UserStatistics/UserStatistics';
+import UserSettingPage from './features/myPage/UserSetting/UserSetting';
+import IncorrectAnswerPage from './features/myPage/IncorrectAnswers/IncorrectAnswer';
 
 const queryClient = new QueryClient();
 
@@ -62,6 +65,30 @@ function App() {
           element: (
             <ProtectedRoute>
               <MyPage />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: '/mypage/statistics',
+          element: (
+            <ProtectedRoute>
+              <UserStatisticPage />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: '/mypage/setting',
+          element: (
+            <ProtectedRoute>
+              <UserSettingPage />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: '/mypage/incorrectAnswer',
+          element: (
+            <ProtectedRoute>
+              <IncorrectAnswerPage />
             </ProtectedRoute>
           ),
         },
