@@ -6,6 +6,7 @@ import Pagination from '../../components/ui/Pagination/Pagination';
 
 import type { Post, PostResponse } from '../../types/communityTypes';
 import PostGrid from './components/PostGrid';
+import Button from '../../components/Button';
 
 const CommunityMain = () => {
   const navigate = useNavigate();
@@ -40,10 +41,10 @@ const CommunityMain = () => {
               setCategory(c.value);
               setPage(1);
             }}
-            className={`rounded-full px-5 py-2 text-sm font-semibold transition ${
+            className={`rounded-full px-10 py-2 text-[1.4rem] font-bold transition md:text-[1.6rem] ${
               category === c.value
                 ? 'bg-blue-500 text-white shadow-md'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                : 'bg-gray-100 text-white hover:bg-gray-200'
             } `}
           >
             {c.label}
@@ -62,12 +63,7 @@ const CommunityMain = () => {
         />
       </div>
 
-      <button
-        className='rounded bg-blue-500 px-4 py-2 text-white transition hover:bg-blue-600'
-        onClick={() => navigate('/community/create')}
-      >
-        새 글 작성
-      </button>
+      <Button onClick={() => navigate('/community/create')}>새 글 작성</Button>
     </div>
   );
 };

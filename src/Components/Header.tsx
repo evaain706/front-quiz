@@ -1,13 +1,15 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useUserStore } from '../store/useUserStore';
 import OauthLogin from '../page/OauthLogin';
-import NickName from './ui/NickName';
 import Dropdown from './ui/Dropdown';
 import ProfileImage from './ui/ProfileImage';
+import { useLogout } from '../hooks/useLogout';
 
 const Header = () => {
   const { user } = useUserStore();
   const navigate = useNavigate();
+
+  const logout = useLogout();
 
   return (
     <div className='fixed top-0 flex w-full items-center justify-between bg-slate-200 px-[5rem] py-[1rem] md:px-[10rem]'>
@@ -23,15 +25,15 @@ const Header = () => {
             <div className='relative'>
               <Dropdown>
                 <Dropdown.Trigger>
-                  <ProfileImage src={user.profileImage}/>
+                  <ProfileImage src={user.profileImage} />
                 </Dropdown.Trigger>
                 <Dropdown.Content>
                   <Dropdown.Item onClick={() => navigate('/mypage')}>
                     마이페이지로 이동
                   </Dropdown.Item>
 
-                  <Dropdown.Item onClick={() => console.log('메뉴2 클릭')}>
-                    메뉴2
+                  <Dropdown.Item onClick={() => logout()}>
+                    로그아웃
                   </Dropdown.Item>
                 </Dropdown.Content>
               </Dropdown>

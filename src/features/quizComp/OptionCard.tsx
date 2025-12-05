@@ -33,7 +33,7 @@ const OptionsCard = () => {
 
   return (
     <div className='mt-8 mb-8 min-h-[15rem] md:w-[70rem] lg:w-[90rem]'>
-      <div className='rounded-md border border-gray-200 bg-white p-6 shadow-sm'>
+      <div className='rounded-xl border border-gray-200 bg-gray-400 p-6 shadow-md'>
         <div className='space-y-3'>
           {Object.entries(quiz.options).map(([key, value]) => {
             const isCorrectAnswer = key === quiz.answer;
@@ -91,8 +91,8 @@ const OptionsCard = () => {
                   )}
                 </div>
 
-                <span className='flex-1 font-medium text-gray-800'>
-                  <span className='font-semibold'>{key}.</span>
+                <span className='flex-1 font-bold text-gray-800 md:text-[1.8rem]'>
+                  <span className='font-bold'>{key}.</span>
                   <span className='ml-2'>{value}</span>
                 </span>
               </label>

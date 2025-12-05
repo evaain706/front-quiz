@@ -25,10 +25,8 @@ privateInstance.interceptors.response.use(
 
         return privateInstance(originalRequest);
       } catch (refreshError) {
-        const { clearUser } = useUserStore();
-        clearUser();
-        console.log('토큰만료');
-        
+        useUserStore.getState().clearUser();
+
         return Promise.reject(refreshError);
       }
     }

@@ -19,7 +19,7 @@ const PostGrid = ({ data }: { data: PostResponse }) => {
       {data.posts.map((post: Post) => (
         <div
           key={post._id}
-          className='group grid cursor-pointer grid-cols-3 border-b px-4 py-10 text-[1.2rem] transition md:text-[1.4rem]'
+          className='group grid cursor-pointer grid-cols-3 border-b px-4 py-5 text-[1.2rem] transition md:py-10 md:text-[1.4rem]'
           onClick={() => handleNavigateDetail(post)}
         >
           <p

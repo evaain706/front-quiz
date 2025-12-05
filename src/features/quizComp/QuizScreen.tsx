@@ -5,6 +5,8 @@ import { useQuizStore } from '../../store/useQuizStore';
 import { useOptionStore } from '../../store/useOptionStore';
 import QuestionCard from './QuestionCard';
 import OptionsCard from './OptionCard';
+import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
+import { useState } from 'react';
 
 const QuizScreen = () => {
   const { fetchQuiz, handleSubmit, error } = useQuiz();
@@ -25,9 +27,23 @@ const QuizScreen = () => {
         </h2>
       </div>
 
-      <div>
+      <ErrorBoundary
+        fallback={(reset) => (
+          <div className='flex flex-col items-center p-10 text-white'>
+            <p className='mb-4 text-2xl'>퀴즈 불러오기 실패</p>
+            <Button
+              onClick={() => {
+                reset(); // ErrorBoundary 초기화
+                fetchQuiz(); // 다시 요청
+              }}
+            >
+              다시 시도
+            </Button>
+          </div>
+        )}
+      >
         <QuestionCard error={error} isLoading={isLoading} quiz={quiz} />
-      </div>
+      </ErrorBoundary>
 
       <OptionsCard />
 

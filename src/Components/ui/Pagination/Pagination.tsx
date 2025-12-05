@@ -32,7 +32,7 @@ const Pagination = ({
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className='rounded border bg-white px-3 py-1 disabled:opacity-50'
+        className='rounded border bg-white px-4 py-2 disabled:opacity-50'
       >
         이전
       </button>
@@ -52,7 +52,7 @@ const Pagination = ({
       {pageNumbers.map((num) => (
         <button
           key={num}
-          className={`rounded border px-3 py-1 ${num === currentPage ? 'bg-blue-500 text-white' : 'bg-white'}`}
+          className={`rounded border px-4 py-2 ${num === currentPage ? 'bg-blue-500 text-white' : 'bg-white'}`}
           onClick={() => onPageChange(num)}
         >
           {num}
@@ -74,7 +74,7 @@ const Pagination = ({
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className='rounded border bg-white px-3 py-1 disabled:opacity-50'
+        className='rounded border bg-white px-4 py-2 disabled:opacity-50'
       >
         다음
       </button>
