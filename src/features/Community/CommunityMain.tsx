@@ -5,18 +5,22 @@ import { useState } from 'react';
 import Pagination from '../../components/ui/Pagination/Pagination';
 
 import type { Post, PostResponse } from '../../types/communityTypes';
-import PostGrid from './components/PostGrid';
+import PostGrid from './components/communityMain/PostGrid';
 import Button from '../../components/Button';
+import Input from '../../components/Input';
+import { useDebounce } from '../../hooks/useDebounce';
 
 const CommunityMain = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const [category, setCategory] = useState<string | null>(null);
+  const [search, setSearch] = useState('');
+  const debounceSearch = useDebounce(search, 300);
   const { fetchPosts } = useCommunity();
 
   const { data, isPending, error } = useQuery<PostResponse, Error>({
-    queryKey: ['post', page, category],
-    queryFn: () => fetchPosts(page, 5, category || undefined),
+    queryKey: ['post', page, category, debounceSearch],
+    queryFn: () => fetchPosts(page, 5, category || undefined, debounceSearch),
     staleTime: 5 * 60 * 1000,
   });
 
@@ -50,6 +54,17 @@ const CommunityMain = () => {
             {c.label}
           </button>
         ))}
+      </div>
+
+      <div className='flex gap-5 px-10'>
+        <Input
+          placeholder='검색'
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setPage(1);
+          }}
+        />
       </div>
 
       <PostGrid data={data} />

@@ -1,5 +1,7 @@
 import Button from '../Button';
+import Input from '../Input';
 import Modal from '../Modal';
+import { useState } from 'react';
 
 interface DeleteModalProps {
   isOpen: boolean;
@@ -14,26 +16,30 @@ interface DeleteModalProps {
 const DeleteModal = ({
   isOpen,
   onOpenChange,
-  password,
-  setPassword,
   onDelete,
   isLoading = false,
   title = '삭제',
 }: DeleteModalProps) => {
+  const [password, setPassword] = useState('');
+
   return (
     <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-      <Modal.Content>
+      <Modal.Content className='max-w-[20rem]'>
         <Modal.Header>
-          <Modal.Title>
+          <Modal.Title className='text-[2rem] font-bold md:text-[2.4rem]'>
             {title}
             <Modal.Close />
           </Modal.Title>
         </Modal.Header>
 
         <Modal.Item className='flex flex-col gap-2'>
-          <label className='text-sm text-gray-600'>비밀번호를 입력하세요</label>
+          <label className='text-[1.4rem] text-gray-600 md:text-[1.6rem]'>
+            비밀번호를 입력하세요
+          </label>
 
-          <input
+          <Input
+            name={password}
+            placeholder='비밀번호'
             type='password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}

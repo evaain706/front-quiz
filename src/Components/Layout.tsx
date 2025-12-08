@@ -6,7 +6,7 @@ const Layout = () => {
     <div className='bg-navy-black min-h-screen'>
       <Header />
 
-      <div className='mx-auto flex min-h-screen max-w-[120rem] items-center justify-center pt-[7rem]'>
+      <div className='mx-auto flex min-h-screen max-w-[120rem] items-center justify-center pt-[5rem]'>
         <Outlet />
       </div>
     </div>

@@ -15,7 +15,7 @@ const QuestionCard = ({ error, isLoading, quiz }: QuestionCardProps) => {
 
   if (isLoading) {
     return (
-      <div className='flex min-h-[15rem] w-[40rem] items-center justify-center rounded-md border-5 border-gray-500 bg-white md:w-[70rem] lg:w-[90rem]'>
+      <div className='flex min-h-[15rem] w-full items-center justify-center rounded-md border-5 border-gray-500 bg-white p-6 md:w-[70rem] lg:w-[90rem]'>
         <div className='h-[3rem] w-1/2 animate-pulse rounded-md bg-gray-200' />
       </div>
     );

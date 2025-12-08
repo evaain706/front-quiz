@@ -57,7 +57,7 @@ export default function ModalContent({
               ease: [0.25, 0.1, 0.25, 1],
             }}
             className={cn(
-              'relative m-auto flex h-fit max-h-[85%] w-screen min-w-[375px] origin-center flex-col bg-white p-8 px-10 shadow-2xl md:h-fit md:w-[50%] md:max-w-600',
+              'relative m-auto flex h-fit max-h-[85%] w-screen min-w-[40rem] origin-center flex-col bg-white p-8 px-10 shadow-2xl md:h-fit md:w-[40%] md:max-w-600',
               className,
             )}
           >

@@ -1,5 +1,6 @@
 import Button from '../../components/Button';
 import { useQuizStore } from '../../store/useQuizStore';
+import { useUserStore } from '../../store/useUserStore';
 import { useQuiz } from './hooks/useQuiz';
 import ResultDisplay from './ResultDisplay';
 import React from 'react';
@@ -7,6 +8,7 @@ import React from 'react';
 const OptionsCard = () => {
   const { quiz, userAnswer, setUserAnswer, result } = useQuizStore();
   const { handleAddInCorrect } = useQuiz();
+  const { user } = useUserStore();
 
   if (!quiz) {
     return (
@@ -109,7 +111,8 @@ const OptionsCard = () => {
           </div>
         )}
 
-        {result?.isCorrect === false && (
+        {/* 로그인된 유저만 뜨도록 수정하기 */}
+        {user && result?.isCorrect === false && (
           <div>
             <Button onClick={() => handleAddInCorrect()}>
               오답노트에 등록
