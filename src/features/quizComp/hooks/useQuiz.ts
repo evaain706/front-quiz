@@ -8,19 +8,22 @@ import { useToastStore } from '../../../store/useToastStore';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export const useQuiz = () => {
-  const {
-    result,
-    quiz,
-    setQuiz,
-    userAnswer,
-    setUserAnswer,
-    setResult,
-    setIsLoading,
-    setIsGrading,
-  } = useQuizStore();
-  const { category, level } = useOptionStore();
-  const { user } = useUserStore();
-  const { addToast } = useToastStore();
+  const quiz = useQuizStore((s) => s.quiz);
+  const result = useQuizStore((s) => s.result);
+  const userAnswer = useQuizStore((s) => s.userAnswer);
+
+  const setQuiz = useQuizStore((s) => s.setQuiz);
+  const setUserAnswer = useQuizStore((s) => s.setUserAnswer);
+  const setResult = useQuizStore((s) => s.setResult);
+  const setIsLoading = useQuizStore((s) => s.setIsLoading);
+  const setIsGrading = useQuizStore((s) => s.setIsGrading);
+
+  const category = useOptionStore((s) => s.category);
+  const level = useOptionStore((s) => s.level);
+
+  const user = useUserStore((s) => s.user);
+
+  const addToast = useToastStore((s) => s.addToast);
 
   const queryClient = useQueryClient();
 

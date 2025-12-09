@@ -22,44 +22,52 @@ const CreatePost = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='mx-auto mt-10 max-w-[120rem] rounded-xl border bg-white p-6 shadow'
+      className='mx-auto h-full w-full border bg-white shadow md:rounded-xl'
     >
-      <h2 className='mb-4 text-center text-[2rem] font-bold'>게시글 작성</h2>
+      <h2 className='mb-4 p-5 text-center text-[2rem] font-bold'>
+        게시글 작성
+      </h2>
 
-      <div className='flex flex-col gap-8 p-10'>
+      <div className='flex flex-col gap-2 p-5 md:gap-8'>
         <div>
-          <label className='text-[1.6rem] font-bold'>카테고리 선택</label>
+          <label className='p-2 text-[1.6rem] font-bold'>카테고리 선택</label>
           <select
             {...register('category')}
-            className='mb-3 w-full rounded-lg border border-black bg-white p-2 px-4 py-4 text-[1.6rem] text-black'
+            className='mb-3 w-full rounded-lg border-2 border-gray-600 bg-white p-2 px-4 py-4 text-[1.6rem] text-black'
           >
-            <option value='question'>질문</option>
-            <option value='information'>정보</option>
+            <option className='font-bold' value='question'>
+              질문
+            </option>
+            <option className='font-bold' value='information'>
+              정보
+            </option>
           </select>
         </div>
 
         <div>
-          <label className='text-[1.6rem] font-bold'>제목</label>
+          <label className='p-2 text-[1.6rem] font-bold'>제목</label>
           <Input
             {...register('title', { required: '제목을 입력해주세요.' })}
             placeholder='제목'
-            className='mb-1 w-full rounded border p-2'
+            className='mb-1 w-full rounded border-2 border-gray-600 pl-5'
           />
           {errors.title && (
-            <p className='mb-3 text-sm text-red-500'>{errors.title?.message}</p>
+            <p className='mb-4 pl-3 text-[1.4rem] text-red-500'>
+              {errors.title?.message}
+            </p>
           )}
         </div>
 
         <div>
-          <label className='text-[1.6rem] font-bold'>내용</label>
+          <label className='p-2 text-[1.6rem] font-bold'>내용</label>
           <textarea
             {...register('content', { required: '내용을 입력해주세요.' })}
             placeholder='내용'
-            className='mb-1 w-full rounded border p-2'
+            className='mb-1 w-full rounded border-2 border-gray-600 p-2 text-[1.6rem] font-bold'
             rows={5}
           />
           {errors.content && (
-            <p className='mb-3 text-sm text-red-500'>
+            <p className='mb-4 pl-3 text-[1.4rem] text-red-500'>
               {errors.content.message}
             </p>
           )}
@@ -70,10 +78,10 @@ const CreatePost = () => {
             <Input
               {...register('nickname', { required: '닉네임을 입력해주세요.' })}
               placeholder='닉네임'
-              className='mb-1 w-full rounded border p-2'
+              className='mb-1 w-full rounded border-2 border-gray-600 pl-5'
             />
             {errors.nickname && (
-              <p className='mb-3 text-sm text-red-500'>
+              <p className='mb-4 pl-3 text-[1.4rem] text-red-500'>
                 {errors.nickname.message}
               </p>
             )}
@@ -90,10 +98,10 @@ const CreatePost = () => {
               })}
               placeholder='4자리 비밀번호'
               type='password'
-              className='mb-1 w-full rounded border p-2'
+              className='mb-1 w-full rounded border-2 border-gray-600 pl-5'
             />
             {errors.password && (
-              <p className='mb-4 text-sm text-red-500'>
+              <p className='mb-4 pl-3 text-[1.4rem] text-red-500'>
                 {errors.password.message}
               </p>
             )}
@@ -102,7 +110,8 @@ const CreatePost = () => {
 
         <Button
           type='submit'
-          className='w-full self-center rounded bg-gray-600'
+          className='w-full self-center rounded'
+          onClick={() => {}}
         >
           작성하기
         </Button>

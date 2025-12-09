@@ -6,9 +6,13 @@ import ResultDisplay from './ResultDisplay';
 import React from 'react';
 
 const OptionsCard = () => {
-  const { quiz, userAnswer, setUserAnswer, result } = useQuizStore();
+  const quiz = useQuizStore((s) => s.quiz);
+  const userAnswer = useQuizStore((s) => s.userAnswer);
+  const setUserAnswer = useQuizStore((s) => s.setUserAnswer);
+  const result = useQuizStore((s) => s.result);
+  const user = useUserStore((s) => s.user);
+
   const { handleAddInCorrect } = useQuiz();
-  const { user } = useUserStore();
 
   if (!quiz) {
     return (

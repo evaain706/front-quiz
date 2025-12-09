@@ -11,9 +11,9 @@ const UserSettingPage = () => {
 
   const updateUser = useUserStore((s) => s.updateUser);
 
-  const { addToast } = useToastStore();
+  const addToast = useToastStore((s) => s.addToast);
 
-  const { user } = useUserStore();
+  const user = useUserStore((s) => s.user);
 
   const handleNickNameUpdate = async () => {
     if (nickName.length === 0) {

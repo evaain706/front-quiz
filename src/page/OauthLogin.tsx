@@ -11,7 +11,9 @@ const OauthLogin = () => {
 
   return (
     <div>
-      <Button onClick={handleKakaoLogin}>로그인</Button>
+      <Button className='w-50 font-bold md:w-60' onClick={handleKakaoLogin}>
+        로그인
+      </Button>
     </div>
   );
 };

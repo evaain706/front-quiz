@@ -4,7 +4,7 @@ import { useCommunity } from './hooks/useCommunity';
 import { useState } from 'react';
 import Pagination from '../../components/ui/Pagination/Pagination';
 
-import type { Post, PostResponse } from '../../types/communityTypes';
+import type { PostResponse } from '../../types/communityTypes';
 import PostGrid from './components/communityMain/PostGrid';
 import Button from '../../components/Button';
 import Input from '../../components/Input';

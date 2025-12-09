@@ -8,7 +8,7 @@ import type { PostForm } from '../../../types/communityTypes';
 export const useCommunity = () => {
   const [password, setPassword] = useState('');
 
-  const { addToast } = useToastStore();
+  const addToast = useToastStore((s) => s.addToast);
 
   const navigate = useNavigate();
 

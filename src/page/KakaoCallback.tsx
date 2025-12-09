@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useUserStore } from '../store/useUserStore';
@@ -8,7 +8,7 @@ import KakaoLoading from '../components/KakaoLoading';
 const KakaoCallback = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { setUser } = useUserStore();
+  const setUser = useUserStore((s) => s.setUser);
 
   useEffect(() => {
     const code = new URLSearchParams(location.search).get('code');

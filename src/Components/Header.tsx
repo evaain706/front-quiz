@@ -6,16 +6,16 @@ import ProfileImage from './ui/ProfileImage';
 import { useLogout } from '../hooks/useLogout';
 
 const Header = () => {
-  const { user } = useUserStore();
+  const user = useUserStore((s) => s.user);
   const navigate = useNavigate();
 
   const logout = useLogout();
 
   return (
-    <div className='fixed top-0 flex w-full items-center justify-between bg-slate-200 px-[5rem] py-[1rem] md:px-[10rem]'>
+    <div className='fixed top-0 flex w-full items-center justify-between bg-slate-200 px-[3rem] py-[1rem] md:px-[10rem]'>
       <div>
         <Link to='/main'>
-          <h2 className='text-[2rem] font-bold md:text-[4rem]'>FrontQuiz</h2>
+          <h2 className='text-[3rem] font-bold md:text-[4rem]'>FrontQuiz</h2>
         </Link>
       </div>
 

@@ -45,12 +45,10 @@ const Select = ({
         )}
         {...props}
       >
-        {/* placeholder */}
         <option value='' disabled>
           {placeholder}
         </option>
 
-        {/* options */}
         {options.map((opt) => (
           <option key={opt.value} value={opt.value}>
             {opt.label}

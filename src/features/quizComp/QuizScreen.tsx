@@ -7,7 +7,6 @@ import QuestionCard from './QuestionCard';
 import OptionsCard from './OptionCard';
 import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
 
-
 const QuizScreen = () => {
   const { fetchQuiz, handleSubmit, error } = useQuiz();
   const isLoading = useQuizStore((s) => s.isLoading);
@@ -20,7 +19,7 @@ const QuizScreen = () => {
   }, []);
 
   return (
-    <div className='mx-3 flex flex-col gap-3'>
+    <div className='mx-3 mt-7 flex flex-col gap-3'>
       <div className='flex flex-col items-center justify-center'>
         <h2 className='text-[3rem] font-bold text-white md:text-[5rem]'>
           {category}
@@ -48,10 +47,10 @@ const QuizScreen = () => {
       <OptionsCard />
 
       <div className='flex items-center justify-between'>
-        <Button onClick={fetchQuiz} disabled={isLoading}>
+        <Button onClick={fetchQuiz} disabled={isLoading || isGrading}>
           문제받기
         </Button>
-        <Button onClick={handleSubmit} disabled={isGrading}>
+        <Button onClick={handleSubmit} disabled={isGrading || isLoading}>
           채점
         </Button>
       </div>

@@ -8,8 +8,8 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const { user } = useUserStore();
-  const { addToast } = useToastStore();
+  const user = useUserStore((s) => s.user);
+  const addToast = useToastStore((s) => s.addToast);
 
   useEffect(() => {
     if (!user) {
