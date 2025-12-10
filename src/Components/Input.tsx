@@ -13,7 +13,7 @@ const Input = ({
   return (
     <input
       className={cn(
-        'w-full rounded-lg border border-black bg-white px-4 py-4 text-[1.6rem] font-bold text-black',
+        'w-full rounded-lg bg-white px-4 py-3 text-[1.6rem] shadow-sm transition-all hover:border-emerald-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 focus:outline-none',
         className,
       )}
       type={type}

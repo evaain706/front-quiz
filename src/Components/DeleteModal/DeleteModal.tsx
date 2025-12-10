@@ -11,6 +11,7 @@ interface DeleteModalProps {
   onDelete: () => void;
   isLoading?: boolean;
   title?: string;
+  errorMessage?: string;
 }
 
 const DeleteModal = ({
@@ -19,6 +20,7 @@ const DeleteModal = ({
   onDelete,
   isLoading = false,
   title = '삭제',
+  errorMessage,
 }: DeleteModalProps) => {
   const [password, setPassword] = useState('');
 
@@ -45,10 +47,13 @@ const DeleteModal = ({
             onChange={(e) => setPassword(e.target.value)}
             className='w-full rounded border px-2 py-1'
           />
+          {errorMessage && (
+            <p className='mt-2 text-center text-[1.6rem] text-red-500'>
+              {errorMessage}
+            </p>
+          )}
 
-          <div className='mt-4 flex justify-end gap-2'>
-            <Button onClick={() => onOpenChange(false)}>취소</Button>
-
+          <div className='mt-4 flex justify-center gap-2'>
             <Button onClick={onDelete} disabled={isLoading}>
               삭제
             </Button>

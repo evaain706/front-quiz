@@ -5,6 +5,7 @@ import {
   BUTTON_SIZE,
   BUTTON_VARIANTS,
 } from '../constants/buttonVarient';
+import Spinner from './ui/Spinner';
 
 interface ButtonTypes {
   size?: 'sm' | 'md' | 'xl';
@@ -49,7 +50,7 @@ const Button = ({
       onClick={onClick}
       {...props}
     >
-      {children}
+      {isLoading ? <Spinner /> : children}
     </button>
   );
 };

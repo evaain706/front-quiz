@@ -16,11 +16,13 @@ const CommunityDetail = () => {
   const [open, setOpen] = useState(false);
   const [commentModalOpen, setCommentModalOpen] = useState(false);
   const [deleteCommentId, setDeleteCommentId] = useState<string | null>(null);
+  const [postDeleteError, setPostDeleteError] = useState('');
+  const [commentDeleteError, setCommentDeleteError] = useState('');
 
   const {
     password,
     setPassword,
-    handleDeletePost,
+    handleDeletePostMutate,
     handleAddCommentMutate,
     handleDeleteCommentMutate,
   } = useCommunity();
@@ -32,6 +34,20 @@ const CommunityDetail = () => {
       return res.data;
     },
   });
+
+  const handleDeletePost = () => {
+    handleDeletePostMutate.mutate(id!, {
+      onSuccess: () => {
+        setPassword('');
+        setOpen(false);
+        setPostDeleteError('');
+      },
+      onError: (error: any) => {
+        setPassword('');
+        setPostDeleteError(error.message || '게시글 삭제 실패');
+      },
+    });
+  };
 
   const handleDeleteComment = () => {
     if (!deleteCommentId) return;
@@ -48,7 +64,10 @@ const CommunityDetail = () => {
           setCommentModalOpen(false);
           setDeleteCommentId(null);
         },
-        onError: () => setPassword(''),
+        onError: (error: any) => {
+          setPassword('');
+          setPostDeleteError(error.message || '댓글 삭제 실패');
+        },
       },
     );
   };
@@ -66,9 +85,10 @@ const CommunityDetail = () => {
           onOpenChange={setOpen}
           password={password}
           setPassword={setPassword}
-          onDelete={() => handleDeletePost.mutate(id!)}
-          isLoading={handleDeletePost.isPending}
+          onDelete={handleDeletePost}
+          isLoading={handleDeletePostMutate.isPending}
           title='게시글 삭제'
+          errorMessage={postDeleteError}
         />
       )}
 
@@ -89,6 +109,7 @@ const CommunityDetail = () => {
           onDelete={handleDeleteComment}
           isLoading={handleDeleteCommentMutate.isPending}
           title='댓글 삭제'
+          errorMessage={commentDeleteError}
         />
       )}
 

@@ -37,7 +37,7 @@ export const useCommunity = () => {
     return response.data;
   };
 
-  const handleDeletePost = useMutation({
+  const handleDeletePostMutate = useMutation({
     mutationFn: async (postId: string) => {
       const response = await instance.delete(`/api/community/${postId}`, {
         data: { password },
@@ -48,9 +48,6 @@ export const useCommunity = () => {
       addToast('success', '게시글이 삭제되었습니다.');
       queryClient.invalidateQueries({ queryKey: ['post'] });
       navigate('/community');
-    },
-    onError: (error: any) => {
-      addToast('error', error.message || '삭제 중 오류가 발생했습니다.');
     },
   });
 
@@ -124,9 +121,6 @@ export const useCommunity = () => {
       addToast('success', '댓글이 삭제되었습니다.');
       setPassword('');
     },
-    onError: (error: any) => {
-      addToast('error', error.message || '댓글 삭제 중 오류가 발생했습니다.');
-    },
   });
 
   return {
@@ -134,7 +128,7 @@ export const useCommunity = () => {
     password,
     setPassword,
     handleAddPostMutate,
-    handleDeletePost,
+    handleDeletePostMutate,
     handleAddCommentMutate,
     handleDeleteCommentMutate,
   };

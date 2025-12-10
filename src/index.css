@@ -102,6 +102,10 @@ body {
     animation: flicker 0.01s infinite;
   }
 
+  .animate-spinner {
+    animation: spinner 1s linear infinite;
+  }
+
   .scanline-overlay {
     background: repeating-linear-gradient(
       to bottom,
@@ -119,5 +123,14 @@ body {
   }
   50% {
     opacity: 0.8;
+  }
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

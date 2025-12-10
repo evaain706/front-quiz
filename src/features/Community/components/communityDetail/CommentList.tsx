@@ -39,7 +39,7 @@ const CommentList = ({
             </div>
           ))
         ) : (
-          <div className='flex flex-col items-center justify-center rounded-xl border-2 border-dashed bg-slate-50 py-12 text-center'>
+          <div className='flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-slate-400 bg-slate-50 py-12 text-center'>
             <p className='text-[1.6rem] font-bold text-slate-400'>
               아직 댓글이 없습니다
             </p>
