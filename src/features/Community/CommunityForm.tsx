@@ -3,8 +3,17 @@ import type { PostForm } from '../../types/communityTypes';
 import { useCommunity } from './hooks/useCommunity';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import { useLocation, useNavigate } from 'react-router-dom';
+import BackIcon from '../../assets/svg/BackIcon';
+import { useEffect } from 'react';
 
-const CreatePost = () => {
+const CommunityForm = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const postToEdit = location.state?.post;
+  const isEditMode = !!postToEdit;
+
   const {
     register,
     handleSubmit,
@@ -12,21 +21,55 @@ const CreatePost = () => {
     formState: { errors },
   } = useForm<PostForm>();
 
-  const { handleAddPostMutate } = useCommunity();
+  const { handleAddPostMutate, handleEditPostMutation } = useCommunity();
+
+  useEffect(() => {
+    if (isEditMode && postToEdit) {
+      reset({
+        title: postToEdit.title,
+        content: postToEdit.content,
+        category: postToEdit.category,
+        nickname: postToEdit.nickname,
+      });
+    }
+  }, [isEditMode, postToEdit, reset]);
 
   const onSubmit = async (data: PostForm) => {
-    handleAddPostMutate.mutate(data);
-    reset();
+    if (isEditMode) {
+      handleEditPostMutation.mutate(
+        { ...data, postId: postToEdit._id },
+        {
+          onSuccess: () => {
+            navigate(`/community/detail/${postToEdit._id}`);
+          },
+        },
+      );
+    } else {
+      handleAddPostMutate.mutate(data, {
+        onSuccess: () => {
+          navigate('/community');
+        },
+      });
+    }
   };
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='mx-auto w-full border bg-white shadow md:rounded-xl'
+      className='mx-auto w-full border bg-white p-10 shadow md:rounded-xl'
     >
-      <h2 className='mb-4 p-5 text-center text-[2rem] font-bold'>
-        게시글 작성
-      </h2>
+      <div className='relative mb-6 flex flex-col items-center'>
+        <h1 className='text-[3rem] font-bold'>
+          {isEditMode ? '게시글 수정' : '새 게시글 작성'}
+        </h1>
+
+        <Button
+          onClick={() => navigate(-1)}
+          className='mt-4 w-20 md:absolute md:right-0 md:mt-0'
+        >
+          <BackIcon />
+        </Button>
+      </div>
 
       <div className='flex flex-col gap-2 p-5 md:gap-8'>
         <div>
@@ -79,6 +122,7 @@ const CreatePost = () => {
               {...register('nickname', { required: '닉네임을 입력해주세요.' })}
               placeholder='닉네임'
               className='mb-1 w-full rounded border border-gray-300 pl-5'
+              disabled={isEditMode}
             />
             {errors.nickname && (
               <p className='mb-4 pl-3 text-[1.4rem] text-red-500'>
@@ -91,6 +135,7 @@ const CreatePost = () => {
             <Input
               {...register('password', {
                 required: '비밀번호를 입력해주세요.',
+
                 pattern: {
                   value: /^[0-9]{4}$/,
                   message: '비밀번호는 숫자 4자리여야 합니다.',
@@ -98,6 +143,7 @@ const CreatePost = () => {
               })}
               placeholder='4자리 비밀번호'
               type='password'
+              disabled={isEditMode}
               className='mb-1 w-full rounded border border-gray-300 pl-5'
             />
             {errors.password && (
@@ -111,13 +157,12 @@ const CreatePost = () => {
         <Button
           type='submit'
           className='mt-2 w-full rounded-lg border-0 bg-emerald-600 py-3 text-[1.6rem] font-bold text-white shadow-md transition-all hover:bg-emerald-700 hover:shadow-lg active:scale-[0.98]'
-          onClick={() => {}}
         >
-          작성하기
+          {isEditMode ? '수정하기' : '작성하기'}
         </Button>
       </div>
     </form>
   );
 };
 
-export default CreatePost;
+export default CommunityForm;

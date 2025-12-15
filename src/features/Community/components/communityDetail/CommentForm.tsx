@@ -6,22 +6,19 @@ const CommentForm = ({
   postId,
   mutate,
   isLoading,
-  password,
-  setPassword,
 }: {
   postId: string;
   mutate: any;
   isLoading: boolean;
-  password: string;
-  setPassword: (password: string) => void;
 }) => {
   const [nickname, setNickname] = useState('');
+  const [password, setPassword] = useState('');
   const [comment, setComment] = useState('');
 
   const handleSubmit = () => {
     if (!nickname.trim() || !comment.trim()) return;
 
-    mutate.mutate({ postId, nickname, content: comment });
+    mutate.mutate({ postId, nickname, content: comment, password });
     setNickname('');
     setComment('');
     setPassword('');

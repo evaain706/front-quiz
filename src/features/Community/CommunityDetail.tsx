@@ -7,24 +7,30 @@ import PostCard from './components/communityDetail/PostCard';
 import CommentList from './components/communityDetail/CommentList';
 import CommentForm from './components/communityDetail/CommentForm';
 import DeleteModal from '../../components/DeleteModal/DeleteModal';
+import { useNavigate } from 'react-router-dom';
 
 import type { Post } from '../../types/communityTypes';
+import Button from '../../components/Button';
+import BackIcon from '../../assets/svg/BackIcon';
 
 const CommunityDetail = () => {
   const { id } = useParams();
 
-  const [open, setOpen] = useState(false);
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [commentModalOpen, setCommentModalOpen] = useState(false);
   const [deleteCommentId, setDeleteCommentId] = useState<string | null>(null);
   const [postDeleteError, setPostDeleteError] = useState('');
+  const [postEditError, setPostEditError] = useState('');
   const [commentDeleteError, setCommentDeleteError] = useState('');
 
+  const navigate = useNavigate();
+
   const {
-    password,
-    setPassword,
     handleDeletePostMutate,
     handleAddCommentMutate,
     handleDeleteCommentMutate,
+    handleCheckPasswordMutate,
   } = useCommunity();
 
   const { data: post, isLoading } = useQuery<Post>({
@@ -35,21 +41,38 @@ const CommunityDetail = () => {
     },
   });
 
-  const handleDeletePost = () => {
-    handleDeletePostMutate.mutate(id!, {
-      onSuccess: () => {
-        setPassword('');
-        setOpen(false);
-        setPostDeleteError('');
+  const handleDeletePost = (password: string) => {
+    handleDeletePostMutate.mutate(
+      { postId: id!, password },
+      {
+        onSuccess: () => {
+          setDeleteModalOpen(false);
+          setPostDeleteError('');
+        },
+        onError: (error: any) => {
+          setPostDeleteError(error.message || '게시글 삭제 실패');
+        },
       },
-      onError: (error: any) => {
-        setPassword('');
-        setPostDeleteError(error.message || '게시글 삭제 실패');
-      },
-    });
+    );
   };
 
-  const handleDeleteComment = () => {
+  const handleEditPost = (password: string) => {
+    handleCheckPasswordMutate.mutate(
+      { postId: id!, password },
+      {
+        onSuccess: () => {
+          setEditModalOpen(false);
+          setPostEditError('');
+          navigate(`/community/create`, { state: { post } });
+        },
+        onError: (error: any) => {
+          setPostEditError(error.message || '비밀번호 확인 실패');
+        },
+      },
+    );
+  };
+
+  const handleDeleteComment = (password: string) => {
     if (!deleteCommentId) return;
 
     handleDeleteCommentMutate.mutate(
@@ -60,13 +83,12 @@ const CommunityDetail = () => {
       },
       {
         onSuccess: () => {
-          setPassword('');
           setCommentModalOpen(false);
           setDeleteCommentId(null);
+          setCommentDeleteError('');
         },
         onError: (error: any) => {
-          setPassword('');
-          setPostDeleteError(error.message || '댓글 삭제 실패');
+          setCommentDeleteError(error.message || '댓글 삭제 실패');
         },
       },
     );
@@ -76,19 +98,38 @@ const CommunityDetail = () => {
   if (!post) return <p>게시글을 찾을 수 없습니다.</p>;
 
   return (
-    <div className='mx-auto w-[100rem] bg-gradient-to-br from-slate-50 via-white to-slate-100 p-10 px-4 py-10'>
-      <PostCard post={post} onDeleteClick={() => setOpen(true)} />
+    <div className='relative mx-auto w-[100rem] bg-gradient-to-br from-slate-50 via-white to-slate-100 p-10 px-4 py-10'>
+      <PostCard
+        post={post}
+        onDeleteClick={() => setDeleteModalOpen(true)}
+        onEditClick={() => setEditModalOpen(true)}
+      />
+      <Button
+        onClick={() => navigate(-1)}
+        className='absolute top-5 right-5 mt-4 w-20 px-2'
+      >
+        <BackIcon />
+      </Button>
 
-      {open && (
+      {isDeleteModalOpen && (
         <DeleteModal
-          isOpen={open}
-          onOpenChange={setOpen}
-          password={password}
-          setPassword={setPassword}
+          isOpen={isDeleteModalOpen}
+          onOpenChange={setDeleteModalOpen}
           onDelete={handleDeletePost}
           isLoading={handleDeletePostMutate.isPending}
           title='게시글 삭제'
           errorMessage={postDeleteError}
+        />
+      )}
+
+      {isEditModalOpen && (
+        <DeleteModal
+          isOpen={isEditModalOpen}
+          onOpenChange={setEditModalOpen}
+          onDelete={handleEditPost}
+          isLoading={handleCheckPasswordMutate.isPending}
+          title='게시글 수정'
+          errorMessage={postEditError}
         />
       )}
 
@@ -97,6 +138,7 @@ const CommunityDetail = () => {
         onClickDelete={(commentId) => {
           setDeleteCommentId(commentId);
           setCommentModalOpen(true);
+          setCommentDeleteError('');
         }}
       />
 
@@ -104,8 +146,6 @@ const CommunityDetail = () => {
         <DeleteModal
           isOpen={commentModalOpen}
           onOpenChange={setCommentModalOpen}
-          password={password}
-          setPassword={setPassword}
           onDelete={handleDeleteComment}
           isLoading={handleDeleteCommentMutate.isPending}
           title='댓글 삭제'
@@ -117,8 +157,6 @@ const CommunityDetail = () => {
         postId={id!}
         mutate={handleAddCommentMutate}
         isLoading={handleAddCommentMutate.isPending}
-        password={password}
-        setPassword={setPassword}
       />
     </div>
   );

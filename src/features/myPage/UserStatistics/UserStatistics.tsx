@@ -6,6 +6,7 @@ import StatisticGrid from '../../../components/ui/MyPage/Statistics/StatisticGri
 import StatisticSection from '../../../components/ui/MyPage/Statistics/StatisticSection';
 import Button from '../../../components/Button';
 import { useNavigate } from 'react-router-dom';
+import BackIcon from '../../../assets/svg/BackIcon';
 
 const UserStatisticPage = () => {
   const { getUserStatistics } = useQuiz();
@@ -28,9 +29,9 @@ const UserStatisticPage = () => {
 
             <Button
               onClick={() => navigate(-1)}
-              className='mt-4 md:absolute md:right-0 md:mt-0'
+              className='mt-4 w-20 text-[1.4rem] md:absolute md:right-0 md:mt-0'
             >
-              뒤로가기
+              <BackIcon className='h-10 w-20' />
             </Button>
           </div>
 

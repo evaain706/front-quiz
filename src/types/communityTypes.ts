@@ -32,3 +32,11 @@ export interface PostForm {
   nickname: string;
   password: string;
 }
+
+export interface EditPostForm {
+  postId: string;
+  title: string;
+  content: string;
+  category: 'question' | 'information';
+  password: string;
+}

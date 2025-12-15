@@ -1,3 +1,4 @@
+import DeleteIcon from '../../../../assets/svg/DeleteIcon';
 import Button from '../../../../components/Button';
 import type { Comment } from '../../../../types/communityTypes';
 
@@ -31,9 +32,9 @@ const CommentList = ({
 
                 <Button
                   onClick={() => onClickDelete(c._id)}
-                  className='rounded-lg border border-red-200 bg-red-50 px-4 py-2 text-[1.6rem] font-bold text-red-600 hover:bg-red-100'
+                  className='w-20 rounded-lg border border-red-200 bg-red-50 px-2 py-2 text-[1.6rem] font-bold text-red-600 hover:bg-red-100'
                 >
-                  삭제
+                  <DeleteIcon />
                 </Button>
               </div>
             </div>

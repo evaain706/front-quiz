@@ -49,7 +49,7 @@ const ImageUpload = ({ initialSrc, handleUpload }: ImageUploadProps) => {
   };
 
   return (
-    <div className='flex cursor-pointer flex-col items-center'>
+    <div className='relative flex cursor-pointer flex-col items-center'>
       <ProfileImage src={preview} size='lg' onClick={handleClick} />
 
       <input
@@ -60,9 +60,19 @@ const ImageUpload = ({ initialSrc, handleUpload }: ImageUploadProps) => {
         onChange={handleChange}
       />
       {onChange && (
-        <div className='mt-5 flex h-10 gap-2'>
-          <Button onClick={handleUploadClick}>변경</Button>
-          <Button onClick={handleCancelClick}>취소</Button>
+        <div className='absolute -bottom-15 flex h-10 gap-2'>
+          <Button
+            className='w-[10rem] py-5 md:w-[18rem]'
+            onClick={handleUploadClick}
+          >
+            변경
+          </Button>
+          <Button
+            className='w-[10rem] py-5 md:w-[18rem]'
+            onClick={handleCancelClick}
+          >
+            취소
+          </Button>
         </div>
       )}
     </div>

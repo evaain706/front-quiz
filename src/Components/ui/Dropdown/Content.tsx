@@ -11,7 +11,7 @@ const DropdownContent = ({ children, className }: DropdownProps) => {
     <>
       <div
         className={cn(
-          'absolute -right-7 z-100 flex flex-col content-center justify-around rounded-[1.6rem] border border-gray-400 bg-white p-2 shadow-lg',
+          'absolute top-22 -right-13 z-100 flex flex-col content-center justify-around gap-2 rounded-[1.6rem] border border-gray-400 bg-white p-2 shadow-lg',
           className,
         )}
       >

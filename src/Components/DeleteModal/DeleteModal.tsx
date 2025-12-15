@@ -1,14 +1,12 @@
+import { useState } from 'react';
 import Button from '../Button';
 import Input from '../Input';
 import Modal from '../Modal';
-import { useState } from 'react';
 
 interface DeleteModalProps {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
-  password: string;
-  setPassword: (value: string) => void;
-  onDelete: () => void;
+  onDelete: (password: string) => void;
   isLoading?: boolean;
   title?: string;
   errorMessage?: string;
@@ -23,6 +21,10 @@ const DeleteModal = ({
   errorMessage,
 }: DeleteModalProps) => {
   const [password, setPassword] = useState('');
+
+  const handleDeleteClick = () => {
+    onDelete(password);
+  };
 
   return (
     <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
@@ -40,7 +42,6 @@ const DeleteModal = ({
           </label>
 
           <Input
-            name={password}
             placeholder='비밀번호'
             type='password'
             value={password}
@@ -54,7 +55,7 @@ const DeleteModal = ({
           )}
 
           <div className='mt-4 flex justify-center gap-2'>
-            <Button onClick={onDelete} disabled={isLoading}>
+            <Button onClick={handleDeleteClick} disabled={isLoading}>
               삭제
             </Button>
           </div>

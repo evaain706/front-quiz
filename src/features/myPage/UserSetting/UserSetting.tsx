@@ -5,6 +5,8 @@ import { useState } from 'react';
 import { privateInstance } from '../../../apis/privateInstance';
 import { useUserStore } from '../../../store/useUserStore';
 import { useToastStore } from '../../../store/useToastStore';
+import BackIcon from '../../../assets/svg/BackIcon';
+import { useNavigate } from 'react-router-dom';
 
 const UserSettingPage = () => {
   const [nickName, setNickName] = useState('');
@@ -14,6 +16,8 @@ const UserSettingPage = () => {
   const addToast = useToastStore((s) => s.addToast);
 
   const user = useUserStore((s) => s.user);
+
+  const navigate = useNavigate();
 
   const handleNickNameUpdate = async () => {
     if (nickName.length === 0) {
@@ -42,7 +46,13 @@ const UserSettingPage = () => {
         유저정보변경
       </h2>
 
-      <div className='flex h-[50rem] w-full flex-col items-center justify-around rounded-md bg-slate-300 p-10 transition-transform md:flex-row'>
+      <div className='relative flex h-[50rem] w-full flex-col items-center justify-around rounded-md bg-slate-300 p-10 transition-transform md:flex-row'>
+        <Button
+          onClick={() => navigate(-1)}
+          className='absolute top-3 right-10 w-20'
+        >
+          <BackIcon />
+        </Button>
         <div className='flex flex-col items-center gap-5'>
           <h2 className='text-[1.6rem] font-bold text-black md:text-[2rem]'>
             닉네임 변경
