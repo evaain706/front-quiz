@@ -46,11 +46,19 @@ const QuizScreen = () => {
 
       <OptionsCard />
 
-      <div className='flex items-center justify-between'>
-        <Button onClick={fetchQuiz} disabled={isLoading || isGrading}>
+      <div className='flex w-full items-center justify-between'>
+        <Button
+          onClick={fetchQuiz}
+          disabled={isLoading || isGrading}
+          isLoading={isGrading || isLoading}
+        >
           문제받기
         </Button>
-        <Button onClick={handleSubmit} disabled={isGrading || isLoading}>
+        <Button
+          onClick={handleSubmit}
+          disabled={isGrading || isLoading}
+          isLoading={isGrading || isLoading}
+        >
           채점
         </Button>
       </div>

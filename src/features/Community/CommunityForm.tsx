@@ -131,27 +131,27 @@ const CommunityForm = () => {
             )}
           </div>
 
-          <div className='w-full'>
-            <Input
-              {...register('password', {
-                required: '비밀번호를 입력해주세요.',
-
-                pattern: {
-                  value: /^[0-9]{4}$/,
-                  message: '비밀번호는 숫자 4자리여야 합니다.',
-                },
-              })}
-              placeholder='4자리 비밀번호'
-              type='password'
-              disabled={isEditMode}
-              className='mb-1 w-full rounded border border-gray-300 pl-5'
-            />
-            {errors.password && (
-              <p className='mb-4 pl-3 text-[1.4rem] text-red-500'>
-                {errors.password.message}
-              </p>
-            )}
-          </div>
+          {!isEditMode && (
+            <div className='w-full'>
+              <Input
+                {...register('password', {
+                  required: '비밀번호를 입력해주세요.',
+                  pattern: {
+                    value: /^[0-9]{4}$/,
+                    message: '비밀번호는 숫자 4자리여야 합니다.',
+                  },
+                })}
+                placeholder='4자리 비밀번호'
+                type='password'
+                className='mb-1 w-full rounded border border-gray-300 pl-5'
+              />
+              {errors.password && (
+                <p className='mb-4 pl-3 text-[1.4rem] text-red-500'>
+                  {errors.password.message}
+                </p>
+              )}
+            </div>
+          )}
         </div>
 
         <Button

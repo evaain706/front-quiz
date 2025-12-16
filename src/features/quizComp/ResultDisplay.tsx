@@ -14,7 +14,9 @@ const ResultDisplay = ({
       >
         {isCorrect ? '정답' : '오답'}
       </h3>
-      <p className='whitespace-wrap font-bold text-gray-700'>{explanation}</p>
+      <p className='whitespace-wrap text-[1.2rem] font-bold text-gray-700 md:text-[1.6rem]'>
+        {explanation}
+      </p>
     </div>
   );
 };

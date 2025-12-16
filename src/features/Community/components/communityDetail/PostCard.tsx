@@ -12,7 +12,7 @@ const PostCard = ({
   onEditClick: () => void;
 }) => {
   return (
-    <div className='overflow-hidden rounded-2xl bg-white shadow-xl ring-1 ring-slate-100'>
+    <div className='rounded-2xl bg-white shadow-xl ring-1 ring-slate-100'>
       <header className='border-b border-slate-100 px-6 py-6 sm:px-8'>
         <h1 className='text-[2rem] font-bold'>{post.title}</h1>
 
@@ -30,16 +30,18 @@ const PostCard = ({
         </p>
 
         <div className='mt-8 flex justify-end border-t border-slate-100 pt-6'>
-          <Dropdown>
-            <Dropdown.Trigger className='relative'>
-              <DotIcon />
-            </Dropdown.Trigger>
-            <Dropdown.Content>
-              <Dropdown.Item onClick={onDeleteClick}>삭제</Dropdown.Item>
+          <div className='relative'>
+            <Dropdown>
+              <Dropdown.Trigger>
+                <DotIcon />
+              </Dropdown.Trigger>
+              <Dropdown.Content>
+                <Dropdown.Item onClick={onDeleteClick}>삭제</Dropdown.Item>
 
-              <Dropdown.Item onClick={onEditClick}>수정</Dropdown.Item>
-            </Dropdown.Content>
-          </Dropdown>
+                <Dropdown.Item onClick={onEditClick}>수정</Dropdown.Item>
+              </Dropdown.Content>
+            </Dropdown>
+          </div>
         </div>
       </div>
     </div>

@@ -1,3 +1,4 @@
+import DeleteIcon from '../../../assets/svg/DeleteIcon';
 import Button from '../../../components/Button';
 import type { IncorrectQuiz } from '../../../types/quizTypes';
 import { cn } from '../../../utils/cn';
@@ -13,7 +14,8 @@ const AnswerHistoryCard = ({ data }: AnswerHistoryCardProps) => {
 
   const { handleDeleteIncorrect } = useQuiz();
 
-  const handleDelete = () => {
+  const handleDelete = (e: React.MouseEvent) => {
+    e.stopPropagation();
     handleDeleteIncorrect.mutate(data.id);
   };
 
@@ -38,28 +40,21 @@ const AnswerHistoryCard = ({ data }: AnswerHistoryCardProps) => {
   }
 
   return (
-    <div className='w-full rounded-xl border border-gray-300 bg-white px-10 py-5 shadow-sm hover:animate-pulse hover:cursor-pointer'>
-      <h3 className='text-[1.2rem] font-bold text-black md:text-[1.4rem]'>
+    <div className='w-full rounded-xl border border-gray-300 bg-white px-10 py-8 shadow-sm hover:animate-pulse hover:cursor-pointer'>
+      <h3 className='text-[1.2rem] font-bold text-black md:text-[1.6rem]'>
         {data.question}
       </h3>
 
       <div className='mt-2 flex justify-between space-y-1 text-gray-700'>
-        <div className='text-md mt-2 flex flex-col gap-3 font-bold text-gray-500'>
-          <p className={cn('text-xl font-bold text-black', topicClassName)}>
+        <div className='mt-2 flex flex-col gap-3 text-[1.4rem] font-bold text-gray-500 md:text-[1.6rem]'>
+          <p className={cn('font-bold text-black', topicClassName)}>
             {data.topic}
           </p>
-          <p className={cn(`text-xl font-bold`, levelClassName)}>
-            {data.level}
-          </p>
+          <p className={cn(`font-bold`, levelClassName)}>{data.level}</p>
         </div>
 
-        <div>
-          <Button
-            onClick={() => handleDelete()}
-            className='w-[6rem] py-[1rem] md:w-[10rem]'
-          >
-            삭제
-          </Button>
+        <div className='text-red-500' onClick={handleDelete}>
+          <DeleteIcon />
         </div>
       </div>
     </div>

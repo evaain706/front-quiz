@@ -12,7 +12,7 @@ const Header = () => {
   const logout = useLogout();
 
   return (
-    <div className='fixed top-0 flex w-full items-center justify-between bg-slate-200 px-[3rem] py-[1rem] md:px-[10rem]'>
+    <div className='fixed top-0 z-50 flex w-full items-center justify-between bg-slate-200 px-[3rem] py-[1rem] md:px-[10rem]'>
       <div>
         <Link to='/main'>
           <h2 className='text-[3rem] font-bold md:text-[4rem]'>FrontQuiz</h2>

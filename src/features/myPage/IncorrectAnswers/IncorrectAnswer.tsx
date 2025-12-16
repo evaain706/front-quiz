@@ -40,7 +40,7 @@ const IncorrectAnswerPage = () => {
   if (error) return <>에러발생: {error.message}</>;
 
   return (
-    <div className='w-full'>
+    <div className='mt-5 w-full'>
       <div className='mb-5 flex items-center justify-center'>
         <h2 className='text-[1.8rem] font-bold text-white md:text-[4rem]'>
           저장된 오답문제
@@ -49,7 +49,7 @@ const IncorrectAnswerPage = () => {
       <div className='flex flex-col items-center gap-4 px-10 md:flex-row md:justify-between'>
         <div className='flex flex-col gap-4 md:flex-row'>
           <select
-            className='bg-white py-4'
+            className='rounded-xl bg-white px-2 py-4 text-[1.4rem] font-bold'
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
@@ -65,7 +65,7 @@ const IncorrectAnswerPage = () => {
           </select>
 
           <select
-            className='bg-white px-5 py-4'
+            className='rounded-xl bg-white px-2 py-4 text-[1.4rem] font-bold'
             value={level}
             onChange={(e) => setLevel(e.target.value)}
           >
@@ -93,7 +93,7 @@ const IncorrectAnswerPage = () => {
 
       <div className='relative mt-4 flex h-[40rem] flex-col gap-4 overflow-auto p-10 md:h-[70rem]'>
         {(!data || data.length === 0) && (
-          <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 py-10 text-center text-[2rem] font-bold text-white'>
+          <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 py-10 text-center text-[1.6rem] font-bold text-white md:text-[2rem]'>
             저장된 문제가 없습니다
           </div>
         )}

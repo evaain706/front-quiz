@@ -1,6 +1,7 @@
 import type { IncorrectQuiz } from '../../types/quizTypes';
 import Button from '../Button';
 import Modal from '../Modal';
+import ReactMarkdown from 'react-markdown';
 
 interface AnswerHistoryCardProps {
   data: IncorrectQuiz;
@@ -13,18 +14,21 @@ const IncorrectModal = ({
   isOpen,
   setIsopen,
 }: AnswerHistoryCardProps) => {
+  const markdownContent = data.question;
+
   return (
     <>
       <Modal isOpen={isOpen} onOpenChange={setIsopen}>
         <Modal.Content>
           <Modal.Header>
-            <Modal.Title>상세</Modal.Title>
-            <Modal.Close />
+            <Modal.Title className='text-center text-[1.8rem]'>
+              저장된 문제
+            </Modal.Title>
           </Modal.Header>
           <Modal.Item>
-            <div className='flex flex-col items-center justify-center gap-5'>
-              <h3 className='text-lg font-bold text-gray-900'>
-                {data.question}
+            <div className='flex flex-col items-center justify-center gap-5 md:gap-8'>
+              <h3 className='text-[1.3rem] font-bold text-gray-900 md:text-[1.6rem]'>
+                <ReactMarkdown>{markdownContent}</ReactMarkdown>
               </h3>
 
               {Object.entries(data.options).map(([key, value]) => {
@@ -43,7 +47,7 @@ const IncorrectModal = ({
                     className={`flex w-full items-center gap-4 rounded-lg border-2 p-4 transition-all duration-200 ${isCorrectAnswer ? 'border-green-500 bg-green-50' : isSelectedAnswer ? 'border-red-500 bg-red-50' : 'border-gray-200'} `}
                   >
                     <div className={`relative ${textColorClass}`}>
-                      <span className='flex-1 font-medium'>
+                      <span className='flex-1 text-[1.2rem] font-bold md:text-[1.6rem]'>
                         <span className='font-bold'>{key}.</span>
                         <span className='ml-2'>{value}</span>
                       </span>
@@ -52,10 +56,10 @@ const IncorrectModal = ({
                 );
               })}
 
-              <div className='mt-2 space-y-1 text-gray-700'>
-                <p> 설명: {data.explanation}</p>
+              <div className='mt-2 space-y-1 text-[1.4rem] font-bold text-black'>
+                <p> {data.explanation}</p>
 
-                <div className='mt-2 flex gap-3 text-sm text-gray-500'>
+                <div className='mt-2 flex gap-3 text-[1.2rem] font-bold text-gray-500 md:text-[1.4rem]'>
                   <p> 토픽: {data.topic}</p>
                   <p> 레벨: {data.level}</p>
                 </div>

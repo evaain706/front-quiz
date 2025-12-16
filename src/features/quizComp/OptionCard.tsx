@@ -39,7 +39,7 @@ const OptionsCard = () => {
 
   return (
     <div className='mt-8 mb-8 min-h-[15rem] md:w-[70rem] lg:w-[90rem]'>
-      <div className='rounded-xl border border-gray-200 bg-gray-400 p-6 shadow-md'>
+      <div className='flex flex-col rounded-xl border border-gray-200 bg-slate-300 p-6 shadow-md'>
         <div className='space-y-3'>
           {Object.entries(quiz.options).map(([key, value]) => {
             const isCorrectAnswer = key === quiz.answer;
@@ -49,25 +49,28 @@ const OptionsCard = () => {
 
             if (isSubmitted) {
               if (isCorrectAnswer) {
-                optionStyles = 'border-green-500 bg-green-50 text-green-800';
+                optionStyles =
+                  'border-emerald-400 bg-emerald-50 ring-2 ring-emerald-400/20';
               } else if (isSelectedAnswer) {
-                optionStyles = 'border-red-500 bg-red-50 text-red-800';
+                optionStyles =
+                  'border-rose-400 bg-rose-50 ring-2 ring-rose-400/20';
               } else {
-                optionStyles = 'border-gray-200 bg-gray-50 text-gray-500';
+                optionStyles = 'border-gray-100 bg-gray-50/50 opacity-60';
               }
             } else {
               if (isSelectedAnswer) {
-                optionStyles = 'border-blue-500 bg-blue-50';
+                optionStyles =
+                  'border-blue-400 bg-blue-50 ring-2 ring-blue-400/20 shadow-md shadow-blue-100';
               } else {
                 optionStyles =
-                  'border-gray-300 hover:border-blue-400 hover:bg-gray-50';
+                  'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50/30 hover:shadow-md';
               }
             }
 
             return (
               <label
                 key={key}
-                className={`flex items-center gap-4 rounded-lg border-2 p-4 transition-all duration-200 ${optionStyles} ${isSubmitted ? 'cursor-default' : 'cursor-pointer'} `}
+                className={`group flex items-center gap-4 rounded-xl border-2 p-4 transition-all duration-300 ease-out md:p-5 ${optionStyles} ${isSubmitted ? 'cursor-default' : 'cursor-pointer'}`}
               >
                 <div className='relative flex-shrink-0'>
                   <input
@@ -117,7 +120,7 @@ const OptionsCard = () => {
 
         {/* 로그인된 유저만 뜨도록 수정하기 */}
         {user && result?.isCorrect === false && (
-          <div>
+          <div className='mt-3 self-center'>
             <Button onClick={() => handleAddInCorrect()}>
               오답노트에 등록
             </Button>
