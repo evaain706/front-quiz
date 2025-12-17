@@ -24,7 +24,7 @@ export function FrontCloud() {
   );
 
   return (
-    <div className='relative flex size-full items-center justify-center overflow-hidden'>
+    <div className='relative mt-5 flex size-full h-80 items-center justify-center overflow-hidden'>
       <IconCloud images={images} />
     </div>
   );
