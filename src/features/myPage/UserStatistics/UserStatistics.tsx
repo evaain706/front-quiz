@@ -21,7 +21,7 @@ const UserStatisticPage = () => {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className='flex flex-col items-center justify-center gap-5 overflow-auto'>
+    <div className='flex min-h-[calc(100vh-6rem)] flex-col items-center justify-center gap-5 overflow-auto'>
       {data && (
         <div className='w-screen bg-gray-900 p-10 text-white md:w-[70rem] lg:w-[100rem]'>
           <div className='relative mb-6 flex flex-col items-center'>

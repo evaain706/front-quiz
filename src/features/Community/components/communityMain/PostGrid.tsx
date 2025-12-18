@@ -9,37 +9,50 @@ const PostGrid = ({ data }: { data: PostResponse }) => {
   };
 
   return (
-    <div className='w-[30rem] overflow-hidden rounded-xl border border-gray-300 bg-white shadow-sm md:w-[80rem] md:max-w-[120rem]'>
-      <div className='grid grid-cols-3 border-b bg-gray-100 px-4 py-3 text-[1.4rem] font-bold text-white'>
+    <div className='w-full max-w-[90rem] overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-xl shadow-black/10 backdrop-blur-sm'>
+      <div className='grid grid-cols-[1fr_1fr_2fr] gap-4 border-b border-white/10 bg-white/20 px-6 py-4 text-[1.4rem] font-bold tracking-wider text-white md:grid-cols-[1fr_1fr_1fr]'>
         <p>카테고리</p>
         <p>작성자</p>
         <p>제목</p>
       </div>
 
       {data?.posts?.length > 0 ? (
-        data.posts.map((post: Post) => (
-          <div
-            key={post._id}
-            className='group grid cursor-pointer grid-cols-3 border-b px-4 py-5 text-[1.2rem] transition md:py-10 md:text-[1.4rem]'
-            onClick={() => handleNavigateDetail(post)}
-          >
-            <p
-              className={`${
-                post.category === 'question'
-                  ? 'text-blue-500'
-                  : 'text-green-500'
-              } font-bold`}
+        <div className='divide-y divide-white/20'>
+          {data.posts.map((post: Post) => (
+            <div
+              key={post._id}
+              className='group grid cursor-pointer grid-cols-[1fr_1fr_2fr] gap-4 px-6 py-4 transition-all hover:bg-white/5 md:grid-cols-[1fr_1fr_1fr] md:py-10'
+              onClick={() => handleNavigateDetail(post)}
             >
-              {post.category === 'question' ? '질문' : '정보'}
-            </p>
-            <p className='text-black'>{post.nickname}</p>
-            <p className='truncate font-bold text-black'>{post.title}</p>
-          </div>
-        ))
+              <div className='flex items-center'>
+                <p
+                  className={`inline-flex items-center gap-1.5 rounded-full px-5 py-1.5 text-[1.6rem] font-bold transition-transform group-hover:scale-105 ${
+                    post.category === 'question'
+                      ? 'bg-blue-500/20 text-blue-300 ring-1 ring-blue-500/30'
+                      : 'bg-emerald-500/20 text-emerald-300 ring-1 ring-emerald-500/30'
+                  }`}
+                >
+                  {post.category === 'question' ? '질문' : '정보'}
+                </p>
+              </div>
+
+              <div className='flex items-center gap-2 text-[1.6rem] text-slate-300'>
+                <div className='flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-slate-600 to-slate-700 ring-1 ring-white/10'></div>
+                <span className='truncate'>{post.nickname}</span>
+              </div>
+
+              <div className='flex items-center justify-between gap-2'>
+                <p className='truncate text-[1.6rem] font-medium text-slate-200 transition-colors group-hover:text-white'>
+                  {post.title}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
       ) : (
-        <p className='py-10 text-center text-[1.6rem] text-gray-400'>
-          게시글이 없습니다
-        </p>
+        <div className='flex flex-col items-center justify-center py-16 text-slate-500'>
+          <p className='text-[1.6rem]'>게시글이 없습니다</p>
+        </div>
       )}
     </div>
   );

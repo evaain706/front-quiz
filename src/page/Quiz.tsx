@@ -2,7 +2,7 @@ import QuizScreen from '../features/quizComp/QuizScreen';
 
 const Quiz = () => {
   return (
-    <div className='flex items-center justify-center'>
+    <div className='flex min-h-[calc(100vh-6rem)] items-center justify-center'>
       <QuizScreen />
     </div>
   );

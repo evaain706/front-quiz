@@ -48,13 +48,13 @@ const OptionSelect = () => {
   }, [step, category]);
 
   return (
-    <div className='flex w-full flex-col items-center justify-center gap-10 p-4 md:gap-16 md:p-8'>
+    <div className='flex min-h-[calc(100vh-6rem)] w-full flex-col items-center justify-center gap-10 p-4 md:gap-14 md:p-8'>
       {step === 0 && (
         <div className='w-full text-center'>
           <h2 className='mb-8 text-2xl font-bold text-white md:text-[4rem]'>
             주제를 선택해주세요
           </h2>
-          <div className='grid max-h-[50rem] w-full grid-cols-2 gap-4 overflow-auto md:h-full md:grid-cols-3 lg:grid-cols-4'>
+          <div className='grid max-h-[80rem] w-full grid-cols-2 gap-4 overflow-auto md:grid-cols-3 lg:grid-cols-4'>
             {categorylist.map((cat) => (
               <Card
                 key={cat.id}
@@ -78,7 +78,7 @@ const OptionSelect = () => {
           <div className='flex flex-col justify-center gap-4 md:flex-row'>
             <Button
               size='md'
-              className='bg-amber-100 font-bold text-black'
+              className='bg-amber-100 py-20 font-bold text-black'
               onClick={() => handleLevelSelect('쉬움')}
             >
               쉬움

@@ -33,14 +33,14 @@ const IncorrectAnswerPage = () => {
 
   if (isPending)
     return (
-      <div>
+      <div className='flex min-h-[calc(100vh-10rem)] items-center justify-center'>
         <Spinner className='h-20 w-20 border-blue-400' />
       </div>
     );
   if (error) return <>에러발생: {error.message}</>;
 
   return (
-    <div className='mt-5 w-full'>
+    <div className='mt-10 flex min-h-[calc(100vh-10rem)] w-full flex-col justify-center'>
       <div className='mb-5 flex items-center justify-center'>
         <h2 className='text-[1.8rem] font-bold text-white md:text-[4rem]'>
           저장된 오답문제
@@ -91,7 +91,7 @@ const IncorrectAnswerPage = () => {
         </Button>
       </div>
 
-      <div className='relative mt-4 flex h-[40rem] flex-col gap-4 overflow-auto p-10 md:h-[70rem]'>
+      <div className='relative mt-4 flex h-[40rem] flex-col gap-4 overflow-auto p-10 md:h-[60rem] lg:h-[70rem]'>
         {(!data || data.length === 0) && (
           <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 py-10 text-center text-[1.6rem] font-bold text-white md:text-[2rem]'>
             저장된 문제가 없습니다

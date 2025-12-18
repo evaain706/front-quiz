@@ -98,66 +98,68 @@ const CommunityDetail = () => {
   if (!post) return <p>게시글을 찾을 수 없습니다.</p>;
 
   return (
-    <div className='relative mx-auto w-[100rem] bg-gradient-to-br from-slate-50 via-white to-slate-100 p-10 px-4 py-10'>
-      <PostCard
-        post={post}
-        onDeleteClick={() => setDeleteModalOpen(true)}
-        onEditClick={() => setEditModalOpen(true)}
-      />
-      <Button
-        onClick={() => navigate(-1)}
-        className='absolute top-5 right-5 mt-4 w-20 px-2'
-      >
-        <BackIcon />
-      </Button>
-
-      {isDeleteModalOpen && (
-        <DeleteModal
-          isOpen={isDeleteModalOpen}
-          onOpenChange={setDeleteModalOpen}
-          onDelete={handleDeletePost}
-          isLoading={handleDeletePostMutate.isPending}
-          title='게시글 삭제'
-          errorMessage={postDeleteError}
+    <div className='flex min-h-[calc(100vh-6rem)] items-center justify-center'>
+      <div className='relative mx-auto w-full bg-white'>
+        <PostCard
+          post={post}
+          onDeleteClick={() => setDeleteModalOpen(true)}
+          onEditClick={() => setEditModalOpen(true)}
         />
-      )}
+        <Button
+          onClick={() => navigate(-1)}
+          className='absolute top-0 right-5 mt-4 w-15'
+        >
+          <BackIcon />
+        </Button>
 
-      {isEditModalOpen && (
-        <DeleteModal
-          isOpen={isEditModalOpen}
-          onOpenChange={setEditModalOpen}
-          onDelete={handleEditPost}
-          isLoading={handleCheckPasswordMutate.isPending}
-          title='게시글 수정'
-          errorMessage={postEditError}
+        {isDeleteModalOpen && (
+          <DeleteModal
+            isOpen={isDeleteModalOpen}
+            onOpenChange={setDeleteModalOpen}
+            onDelete={handleDeletePost}
+            isLoading={handleDeletePostMutate.isPending}
+            title='게시글 삭제'
+            errorMessage={postDeleteError}
+          />
+        )}
+
+        {isEditModalOpen && (
+          <DeleteModal
+            isOpen={isEditModalOpen}
+            onOpenChange={setEditModalOpen}
+            onDelete={handleEditPost}
+            isLoading={handleCheckPasswordMutate.isPending}
+            title='게시글 수정'
+            errorMessage={postEditError}
+          />
+        )}
+
+        <CommentList
+          comments={post.comments}
+          onClickDelete={(commentId) => {
+            setDeleteCommentId(commentId);
+            setCommentModalOpen(true);
+            setCommentDeleteError('');
+          }}
         />
-      )}
 
-      <CommentList
-        comments={post.comments}
-        onClickDelete={(commentId) => {
-          setDeleteCommentId(commentId);
-          setCommentModalOpen(true);
-          setCommentDeleteError('');
-        }}
-      />
+        {commentModalOpen && (
+          <DeleteModal
+            isOpen={commentModalOpen}
+            onOpenChange={setCommentModalOpen}
+            onDelete={handleDeleteComment}
+            isLoading={handleDeleteCommentMutate.isPending}
+            title='댓글 삭제'
+            errorMessage={commentDeleteError}
+          />
+        )}
 
-      {commentModalOpen && (
-        <DeleteModal
-          isOpen={commentModalOpen}
-          onOpenChange={setCommentModalOpen}
-          onDelete={handleDeleteComment}
-          isLoading={handleDeleteCommentMutate.isPending}
-          title='댓글 삭제'
-          errorMessage={commentDeleteError}
+        <CommentForm
+          postId={id!}
+          mutate={handleAddCommentMutate}
+          isLoading={handleAddCommentMutate.isPending}
         />
-      )}
-
-      <CommentForm
-        postId={id!}
-        mutate={handleAddCommentMutate}
-        isLoading={handleAddCommentMutate.isPending}
-      />
+      </div>
     </div>
   );
 };

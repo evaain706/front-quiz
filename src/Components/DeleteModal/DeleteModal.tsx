@@ -28,7 +28,7 @@ const DeleteModal = ({
 
   return (
     <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-      <Modal.Content className='max-w-[20rem]'>
+      <Modal.Content className='max-w-[20rem] rounded-4xl bg-white'>
         <Modal.Header>
           <Modal.Title className='text-[2rem] font-bold md:text-[2.4rem]'>
             {title}
@@ -37,7 +37,7 @@ const DeleteModal = ({
         </Modal.Header>
 
         <Modal.Item className='flex flex-col gap-2'>
-          <label className='text-[1.4rem] text-gray-600 md:text-[1.6rem]'>
+          <label className='text-[1.4rem] text-gray-900 md:text-[1.6rem]'>
             비밀번호를 입력하세요
           </label>
 
@@ -46,7 +46,7 @@ const DeleteModal = ({
             type='password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className='w-full rounded border px-2 py-1'
+            className='w-full rounded border-2 border-gray-200 px-2 py-1'
           />
           {errorMessage && (
             <p className='mt-2 text-center text-[1.6rem] text-red-500'>
@@ -55,8 +55,12 @@ const DeleteModal = ({
           )}
 
           <div className='mt-4 flex justify-center gap-2'>
-            <Button onClick={handleDeleteClick} disabled={isLoading}>
-              삭제
+            <Button
+              className='border-none bg-red-400 text-white hover:bg-red-300'
+              onClick={handleDeleteClick}
+              disabled={isLoading}
+            >
+              {title}
             </Button>
           </div>
         </Modal.Item>

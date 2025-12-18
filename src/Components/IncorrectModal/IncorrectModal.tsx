@@ -19,15 +19,10 @@ const IncorrectModal = ({
   return (
     <>
       <Modal isOpen={isOpen} onOpenChange={setIsopen}>
-        <Modal.Content>
-          <Modal.Header>
-            <Modal.Title className='text-center text-[1.8rem]'>
-              저장된 문제
-            </Modal.Title>
-          </Modal.Header>
+        <Modal.Content className='rounded-4xl bg-gray-900'>
           <Modal.Item>
             <div className='flex flex-col items-center justify-center gap-5 md:gap-8'>
-              <h3 className='text-[1.3rem] font-bold text-gray-900 md:text-[1.6rem]'>
+              <h3 className='text-[1.3rem] font-bold text-white md:text-[1.6rem]'>
                 <ReactMarkdown>{markdownContent}</ReactMarkdown>
               </h3>
 
@@ -36,15 +31,15 @@ const IncorrectModal = ({
                 const isSelectedAnswer = key === data.selectedAnswer;
 
                 const textColorClass = isCorrectAnswer
-                  ? 'text-green-600 font-bold'
+                  ? 'text-green-600 font-bold '
                   : isSelectedAnswer
                     ? 'text-red-600 font-semibold'
-                    : 'text-gray-800';
+                    : 'text-white';
 
                 return (
                   <div
                     key={key}
-                    className={`flex w-full items-center gap-4 rounded-lg border-2 p-4 transition-all duration-200 ${isCorrectAnswer ? 'border-green-500 bg-green-50' : isSelectedAnswer ? 'border-red-500 bg-red-50' : 'border-gray-200'} `}
+                    className={`flex w-full items-center gap-4 rounded-lg border-2 bg-white/10 p-4 transition-all duration-200 ${isCorrectAnswer ? 'border-green-500 bg-green-50' : isSelectedAnswer ? 'border-red-500 bg-red-50' : 'border-gray-200'} `}
                   >
                     <div className={`relative ${textColorClass}`}>
                       <span className='flex-1 text-[1.2rem] font-bold md:text-[1.6rem]'>
@@ -56,10 +51,10 @@ const IncorrectModal = ({
                 );
               })}
 
-              <div className='mt-2 space-y-1 text-[1.4rem] font-bold text-black'>
+              <div className='mt-2 space-y-1 text-[1.4rem] font-bold text-white'>
                 <p> {data.explanation}</p>
 
-                <div className='mt-2 flex gap-3 text-[1.2rem] font-bold text-gray-500 md:text-[1.4rem]'>
+                <div className='mt-2 flex gap-3 text-[1.2rem] font-bold text-white/80 md:text-[1.4rem]'>
                   <p> 토픽: {data.topic}</p>
                   <p> 레벨: {data.level}</p>
                 </div>

@@ -25,7 +25,7 @@ const CommentForm = ({
   };
 
   return (
-    <div className='rounded-xl bg-white p-6 shadow-sm ring-1 ring-slate-100'>
+    <div className='p-6 shadow-sm ring-1 ring-slate-100'>
       <h3 className='mb-5 text-[1.6rem] font-bold'>댓글 작성</h3>
 
       <div className='space-y-4'>
@@ -49,13 +49,14 @@ const CommentForm = ({
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           rows={4}
-          className='w-full rounded-lg border border-slate-200 p-3'
+          className='w-full rounded-lg border border-slate-200 p-3 text-[1.6rem] shadow-sm transition-all focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 focus:outline-none'
         />
 
         <div className='flex justify-end'>
           <Button
             onClick={handleSubmit}
             disabled={isLoading || !nickname.trim() || !comment.trim()}
+            className='border-none bg-green-700 text-white hover:bg-green-600'
           >
             {isLoading ? '작성 중...' : '작성'}
           </Button>

@@ -56,10 +56,10 @@ const CommunityForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='mx-auto w-full border bg-white p-10 shadow md:rounded-xl'
+      className='mx-auto w-full border bg-white/5 p-10 shadow md:rounded-xl'
     >
       <div className='relative mb-6 flex flex-col items-center'>
-        <h1 className='text-[3rem] font-bold'>
+        <h1 className='text-[3rem] font-bold text-white'>
           {isEditMode ? '게시글 수정' : '새 게시글 작성'}
         </h1>
 
@@ -73,26 +73,28 @@ const CommunityForm = () => {
 
       <div className='flex flex-col gap-2 p-5 md:gap-8'>
         <div>
-          <label className='p-2 text-[1.6rem] font-bold'>카테고리 선택</label>
+          <label className='p-2 text-[1.6rem] font-bold text-white'>
+            카테고리 선택
+          </label>
           <select
             {...register('category')}
-            className='w-full cursor-pointer rounded-lg border border-gray-300 bg-white px-4 py-3 text-[1.6rem] text-gray-700 shadow-sm transition-all hover:border-emerald-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 focus:outline-none'
+            className='w-full cursor-pointer rounded-lg border border-gray-300 bg-white/20 px-4 py-3 text-[1.6rem] text-white shadow-sm transition-all hover:border-emerald-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 focus:outline-none'
           >
-            <option className='font-bold' value='question'>
+            <option className='font-bold text-black' value='question'>
               질문
             </option>
-            <option className='font-bold' value='information'>
+            <option className='font-bold text-black' value='information'>
               정보
             </option>
           </select>
         </div>
 
         <div>
-          <label className='p-2 text-[1.6rem] font-bold'>제목</label>
+          <label className='p-2 text-[1.6rem] font-bold text-white'>제목</label>
           <Input
             {...register('title', { required: '제목을 입력해주세요.' })}
             placeholder='제목'
-            className='mb-1 w-full rounded border border-gray-300 pl-5'
+            className='mb-1 w-full rounded border border-gray-300 bg-white/20 pl-5 text-white'
           />
           {errors.title && (
             <p className='mb-4 pl-3 text-[1.4rem] text-red-500'>
@@ -102,11 +104,10 @@ const CommunityForm = () => {
         </div>
 
         <div>
-          <label className='p-2 text-[1.6rem] font-bold'>내용</label>
+          <label className='p-2 text-[1.6rem] font-bold text-white'>내용</label>
           <textarea
             {...register('content', { required: '내용을 입력해주세요.' })}
-            placeholder='내용'
-            className='w-full resize-none rounded-lg border border-gray-300 px-4 py-3 text-[1.6rem] shadow-sm transition-all hover:border-emerald-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 focus:outline-none'
+            className='w-full resize-none rounded-lg border border-gray-300 bg-white/20 px-4 py-3 text-[1.6rem] text-white shadow-sm transition-all hover:border-emerald-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 focus:outline-none'
             rows={6}
           />
           {errors.content && (
@@ -121,7 +122,7 @@ const CommunityForm = () => {
             <Input
               {...register('nickname', { required: '닉네임을 입력해주세요.' })}
               placeholder='닉네임'
-              className='mb-1 w-full rounded border border-gray-300 pl-5'
+              className='mb-1 w-full rounded border border-gray-300 bg-white/20 pl-5 text-white'
               disabled={isEditMode}
             />
             {errors.nickname && (
@@ -143,7 +144,7 @@ const CommunityForm = () => {
                 })}
                 placeholder='4자리 비밀번호'
                 type='password'
-                className='mb-1 w-full rounded border border-gray-300 pl-5'
+                className='mb-1 w-full rounded border border-gray-300 bg-white/20 pl-5 text-white'
               />
               {errors.password && (
                 <p className='mb-4 pl-3 text-[1.4rem] text-red-500'>
@@ -156,7 +157,7 @@ const CommunityForm = () => {
 
         <Button
           type='submit'
-          className='mt-2 w-full rounded-lg border-0 bg-emerald-600 py-3 text-[1.6rem] font-bold text-white shadow-md transition-all hover:bg-emerald-700 hover:shadow-lg active:scale-[0.98]'
+          className='mt-2 w-full rounded-lg border-0 bg-emerald-600/50 py-3 text-[1.6rem] font-bold text-white shadow-md transition-all hover:bg-emerald-700 hover:shadow-lg active:scale-[0.98]'
         >
           {isEditMode ? '수정하기' : '작성하기'}
         </Button>
