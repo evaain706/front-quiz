@@ -6,19 +6,25 @@ import { motion } from 'motion/react';
 
 const items = [
   {
-    color: 'bg-amber-300',
+    color: 'bg-yellow-300/90',
+    gradient: 'from-amber-500 via-orange-500 to-yellow-500',
+    glowColor: 'shadow-amber-500/50',
     label: '마이페이지',
     path: '/mypage',
     desc: '내정보수정,문제통계,오답문제에 저장한 문제 확인',
   },
   {
-    color: 'bg-red-300',
+    color: 'bg-green-200/80',
+    gradient: 'from-rose-500 via-red-500 to-pink-500',
+    glowColor: 'shadow-rose-500/50',
     label: '퀴즈',
     path: '/select',
     desc: '프론트엔드관련 토픽/난이도를 선택해 문제 풀어보기',
   },
   {
-    color: 'bg-blue-300',
+    color: 'bg-blue-200/50',
+    gradient: 'from-blue-500 via-indigo-500 to-violet-500',
+    glowColor: 'shadow-blue-500/50',
     label: '커뮤니티',
     path: '/community',
     desc: '질문/정보등을 올릴수있는 커뮤니티',
@@ -87,22 +93,24 @@ const CircleItem = ({
       <motion.div
         className='absolute inset-0 rounded-full'
         animate={{ rotateY: flipped === i ? 180 : 0 }}
-        transition={{ duration: 1.0 }}
+        transition={{ duration: 0.8 }}
         style={{ transformStyle: 'preserve-3d' }}
       >
         <div
-          className={`absolute inset-0 ${item.color} flex items-center justify-center rounded-full backface-hidden`}
+          className={`absolute inset-0 ${item.color} bg-gradient-to-br ${item.gradient} flex items-center justify-center rounded-full ring-2 ring-white/80 backface-hidden`}
         >
           <p className='text-[2rem] font-bold text-white md:text-[3rem]'>
             {item.label}
           </p>
         </div>
 
-        <div className='absolute inset-0 flex rotate-y-180 flex-col items-center justify-center gap-2 rounded-full bg-slate-200 px-4 backface-hidden'>
-          <p className='text-[1.6rem] font-bold text-black md:text-[1.8rem]'>
+        <div
+          className={`rind-2 absolute inset-0 flex rotate-y-180 flex-col items-center justify-center gap-2 rounded-full bg-white/20 bg-gradient-to-r px-4 ring-white/80 backface-hidden`}
+        >
+          <p className={`text-[1.6rem] font-bold text-white md:text-[1.8rem]`}>
             {item.label}
           </p>
-          <p className='text-center text-[1.4rem] font-bold text-black opacity-70 md:text-[1.6rem]'>
+          <p className='text-center text-[1.4rem] font-bold text-white opacity-70 md:text-[1.6rem]'>
             {item.desc}
           </p>
           <p className='mt-2 font-semibold text-blue-500 md:text-[1.6rem]'>

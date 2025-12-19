@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import ProfileImage from './ProfileImage';
 import Button from '../Button';
 import { useUploadImage } from '../../hooks/useUploadImage';

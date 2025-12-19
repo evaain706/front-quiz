@@ -29,7 +29,7 @@ const Toast = ({ mode, message }: ToastProps) => {
   return createPortal(
     <motion.div
       className={cn(
-        'fixed top-10 left-1/2 z-[999] w-[20rem] -translate-x-1/2 rounded-lg py-3 text-center shadow-lg',
+        'fixed top-40 left-1/2 z-[999] w-[20rem] -translate-x-1/2 rounded-lg py-5 text-center shadow-lg md:w-[30rem]',
         className,
       )}
       initial={{ y: -50, opacity: 0 }}
@@ -37,7 +37,7 @@ const Toast = ({ mode, message }: ToastProps) => {
       exit={{ y: -50, opacity: 0 }}
       transition={{ duration: 0.4, ease: 'easeOut' }}
     >
-      <p className='text-[1.4rem] font-bold text-black'>{message}</p>
+      <p className='text-[1.6rem] font-bold text-black'>{message}</p>
     </motion.div>,
     root,
   );

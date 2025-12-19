@@ -48,6 +48,7 @@ const QuizScreen = () => {
 
       <div className='flex w-full items-center justify-between'>
         <Button
+          className='bg-white/30 text-white'
           onClick={fetchQuiz}
           disabled={isLoading || isGrading}
           isLoading={isGrading || isLoading}
@@ -55,6 +56,7 @@ const QuizScreen = () => {
           문제받기
         </Button>
         <Button
+          className='bg-white/20 text-white'
           onClick={handleSubmit}
           disabled={isGrading || isLoading}
           isLoading={isGrading || isLoading}
