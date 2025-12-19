@@ -1,6 +1,6 @@
 import { createPortal } from 'react-dom';
 import { motion } from 'motion/react';
-import { cn } from '../../../utils/cn';
+import { cn } from '@/utils/cn';
 
 interface ToastProps {
   mode: 'default' | 'success' | 'error' | 'warn';

@@ -1,6 +1,6 @@
-import Button from '../../components/Button';
-import { useQuizStore } from '../../store/useQuizStore';
-import { useUserStore } from '../../store/useUserStore';
+import Button from '@/components/Button';
+import { useQuizStore } from '@/store/useQuizStore';
+import { useUserStore } from '@/store/useUserStore';
 import { useQuiz } from './hooks/useQuiz';
 import ResultDisplay from './ResultDisplay';
 import React from 'react';

@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react';
-import { DropdownContext } from '../../../contexts/DropdownContext';
+import { DropdownContext } from '@/contexts/DropdownContext';
 
 const DropdownWrapper = ({ children }: { children: ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false);

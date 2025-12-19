@@ -1,8 +1,8 @@
-import DeleteIcon from '../../../assets/svg/DeleteIcon';
-import Button from '../../../components/Button';
-import type { IncorrectQuiz } from '../../../types/quizTypes';
-import { cn } from '../../../utils/cn';
-import { useQuiz } from '../../quizComp/hooks/useQuiz';
+import DeleteIcon from '@/assets/svg/DeleteIcon';
+
+import type { IncorrectQuiz } from '@/types/quizTypes';
+import { cn } from '@/utils/cn';
+import { useQuiz } from '@/features/quizComp/hooks/useQuiz';
 
 interface AnswerHistoryCardProps {
   data: IncorrectQuiz;

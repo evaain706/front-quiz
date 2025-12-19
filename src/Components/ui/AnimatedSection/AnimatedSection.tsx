@@ -1,7 +1,7 @@
 import React from 'react';
 import type { ReactNode } from 'react';
 import { motion } from 'motion/react';
-import useScroll from '../../../hooks/useScroll';
+import useScroll from '@/hooks/useScroll';
 
 interface AnimatedSectionProps {
   children: ReactNode;

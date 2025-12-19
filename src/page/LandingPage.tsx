@@ -1,14 +1,14 @@
-import Button from '../components/Button';
+import Button from '@/components/Button';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 
-import StatImg from '../assets/img/stat.png';
-import Incorrect from '../assets/img/Incorrect.png';
-import IncorrectModal from '../assets/img/IncorrectModal.png';
-import Quiz from '../assets/img/Quiz.png';
-import CommunityMain from '../assets/img/CommunityMain.png';
-import CommunityDetailImg from '../assets/img/CommunityDetail.png';
-import ImageSlider from '../components/ui/ImgaSlider';
+import StatImg from '@/assets/img/stat.png';
+import Incorrect from '@/assets/img/Incorrect.png';
+import IncorrectModal from '@/assets/img/IncorrectModal.png';
+import Quiz from '@/assets/img/Quiz.png';
+import CommunityMain from '@/assets/img/CommunityMain.png';
+import CommunityDetailImg from '@/assets/img/CommunityDetail.png';
+import ImageSlider from '@/components/ui/ImgaSlider';
 
 const LandingPage = () => {
   const navigate = useNavigate();

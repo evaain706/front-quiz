@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { privateInstance } from '../apis/privateInstance';
+import { privateInstance } from '@/apis/privateInstance';
 
 export const useUploadImage = () => {
   const [loading, setLoading] = useState(false);

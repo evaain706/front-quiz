@@ -1,8 +1,6 @@
-'use client';
-
-import { cn } from '../../utils/cn';
-import { useModalContext } from '../../contexts/ModalContext';
-import type { ModalProps } from '../../types/modalTypes';
+import { cn } from '@/utils/cn';
+import { useModalContext } from '@/contexts/ModalContext';
+import type { ModalProps } from '@/types/modalTypes';
 
 export default function ModalClose({ children, className }: ModalProps) {
   const { onOpenChange } = useModalContext();

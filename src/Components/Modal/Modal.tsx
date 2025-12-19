@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ModalContext } from '../../contexts/ModalContext';
-import type { ModalRootProps } from '../../types/modalTypes';
+import { ModalContext } from '@/contexts/ModalContext';
+import type { ModalRootProps } from '@/types/modalTypes';
 
 export default function ModalWrapper({
   children,

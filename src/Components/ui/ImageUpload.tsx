@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react';
 import ProfileImage from './ProfileImage';
 import Button from '../Button';
-import { useUploadImage } from '../../hooks/useUploadImage';
-import { useUserStore } from '../../store/useUserStore';
+import { useUploadImage } from '@/hooks/useUploadImage';
+import { useUserStore } from '@/store/useUserStore';
 
 interface ImageUploadProps {
   initialSrc?: string | null;

@@ -1,4 +1,4 @@
-import MyPageMain from '../features/myPage/MyPageMain';
+import MyPageMain from '@/features/myPage/MyPageMain';
 
 const MyPage = () => {
   return (

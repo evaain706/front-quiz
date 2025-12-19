@@ -1,10 +1,10 @@
 import { useForm } from 'react-hook-form';
-import type { PostForm } from '../../types/communityTypes';
+import type { PostForm } from '@/types/communityTypes';
 import { useCommunity } from './hooks/useCommunity';
-import Input from '../../components/Input';
-import Button from '../../components/Button';
+import Input from '@/components/Input';
+import Button from '@/components/Button';
 import { useLocation, useNavigate } from 'react-router-dom';
-import BackIcon from '../../assets/svg/BackIcon';
+import BackIcon from '@/assets/svg/BackIcon';
 import { useEffect } from 'react';
 
 const CommunityForm = () => {

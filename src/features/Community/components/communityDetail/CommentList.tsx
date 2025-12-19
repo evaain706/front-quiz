@@ -1,6 +1,6 @@
-import DeleteIcon from '../../../../assets/svg/DeleteIcon';
+import DeleteIcon from '@/assets/svg/DeleteIcon';
 
-import type { Comment } from '../../../../types/communityTypes';
+import type { Comment } from '@/types/communityTypes';
 
 const CommentList = ({
   comments,

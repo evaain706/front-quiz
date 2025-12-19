@@ -1,4 +1,4 @@
-import type { Post, PostResponse } from '../../../../types/communityTypes';
+import type { Post, PostResponse } from '@/types/communityTypes';
 import { useNavigate } from 'react-router-dom';
 
 const PostGrid = ({ data }: { data: PostResponse }) => {

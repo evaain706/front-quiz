@@ -1,4 +1,4 @@
-import type { IncorrectQuiz } from '../../types/quizTypes';
+import type { IncorrectQuiz } from '@/types/quizTypes';
 import Button from '../Button';
 import Modal from '../Modal';
 import ReactMarkdown from 'react-markdown';

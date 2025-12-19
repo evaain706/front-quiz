@@ -1,6 +1,6 @@
-import DotIcon from '../../../../assets/svg/DotIcon';
-import type { Post } from '../../../../types/communityTypes';
-import Dropdown from '../../../../components/ui/Dropdown';
+import DotIcon from '@/assets/svg/DotIcon';
+import type { Post } from '@/types/communityTypes';
+import Dropdown from '@/components/ui/Dropdown';
 
 const PostCard = ({
   post,

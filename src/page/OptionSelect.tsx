@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Card from '../components/Card';
-import Button from '../components/Button';
-import { useOptionStore } from '../store/useOptionStore';
-import { categorylist } from '../constants/categoryList';
+import Card from '@/components/Card';
+import Button from '@/components/Button';
+import { useOptionStore } from '@/store/useOptionStore';
+import { categorylist } from '@/constants/categoryList';
 
 const OptionSelect = () => {
   const [step, setStep] = useState(0);

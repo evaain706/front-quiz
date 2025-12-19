@@ -2,14 +2,14 @@ import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { useCommunity } from './hooks/useCommunity';
 import { useState } from 'react';
-import Pagination from '../../components/ui/Pagination/Pagination';
+import Pagination from '@/components/ui/Pagination/Pagination';
 
-import type { PostResponse } from '../../types/communityTypes';
+import type { PostResponse } from '@/types/communityTypes';
 import PostGrid from './components/communityMain/PostGrid';
-import Button from '../../components/Button';
-import Input from '../../components/Input';
-import { useDebounce } from '../../hooks/useDebounce';
-import CommunityPostListSkeletion from '../../components/ui/Skeleton/CommunityPostListSkeleton';
+import Button from '@/components/Button';
+import Input from '@/components/Input';
+import { useDebounce } from '@/hooks/useDebounce';
+import CommunityPostListSkeletion from '@/components/ui/Skeleton/CommunityPostListSkeleton';
 
 const CommunityMain = () => {
   const navigate = useNavigate();

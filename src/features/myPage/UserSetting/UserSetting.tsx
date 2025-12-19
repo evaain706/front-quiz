@@ -1,11 +1,11 @@
-import Button from '../../../components/Button';
-import Input from '../../../components/Input';
-import ImageUpload from '../../../components/ui/ImageUpload';
+import Button from '@/components/Button';
+import Input from '@/components/Input';
+import ImageUpload from '@/components/ui/ImageUpload';
 import { useState } from 'react';
-import { privateInstance } from '../../../apis/privateInstance';
-import { useUserStore } from '../../../store/useUserStore';
-import { useToastStore } from '../../../store/useToastStore';
-import BackIcon from '../../../assets/svg/BackIcon';
+import { privateInstance } from '@/apis/privateInstance';
+import { useUserStore } from '@/store/useUserStore';
+import { useToastStore } from '@/store/useToastStore';
+import BackIcon from '@/assets/svg/BackIcon';
 import { useNavigate } from 'react-router-dom';
 
 const UserSettingPage = () => {

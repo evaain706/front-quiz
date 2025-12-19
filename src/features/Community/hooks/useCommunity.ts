@@ -1,8 +1,8 @@
 import { useQueryClient, useMutation } from '@tanstack/react-query';
-import { instance } from '../../../apis/instance';
-import { useToastStore } from '../../../store/useToastStore';
+import { instance } from '@/apis/instance';
+import { useToastStore } from '@/store/useToastStore';
 import { useNavigate } from 'react-router-dom';
-import type { PostForm, EditPostForm } from '../../../types/communityTypes';
+import type { PostForm, EditPostForm } from '@/types/communityTypes';
 
 interface AddCommentParams {
   postId: string;

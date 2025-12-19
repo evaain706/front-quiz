@@ -1,10 +1,10 @@
-import { useQuizStore } from '../../../store/useQuizStore';
-import { useOptionStore } from '../../../store/useOptionStore';
-import { useUserStore } from '../../../store/useUserStore';
-import { instance } from '../../../apis/instance';
-import { privateInstance } from '../../../apis/privateInstance';
+import { useQuizStore } from '@/store/useQuizStore';
+import { useOptionStore } from '@/store/useOptionStore';
+import { useUserStore } from '@/store/useUserStore';
+import { instance } from '@/apis/instance';
+import { privateInstance } from '@/apis/privateInstance';
 import { useState } from 'react';
-import { useToastStore } from '../../../store/useToastStore';
+import { useToastStore } from '@/store/useToastStore';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export const useQuiz = () => {

@@ -1,5 +1,5 @@
 import ReactMarkdown from 'react-markdown';
-import type { Quiz } from '../../types/quizTypes';
+import type { Quiz } from '@/types/quizTypes';
 import React from 'react';
 
 interface QuestionCardProps {

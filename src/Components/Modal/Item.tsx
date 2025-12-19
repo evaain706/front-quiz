@@ -1,6 +1,6 @@
-import type { ModalProps } from '../../types/modalTypes';
+import type { ModalProps } from '@/types/modalTypes';
 
-import { cn } from '../../utils/cn';
+import { cn } from '@/utils/cn';
 
 export default function ModalItem({ children, className }: ModalProps) {
   return (

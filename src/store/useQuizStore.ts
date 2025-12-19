@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { Quiz, QuizState, Result } from '../types/quizTypes';
+import type { Quiz, QuizState, Result } from '@/types/quizTypes';
 
 export const useQuizStore = create<QuizState>((set) => ({
   quiz: null,

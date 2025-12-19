@@ -1,6 +1,6 @@
 import { AnimatePresence } from 'motion/react';
 import Toast from './Toast';
-import { useToastStore } from '../../../store/useToastStore';
+import { useToastStore } from '@/store/useToastStore';
 
 const ToastContainer = () => {
   const toasts = useToastStore((state) => state.toasts);

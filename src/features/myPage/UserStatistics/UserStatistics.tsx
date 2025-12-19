@@ -1,12 +1,12 @@
-import type { UserStatistics } from '../../../types/statTypes';
-import { useQuiz } from '../../quizComp/hooks/useQuiz';
+import type { UserStatistics } from '@/types/statTypes';
+import { useQuiz } from '@/features/quizComp/hooks/useQuiz';
 import { useQuery } from '@tanstack/react-query';
-import StatisticCard from '../../../components/ui/MyPage/Statistics/StatisticsCard';
-import StatisticGrid from '../../../components/ui/MyPage/Statistics/StatisticGrid';
-import StatisticSection from '../../../components/ui/MyPage/Statistics/StatisticSection';
-import Button from '../../../components/Button';
+import StatisticCard from '@/components/ui/MyPage/Statistics/StatisticsCard';
+import StatisticGrid from '@/components/ui/MyPage/Statistics/StatisticGrid';
+import StatisticSection from '@/components/ui/MyPage/Statistics/StatisticSection';
+import Button from '@/components/Button';
 import { useNavigate } from 'react-router-dom';
-import BackIcon from '../../../assets/svg/BackIcon';
+import BackIcon from '@/assets/svg/BackIcon';
 
 const UserStatisticPage = () => {
   const { getUserStatistics } = useQuiz();

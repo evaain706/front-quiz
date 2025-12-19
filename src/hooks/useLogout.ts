@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUserStore } from '../store/useUserStore';
-import { privateInstance } from '../apis/privateInstance';
+import { useUserStore } from '@/store/useUserStore';
+import { privateInstance } from '@/apis/privateInstance';
 
 export const useLogout = () => {
   const navigate = useNavigate();

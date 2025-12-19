@@ -1,5 +1,5 @@
-import { useModalContext } from '../../contexts/ModalContext';
-import type { ModalProps } from '../../types/modalTypes';
+import { useModalContext } from '@/contexts/ModalContext';
+import type { ModalProps } from '@/types/modalTypes';
 
 export default function ModalTrigger({ children }: ModalProps) {
   const { onOpenChange } = useModalContext();

@@ -1,8 +1,8 @@
 'use client';
 
-import { cn } from '../../utils/cn';
-import { useModalContext } from '../../contexts/ModalContext';
-import type { ModalProps } from '../../types/modalTypes';
+import { cn } from '@/utils/cn';
+import { useModalContext } from '@/contexts/ModalContext';
+import type { ModalProps } from '@/types/modalTypes';
 import { createPortal } from 'react-dom';
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';

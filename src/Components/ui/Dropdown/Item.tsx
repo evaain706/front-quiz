@@ -1,6 +1,6 @@
-import { useDropdownContext } from '../../../contexts/DropdownContext';
-import type { DropdownProps } from '../../../types/dropdownTypes';
-import { cn } from '../../../utils/cn';
+import { useDropdownContext } from '@/contexts/DropdownContext';
+import type { DropdownProps } from '@/types/dropdownTypes';
+import { cn } from '@/utils/cn';
 
 const DropdownItem = ({ children, onClick, className }: DropdownProps) => {
   const { setIsOpen } = useDropdownContext();

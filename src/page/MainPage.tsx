@@ -1,4 +1,4 @@
-import MainMenu from '../components/ui/MainPage/MainMenu';
+import MainMenu from '@/components/ui/MainPage/MainMenu';
 
 const MainPage = () => {
   return (

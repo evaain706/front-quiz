@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import Button from '../../components/Button';
+import Button from '@/components/Button';
 import { useQuiz } from './hooks/useQuiz';
-import { useQuizStore } from '../../store/useQuizStore';
-import { useOptionStore } from '../../store/useOptionStore';
+import { useQuizStore } from '@/store/useQuizStore';
+import { useOptionStore } from '@/store/useOptionStore';
 import QuestionCard from './QuestionCard';
 import OptionsCard from './OptionCard';
-import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
+import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
 
 const QuizScreen = () => {
   const { fetchQuiz, handleSubmit, error } = useQuiz();

@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import { useQuiz } from '../../quizComp/hooks/useQuiz';
-import type { IncorrectQuiz } from '../../../types/quizTypes';
+import { useQuiz } from '@/features/quizComp/hooks/useQuiz';
+import type { IncorrectQuiz } from '@/types/quizTypes';
 import AnswerHistoryCard from './AnswerHistoryCard';
-import IncorrectModal from '../../../components/IncorrectModal/IncorrectModal';
+import IncorrectModal from '@/components/IncorrectModal/IncorrectModal';
 import { useState } from 'react';
-import { categorylist } from '../../../constants/categoryList';
-import Button from '../../../components/Button';
-import Spinner from '../../../components/ui/Spinner';
+import { categorylist } from '@/constants/categoryList';
+import Button from '@/components/Button';
+import Spinner from '@/components/ui/Spinner';
 
 const IncorrectAnswerPage = () => {
   const { getIncorrectAnswers } = useQuiz();

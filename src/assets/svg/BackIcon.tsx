@@ -1,4 +1,4 @@
-import type { BaseIconProps } from '../../types/iconTypes';
+import type { BaseIconProps } from '@/types/iconTypes';
 
 export default function BackIcon({ size = 18, className }: BaseIconProps) {
   return (

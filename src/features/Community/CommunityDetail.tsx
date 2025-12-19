@@ -1,17 +1,17 @@
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { instance } from '../../apis/instance';
+import { instance } from '@/apis/instance';
 import { useState } from 'react';
 import { useCommunity } from './hooks/useCommunity';
 import PostCard from './components/communityDetail/PostCard';
 import CommentList from './components/communityDetail/CommentList';
 import CommentForm from './components/communityDetail/CommentForm';
-import DeleteModal from '../../components/DeleteModal/DeleteModal';
+import DeleteModal from '@/components/DeleteModal/DeleteModal';
 import { useNavigate } from 'react-router-dom';
 
-import type { Post } from '../../types/communityTypes';
-import Button from '../../components/Button';
-import BackIcon from '../../assets/svg/BackIcon';
+import type { Post } from '@/types/communityTypes';
+import Button from '@/components/Button';
+import BackIcon from '@/assets/svg/BackIcon';
 
 const CommunityDetail = () => {
   const { id } = useParams();
