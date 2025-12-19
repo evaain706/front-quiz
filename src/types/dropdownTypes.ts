@@ -14,5 +14,5 @@ export interface DropdownProps {
 
 export interface DropDownContextType {
   isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }

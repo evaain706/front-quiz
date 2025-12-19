@@ -6,10 +6,9 @@ import { useUserStore } from '@/store/useUserStore';
 
 interface ImageUploadProps {
   initialSrc?: string | null;
-  handleUpload: (url: string) => void;
 }
 
-const ImageUpload = ({ initialSrc, handleUpload }: ImageUploadProps) => {
+const ImageUpload = ({ initialSrc }: ImageUploadProps) => {
   const [preview, setPreview] = useState(initialSrc);
   const [src, setSrc] = useState<File | null>(null);
   const [onChange, setOnchange] = useState(false);

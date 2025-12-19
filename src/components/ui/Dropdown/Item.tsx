@@ -5,10 +5,10 @@ import { cn } from '@/utils/cn';
 const DropdownItem = ({ children, onClick, className }: DropdownProps) => {
   const { setIsOpen } = useDropdownContext();
 
-  const handleItemClick = (e) => {
+  const handleItemClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
-    onClick();
+    onClick?.();
     setIsOpen(false);
   };
   return (
