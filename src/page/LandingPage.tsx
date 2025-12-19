@@ -2,12 +2,14 @@ import Button from '@/components/Button';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 
-import StatImg from '@/assets/img/stat.png';
-import Incorrect from '@/assets/img/Incorrect.png';
-import IncorrectModal from '@/assets/img/IncorrectModal.png';
-import Quiz from '@/assets/img/Quiz.png';
-import CommunityMain from '@/assets/img/CommunityMain.png';
-import CommunityDetailImg from '@/assets/img/CommunityDetail.png';
+import QuizImg1 from '@/assets/img/quiz-img.png';
+import QuizImg2 from '@/assets/img/quiz-img2.png';
+import CommunityImg from '@/assets/img/community-img.png';
+import CommunityDetailImg from '@/assets/img//community-detail-img.png';
+import UserStatImg from '@/assets/img/user-statistic-img.png';
+import IncorrectMainImg from '@/assets/img/incorrect-img.png';
+import IncorrectModalImg from '@/assets/img/incorrect-modal-img.png';
+
 import ImageSlider from '@/components/ui/ImgaSlider';
 
 const LandingPage = () => {
@@ -63,7 +65,12 @@ const LandingPage = () => {
           난이도별로 학습하세요
         </motion.p>
 
-        <ImageSlider images={[{ src: Quiz, alt: 'QuizImg' }]} />
+        <ImageSlider
+          images={[
+            { src: QuizImg1, alt: 'QuizImg' },
+            { src: QuizImg2, alt: 'QuizImg2' },
+          ]}
+        />
       </section>
 
       <section className='relative flex h-screen snap-center flex-col items-center justify-center gap-10 bg-black font-bold text-white'>
@@ -91,7 +98,7 @@ const LandingPage = () => {
           전체,카테고리별,난이도별 통계를 확인할수있습니다
         </motion.p>
 
-        <ImageSlider images={[{ src: StatImg, alt: 'StatImg' }]} />
+        <ImageSlider images={[{ src: UserStatImg, alt: 'UserStatImg' }]} />
       </section>
 
       <section className='relative flex h-screen snap-center flex-col items-center justify-center gap-10 bg-black font-bold text-white'>
@@ -121,8 +128,8 @@ const LandingPage = () => {
 
         <ImageSlider
           images={[
-            { src: Incorrect, alt: 'Community Main' },
-            { src: IncorrectModal, alt: 'Community Detail' },
+            { src: IncorrectMainImg, alt: 'Incorrect Main' },
+            { src: IncorrectModalImg, alt: 'Incorrect Modal' },
           ]}
         />
       </section>
@@ -152,7 +159,7 @@ const LandingPage = () => {
 
         <ImageSlider
           images={[
-            { src: CommunityMain, alt: 'Community Main' },
+            { src: CommunityImg, alt: 'Community Main' },
             { src: CommunityDetailImg, alt: 'Community Detail' },
           ]}
         />
