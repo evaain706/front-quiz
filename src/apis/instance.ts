@@ -3,8 +3,10 @@ import type { AxiosInstance } from 'axios';
 
 import { API_HEADERS, API_TIMEOUT } from '../constants/apiConstants';
 
+const BACKEND_URI = import.meta.env.VITE_BACKEND_URI;
+
 const instance: AxiosInstance = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: BACKEND_URI,
   timeout: API_TIMEOUT,
   headers: API_HEADERS.JSON,
 });

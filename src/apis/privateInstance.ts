@@ -4,9 +4,10 @@ import { instance } from './instance';
 
 import { API_HEADERS, API_TIMEOUT } from '../constants/apiConstants';
 import { useUserStore } from '../store/useUserStore';
+const BACKEND_URI = import.meta.env.VITE_BACKEND_URI;
 
 const privateInstance: AxiosInstance = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: BACKEND_URI,
   timeout: API_TIMEOUT,
   headers: API_HEADERS.JSON,
   withCredentials: true,
