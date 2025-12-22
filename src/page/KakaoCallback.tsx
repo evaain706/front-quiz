@@ -26,11 +26,11 @@ const KakaoCallback = () => {
 
           setUser(user);
 
-          navigate('/');
+          navigate('/main');
         } catch (error) {
           console.error('카카오 로그인 에러:', error);
 
-          navigate('/');
+          navigate('/main');
         }
       };
 

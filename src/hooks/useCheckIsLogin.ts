@@ -8,7 +8,7 @@ export const useCheckIsLogin = () => {
 
   useEffect(() => {
     if (!user) {
-      navigate('/');
+      navigate('/main');
     }
   }, [user, navigate]);
 };

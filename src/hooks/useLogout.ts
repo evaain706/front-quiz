@@ -19,7 +19,7 @@ export const useLogout = () => {
     } finally {
       clearUser();
 
-      navigate('/', { replace: true });
+      navigate('/main', { replace: true });
     }
   }, [clearUser, navigate]);
 
