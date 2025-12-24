@@ -10,7 +10,7 @@ const Card = ({ text, onClick, isSelected }: CardProps) => {
   return (
     <div
       onClick={onClick}
-      className={`flex max-h-[4rem] cursor-pointer items-center justify-center rounded-lg p-4 py-[2rem] transition-all md:py-[4rem] ${
+      className={`flex max-h-[4rem] cursor-pointer items-center justify-center rounded-lg p-4 py-[3rem] transition-all md:py-[4rem] ${
         isSelected
           ? 'animate-pulse bg-blue-500/20 text-white ring-1 ring-blue-500'
           : 'bg-white/20 hover:bg-gray-300'

@@ -54,7 +54,7 @@ const OptionSelect = () => {
           <h2 className='mb-8 text-2xl font-bold text-white md:text-[4rem]'>
             주제를 선택해주세요
           </h2>
-          <div className='grid max-h-[80rem] w-full grid-cols-2 gap-4 overflow-auto md:grid-cols-3 lg:grid-cols-4'>
+          <div className='grid max-h-[80rem] w-full grid-cols-2 gap-4 overflow-auto p-5 md:grid-cols-3 lg:grid-cols-4'>
             {categorylist.map((cat) => (
               <Card
                 key={cat.id}

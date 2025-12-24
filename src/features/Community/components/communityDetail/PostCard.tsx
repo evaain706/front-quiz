@@ -1,6 +1,7 @@
 import DotIcon from '@/assets/svg/DotIcon';
 import type { Post } from '@/types/communityTypes';
 import Dropdown from '@/components/ui/Dropdown';
+import { formatDate } from '@/utils/formatDate';
 
 const PostCard = ({
   post,
@@ -12,7 +13,7 @@ const PostCard = ({
   onEditClick: () => void;
 }) => {
   return (
-    <div className='rounded-2xl bg-white shadow-xl ring-1 ring-slate-100'>
+    <div className='rounded-md bg-white shadow-xl ring-1 ring-slate-100'>
       <header className='border-b border-slate-100 px-6 py-6 sm:px-8'>
         <h1 className='text-[2rem] font-bold'>{post.title}</h1>
 
@@ -20,7 +21,9 @@ const PostCard = ({
           <span className='text-[1.6rem] font-bold text-slate-700'>
             작성자: {post.nickname}
           </span>
-          <time className='text-[1.6rem] text-slate-400'>{post.createdAt}</time>
+          <p className='text-[1.6rem] text-slate-400'>
+            {formatDate(post.createdAt)}
+          </p>
         </div>
       </header>
 

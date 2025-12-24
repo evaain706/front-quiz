@@ -9,7 +9,7 @@ import PostGrid from './components/communityMain/PostGrid';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import { useDebounce } from '@/hooks/useDebounce';
-import CommunityPostListSkeletion from '@/components/ui/Skeleton/CommunityPostListSkeleton';
+import CommunityPageSkeleton from '@/components/ui/Skeleton/CommunityPostListSkeleton';
 
 const CommunityMain = () => {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const CommunityMain = () => {
     staleTime: 5 * 60 * 1000,
   });
 
-  if (isPending) return <CommunityPostListSkeletion />;
+  if (isPending) return <CommunityPageSkeleton />;
   if (error) return <>에러발생: {error.message}</>;
 
   const categories = [

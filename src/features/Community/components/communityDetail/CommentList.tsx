@@ -20,7 +20,7 @@ const CommentList = ({
           comments.map((c) => (
             <div
               key={c._id}
-              className='group rounded-xl bg-white p-10 shadow-sm ring-1 ring-slate-100 hover:shadow-md hover:ring-slate-200'
+              className='group rounded-xl bg-white p-10 shadow-sm ring-slate-100 hover:shadow-md hover:ring-slate-200'
             >
               <div className='flex justify-between'>
                 <div>
@@ -40,7 +40,7 @@ const CommentList = ({
             </div>
           ))
         ) : (
-          <div className='flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-slate-400 bg-slate-50 py-12 text-center'>
+          <div className='mx-5 flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-slate-400 bg-slate-50 py-12 text-center'>
             <p className='text-[1.6rem] font-bold text-slate-400'>
               아직 댓글이 없습니다
             </p>

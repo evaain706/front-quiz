@@ -98,7 +98,7 @@ const CommunityDetail = () => {
   if (!post) return <p>게시글을 찾을 수 없습니다.</p>;
 
   return (
-    <div className='flex min-h-[calc(100vh-6rem)] items-center justify-center'>
+    <div className='mt-5 flex min-h-[calc(100vh-6rem)] items-center justify-center'>
       <div className='relative mx-auto w-full bg-white'>
         <PostCard
           post={post}

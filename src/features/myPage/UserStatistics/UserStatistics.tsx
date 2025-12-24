@@ -7,6 +7,7 @@ import StatisticSection from '@/components/ui/MyPage/Statistics/StatisticSection
 import Button from '@/components/Button';
 import { useNavigate } from 'react-router-dom';
 import BackIcon from '@/assets/svg/BackIcon';
+import UserStatisticsSkeleton from '@/components/ui/Skeleton/UserStatisticsSkeleton';
 
 const UserStatisticPage = () => {
   const { getUserStatistics } = useQuiz();
@@ -16,9 +17,15 @@ const UserStatisticPage = () => {
   const { data, isLoading } = useQuery<UserStatistics | null>({
     queryKey: ['statistics'],
     queryFn: getUserStatistics,
+    
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div>
+        <UserStatisticsSkeleton />
+      </div>
+    );
 
   return (
     <div className='flex min-h-[calc(100vh-6rem)] flex-col items-center justify-center gap-5 overflow-auto'>
