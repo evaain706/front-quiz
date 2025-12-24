@@ -98,7 +98,9 @@ export const useQuiz = () => {
         },
       );
       addToast('success', '오답이 등록되었습니다.');
-      console.log(response.data);
+      queryClient.invalidateQueries({
+        queryKey: ['incorrectAnswer'],
+      });
     } catch (err) {
       addToast('error', '오답등록중 오류가 발생했습니다');
     }
