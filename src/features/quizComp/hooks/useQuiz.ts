@@ -86,17 +86,15 @@ export const useQuiz = () => {
   };
   const handleAddInCorrect = async () => {
     try {
-      const response = await privateInstance.post(
-        '/api/quiz/save-incorrect-answer',
-        {
-          userId: user?.id,
-          quiz: quiz,
-          selectedAnswer: userAnswer,
-          explanation: result?.explanation,
-          level: level,
-          topic: category,
-        },
-      );
+      await privateInstance.post('/api/quiz/save-incorrect-answer', {
+        userId: user?.id,
+        quiz,
+        selectedAnswer: userAnswer,
+        explanation: result?.explanation,
+        level,
+        topic: category,
+      });
+
       addToast('success', '오답이 등록되었습니다.');
       queryClient.invalidateQueries({
         queryKey: ['incorrectAnswer'],
