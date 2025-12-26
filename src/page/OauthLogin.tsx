@@ -1,4 +1,4 @@
-import Button from '@/components/Button';
+import KakaoImg from '@/assets/img/kakao-login.png';
 
 const OauthLogin = () => {
   const KAKAO_REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
@@ -11,9 +11,11 @@ const OauthLogin = () => {
 
   return (
     <div>
-      <Button className='w-50 font-bold md:w-60' onClick={handleKakaoLogin}>
-        로그인
-      </Button>
+      <img
+        src={KakaoImg}
+        className='w-60 cursor-pointer object-cover md:w-full'
+        onClick={handleKakaoLogin}
+      />
     </div>
   );
 };

@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import type { Post } from '@/types/communityTypes';
 import Button from '@/components/Button';
 import BackIcon from '@/assets/svg/BackIcon';
+import CommunityDetailSkeleton from '@/components/ui/Skeleton/CommunityDetailSkeleton';
 
 const CommunityDetail = () => {
   const { id } = useParams();
@@ -94,7 +95,7 @@ const CommunityDetail = () => {
     );
   };
 
-  if (isLoading) return <p>로딩중...</p>;
+  if (isLoading) return <CommunityDetailSkeleton />;
   if (!post) return <p>게시글을 찾을 수 없습니다.</p>;
 
   return (
