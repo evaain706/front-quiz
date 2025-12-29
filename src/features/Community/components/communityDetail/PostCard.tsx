@@ -2,6 +2,7 @@ import DotIcon from '@/assets/svg/DotIcon';
 import type { Post } from '@/types/communityTypes';
 import Dropdown from '@/components/ui/Dropdown';
 import { formatDate } from '@/utils/formatDate';
+import ReactMarkdown from 'react-markdown';
 
 const PostCard = ({
   post,
@@ -12,6 +13,8 @@ const PostCard = ({
   onDeleteClick: () => void;
   onEditClick: () => void;
 }) => {
+  const markdownContent = post.content;
+
   return (
     <div className='rounded-md bg-white shadow-xl ring-1 ring-slate-100'>
       <header className='border-b border-slate-100 px-6 py-6 sm:px-8'>
@@ -29,7 +32,7 @@ const PostCard = ({
 
       <div className='px-6 py-8 sm:px-8'>
         <p className='text-[1.8rem] leading-7 font-bold whitespace-pre-wrap text-slate-700'>
-          {post.content}
+          <ReactMarkdown>{markdownContent}</ReactMarkdown>
         </p>
 
         <div className='mt-8 flex justify-end border-t border-slate-100 pt-6'>

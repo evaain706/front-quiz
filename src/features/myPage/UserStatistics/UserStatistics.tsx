@@ -8,6 +8,7 @@ import Button from '@/components/Button';
 import { useNavigate } from 'react-router-dom';
 import BackIcon from '@/assets/svg/BackIcon';
 import UserStatisticsSkeleton from '@/components/ui/Skeleton/UserStatisticsSkeleton';
+import { useUserStore } from '@/store/useUserStore';
 
 const UserStatisticPage = () => {
   const { getUserStatistics } = useQuiz();
@@ -17,8 +18,9 @@ const UserStatisticPage = () => {
   const { data, isLoading } = useQuery<UserStatistics | null>({
     queryKey: ['statistics'],
     queryFn: getUserStatistics,
-    
   });
+
+  const user = useUserStore((s) => s.user);
 
   if (isLoading)
     return (
@@ -27,45 +29,77 @@ const UserStatisticPage = () => {
       </div>
     );
 
+  if (!data) {
+    return null;
+  }
+
+  const totalCorrect = data.totalStats.correct;
+  const totalIncorrect = data.totalStats.incorrect;
+  const totalCount = totalCorrect + totalIncorrect;
+
+  const accuracy =
+    totalCount === 0 ? 0 : Math.floor((totalCorrect / totalCount) * 100);
+
+  const isEmptyStats = totalCount === 0;
+  const isEmptyCategory = Object.keys(data.categoryStats).length === 0;
+  const isEmptyLevel = Object.keys(data.levelStats).length === 0;
+
   return (
     <div className='flex min-h-[calc(100vh-6rem)] flex-col items-center justify-center gap-5 overflow-auto'>
-      {data && (
-        <div className='w-screen bg-gray-900 p-10 text-white md:w-[70rem] lg:w-[100rem]'>
-          <div className='relative mb-6 flex flex-col items-center'>
-            <h1 className='text-[3rem] font-bold'>내 통계</h1>
+      <div className='w-screen bg-gray-900 p-10 text-white md:w-[70rem] lg:w-[100rem]'>
+        <div className='relative mb-6 flex flex-col items-center'>
+          <h1 className='text-[3rem] font-bold'>
+            <span className='text-gray-600'>{user?.nickname}</span> 님의 통계
+          </h1>
 
-            <Button
-              onClick={() => navigate(-1)}
-              className='mt-4 w-20 text-[1.4rem] md:absolute md:right-0 md:mt-0'
-            >
-              <BackIcon className='h-10 w-20' />
-            </Button>
-          </div>
-
-          <StatisticSection title='전체 정답/오답'>
-            <div className='flex items-center justify-center gap-4'>
-              <StatisticCard label='정답' value={data.totalStats.correct} />
-              <StatisticCard label='오답' value={data.totalStats.incorrect} />
-              <StatisticCard
-                label='정답률'
-                value={`${Math.floor(
-                  (data.totalStats.correct /
-                    (data.totalStats.correct + data.totalStats.incorrect)) *
-                    100,
-                )}%`}
-              />
-            </div>
-          </StatisticSection>
-
-          <StatisticSection title='카테고리별 통계'>
-            <StatisticGrid data={data.categoryStats} />
-          </StatisticSection>
-
-          <StatisticSection title='레벨별 통계'>
-            <StatisticGrid data={data.levelStats} />
-          </StatisticSection>
+          <Button
+            onClick={() => navigate(-1)}
+            className='mt-4 w-20 text-[1.4rem] md:absolute md:right-0 md:mt-0'
+          >
+            <BackIcon className='h-10 w-20' />
+          </Button>
         </div>
-      )}
+
+        <StatisticSection title='전체 정답/오답'>
+          {isEmptyStats ? (
+            <p className='py-10 text-center text-[1.6rem] text-gray-400'>
+              아직 퀴즈 기록이 없습니다
+            </p>
+          ) : (
+            <div className='flex items-center justify-center gap-4'>
+              <StatisticCard label='정답' value={totalCorrect} />
+              <StatisticCard label='오답' value={totalIncorrect} />
+              <StatisticCard label='정답률' value={`${accuracy}%`} />
+            </div>
+          )}
+        </StatisticSection>
+
+        <StatisticSection title='카테고리별 통계'>
+          {isEmptyCategory ? (
+            <p className='py-10 text-center text-[1.6rem] text-gray-400'>
+              아직 카테고리별 통계가 없어요
+            </p>
+          ) : (
+            <StatisticGrid data={data.categoryStats} />
+          )}
+        </StatisticSection>
+
+        <StatisticSection title='레벨별 통계'>
+          {isEmptyLevel ? (
+            <p className='py-10 text-center text-[1.6rem] text-gray-400'>
+              아직 레벨별 통계가 없어요
+            </p>
+          ) : (
+            <StatisticGrid data={data.levelStats} />
+          )}
+        </StatisticSection>
+
+        {isEmptyStats && (
+          <div className='mt-10 flex justify-center'>
+            <Button onClick={() => navigate('/select')}>퀴즈 풀러 가기</Button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

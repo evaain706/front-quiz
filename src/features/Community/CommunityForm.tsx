@@ -6,6 +6,7 @@ import Button from '@/components/Button';
 import { useLocation, useNavigate } from 'react-router-dom';
 import BackIcon from '@/assets/svg/BackIcon';
 import { useEffect } from 'react';
+import { changeIncorrectToQuestion } from '@/utils/changeIncorrectToQuestion';
 
 const CommunityForm = () => {
   const location = useLocation();
@@ -13,6 +14,8 @@ const CommunityForm = () => {
 
   const postToEdit = location.state?.post;
   const isEditMode = !!postToEdit;
+
+  const wrongQuiz = location.state?.fromWrongQuiz;
 
   const {
     register,
@@ -31,8 +34,20 @@ const CommunityForm = () => {
         category: postToEdit.category,
         nickname: postToEdit.nickname,
       });
+      return;
     }
-  }, [isEditMode, postToEdit, reset]);
+
+    if (wrongQuiz) {
+      const mapped = changeIncorrectToQuestion(wrongQuiz);
+
+      reset({
+        title: mapped.title ?? '',
+        content: mapped.content ?? '',
+        category: mapped.category ?? 'question',
+        nickname: '',
+      });
+    }
+  }, [isEditMode, postToEdit, wrongQuiz, reset]);
 
   const onSubmit = async (data: PostForm) => {
     if (isEditMode) {

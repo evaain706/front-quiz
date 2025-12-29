@@ -1,5 +1,8 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
+import defaultUserImg from '@/assets/img/default-profile-img.png';
+
+const DEFAULT_PROFILE_IMG = defaultUserImg;
 
 export type User = {
   id: number;
@@ -46,7 +49,15 @@ export const useUserStore = create<UserStore>()(
       (set) => ({
         user: null,
         hasHydrated: false,
-        setUser: (user: User | null) => set({ user }),
+        setUser: (user: User | null) =>
+          set({
+            user: user
+              ? {
+                  ...user,
+                  profileImage: user.profileImage ?? DEFAULT_PROFILE_IMG,
+                }
+              : null,
+          }),
         clearUser: () => set({ user: null }),
         setHasHydrated: (state: boolean) => set({ hasHydrated: state }),
         updateUser: (nickname) =>
@@ -55,12 +66,23 @@ export const useUserStore = create<UserStore>()(
           })),
         updateProfileImage: (profileImage) =>
           set((state) => ({
-            user: state.user ? { ...state.user, profileImage } : null,
+            user: state.user
+              ? {
+                  ...state.user,
+                  profileImage: profileImage || DEFAULT_PROFILE_IMG,
+                }
+              : null,
           })),
       }),
       {
         name: 'user-storage',
         onRehydrateStorage: () => (state) => {
+          if (state?.user && !state.user.profileImage) {
+            state.setUser({
+              ...state.user,
+              profileImage: DEFAULT_PROFILE_IMG,
+            });
+          }
           state?.setHasHydrated(true);
         },
       },

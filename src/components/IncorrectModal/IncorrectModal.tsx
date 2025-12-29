@@ -2,6 +2,7 @@ import type { IncorrectQuiz } from '@/types/quizTypes';
 import Button from '../Button';
 import Modal from '../Modal';
 import ReactMarkdown from 'react-markdown';
+import { useNavigate } from 'react-router-dom';
 
 interface AnswerHistoryCardProps {
   data: IncorrectQuiz;
@@ -15,6 +16,8 @@ const IncorrectModal = ({
   setIsopen,
 }: AnswerHistoryCardProps) => {
   const markdownContent = data.question;
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -63,6 +66,17 @@ const IncorrectModal = ({
           </Modal.Item>
           <Modal.Footer>
             <Button onClick={() => setIsopen(false)}>닫기</Button>
+            <Button
+              onClick={() => {
+                navigate('/community/create', {
+                  state: {
+                    fromWrongQuiz: data,
+                  },
+                });
+              }}
+            >
+              질문으로 올리기 ✍️
+            </Button>
           </Modal.Footer>
         </Modal.Content>
       </Modal>
