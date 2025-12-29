@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useUserStore } from '@/store/useUserStore';
 import { instance } from '@/apis/instance';
+import KakaoLoading from '@/components/KakaoLoading';
 
 const KakaoCallback = () => {
   const location = useLocation();
@@ -11,7 +12,6 @@ const KakaoCallback = () => {
 
   useEffect(() => {
     const code = new URLSearchParams(location.search).get('code');
-
     if (!code || calledRef.current) return;
 
     calledRef.current = true;
@@ -34,6 +34,8 @@ const KakaoCallback = () => {
 
     sendCodeToBackend();
   }, []);
+
+  return <KakaoLoading />;
 };
 
 export default KakaoCallback;

@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { useQuiz } from '@/features/quizComp/hooks/useQuiz';
 import type { IncorrectQuiz } from '@/types/quizTypes';
 import AnswerHistoryCard from './AnswerHistoryCard';
@@ -43,7 +43,7 @@ const IncorrectAnswerPage = () => {
     getNextPageParam: (lastPage) => lastPage.nextCursor,
     staleTime: 5 * 60 * 1000,
   });
-  
+
   const handleOpenModal = (quiz: IncorrectQuiz) => {
     setSelectedQuiz(quiz);
     setOpen(true);
