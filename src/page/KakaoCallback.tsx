@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useUserStore } from '@/store/useUserStore';
-import { instance } from '@/apis/instance';
+import { kakaoAuthInstance } from '@/apis/kakaoAuthInstance';
 import KakaoLoading from '@/components/KakaoLoading';
 
 const KakaoCallback = () => {
@@ -18,7 +18,7 @@ const KakaoCallback = () => {
 
     const sendCodeToBackend = async () => {
       try {
-        const response = await instance.post(
+        const response = await kakaoAuthInstance.post(
           '/api/auth/kakao',
           { code },
           { withCredentials: true },
