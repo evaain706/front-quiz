@@ -55,6 +55,11 @@ instance.interceptors.response.use(
       return Promise.reject(new Error(getErrorMessage(err)));
     }
 
+    if (config.url.includes('/api/auth/kakao')) {
+      retryCounts.delete(config.url);
+      return Promise.reject(new Error(getErrorMessage(err)));
+    }
+
     const currentRetry = retryCounts.get(config.url) || 0;
 
     if (
