@@ -126,21 +126,29 @@ export const useQuiz = () => {
     },
   });
 
-  const getIncorrectAnswers = async (category?: string, level?: string) => {
-    try {
-      const query = new URLSearchParams();
+  const getIncorrectAnswers = async ({
+    category,
+    level,
+    cursor,
+    limit = 10,
+  }: {
+    category?: string;
+    level?: string;
+    cursor?: string | null;
+    limit?: number;
+  }) => {
+    const query = new URLSearchParams();
 
-      if (category) query.append('category', category);
-      if (level) query.append('level', level);
+    if (category) query.append('category', category);
+    if (level) query.append('level', level);
+    if (cursor) query.append('cursor', cursor);
+    query.append('limit', limit.toString());
 
-      const response = await privateInstance.get(
-        `/api/mypage/incorrect-answers?${query.toString()}`,
-      );
+    const response = await privateInstance.get(
+      `/api/mypage/incorrect-answers?${query.toString()}`,
+    );
 
-      return response.data;
-    } catch (err) {
-      console.log(err);
-    }
+    return response.data;
   };
 
   const getUserStatistics = async () => {

@@ -19,7 +19,7 @@ const QuizScreen = () => {
   }, []);
 
   return (
-    <div className='mx-3 mt-7 flex flex-col gap-3'>
+    <div className='mt-7 flex flex-col gap-3'>
       <div className='flex flex-col items-center justify-center'>
         <h2 className='text-[3rem] font-bold text-white md:text-[5rem]'>
           {category}
@@ -48,7 +48,7 @@ const QuizScreen = () => {
 
       <div className='flex w-full items-center justify-between'>
         <Button
-          className='bg-white/30 text-white'
+          className='w-50 bg-white/30 text-white hover:text-black'
           onClick={fetchQuiz}
           disabled={isLoading || isGrading}
           isLoading={isGrading || isLoading}
@@ -56,7 +56,7 @@ const QuizScreen = () => {
           문제받기
         </Button>
         <Button
-          className='bg-white/20 text-white'
+          className='w-50 bg-white/20 text-white hover:text-black'
           onClick={handleSubmit}
           disabled={isGrading || isLoading}
           isLoading={isGrading || isLoading}

@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { useQuiz } from '@/features/quizComp/hooks/useQuiz';
 import type { IncorrectQuiz } from '@/types/quizTypes';
 import AnswerHistoryCard from './AnswerHistoryCard';
@@ -8,6 +8,7 @@ import { categorylist } from '@/constants/categoryList';
 import Button from '@/components/Button';
 import { useUserStore } from '@/store/useUserStore';
 import IncorrectAnswerSkeleton from '@/components/ui/Skeleton/IncorrectAnswerSkeleton';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 
 const IncorrectAnswerPage = () => {
   const { getIncorrectAnswers } = useQuiz();
@@ -17,12 +18,32 @@ const IncorrectAnswerPage = () => {
   const [selectedQuiz, setSelectedQuiz] = useState<IncorrectQuiz | null>(null);
   const user = useUserStore((s) => s.user);
 
-  const { isPending, error, data } = useQuery<IncorrectQuiz[]>({
+  interface IncorrectAnswerResponse {
+    items: IncorrectQuiz[];
+    nextCursor: string | null;
+    hasNextPage: boolean;
+  }
+
+  const {
+    data,
+    isPending,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery<IncorrectAnswerResponse>({
     queryKey: ['incorrectAnswer', category, level],
-    queryFn: () => getIncorrectAnswers(category, level),
+    queryFn: ({ pageParam }) =>
+      getIncorrectAnswers({
+        category,
+        level,
+        cursor: pageParam as string | null,
+      }),
+    initialPageParam: null,
+    getNextPageParam: (lastPage) => lastPage.nextCursor,
     staleTime: 5 * 60 * 1000,
   });
-
+  
   const handleOpenModal = (quiz: IncorrectQuiz) => {
     setSelectedQuiz(quiz);
     setOpen(true);
@@ -34,6 +55,14 @@ const IncorrectAnswerPage = () => {
   };
 
   if (error) return <>에러발생: {error.message}</>;
+
+  const incorrectAnswers = data?.pages.flatMap((page) => page.items) ?? [];
+
+  const targetRef = useInfiniteScroll({
+    loading: isFetchingNextPage,
+    hasNextPage: !!hasNextPage,
+    onLoadMore: fetchNextPage,
+  });
 
   return (
     <div className='mt-10 flex min-h-[calc(100vh-10rem)] w-full flex-col justify-center'>
@@ -49,9 +78,7 @@ const IncorrectAnswerPage = () => {
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
-            <option value='' disabled selected>
-              카테고리를 선택하세요
-            </option>
+            <option value=''>카테고리를 선택하세요</option>
 
             {categorylist.map((item) => (
               <option key={item.id} value={item.text}>
@@ -89,17 +116,22 @@ const IncorrectAnswerPage = () => {
 
       <div className='relative mt-4 flex h-[40rem] flex-col gap-4 overflow-auto p-10 md:h-[60rem] lg:h-[70rem]'>
         {isPending && <IncorrectAnswerSkeleton />}
-        {!isPending && !data?.length && (
+
+        {!isPending && incorrectAnswers.length === 0 && (
           <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 py-10 text-center text-[1.6rem] font-bold text-white md:text-[2rem]'>
             저장된 문제가 없습니다
           </div>
         )}
-        {!isPending &&
-          data?.map((item) => (
-            <div key={item.id} onClick={() => handleOpenModal(item)}>
-              <AnswerHistoryCard data={item} />
-            </div>
-          ))}
+
+        {incorrectAnswers.map((item) => (
+          <div key={item.id} onClick={() => handleOpenModal(item)}>
+            <AnswerHistoryCard data={item} />
+          </div>
+        ))}
+
+        <div ref={targetRef} />
+
+        {isFetchingNextPage && <IncorrectAnswerSkeleton />}
 
         {selectedQuiz && (
           <IncorrectModal
