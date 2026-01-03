@@ -30,7 +30,7 @@ const IncorrectAnswerPage = () => {
   const {
     data,
     isPending,
-    error,
+
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
