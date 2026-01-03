@@ -13,6 +13,7 @@ import type { Post } from '@/types/communityTypes';
 import Button from '@/components/Button';
 import BackIcon from '@/assets/svg/BackIcon';
 import CommunityDetailSkeleton from '@/components/ui/Skeleton/CommunityDetailSkeleton';
+import ErrorComp from '@/components/ui/ErrorComp';
 
 const CommunityDetail = () => {
   const { id } = useParams();
@@ -96,7 +97,15 @@ const CommunityDetail = () => {
   };
 
   if (isLoading) return <CommunityDetailSkeleton />;
-  if (!post) return <p>게시글을 찾을 수 없습니다.</p>;
+  if (!post)
+    return (
+      <div className='mt-5 flex min-h-[calc(100vh-6rem)] items-center justify-center'>
+        <ErrorComp
+          PageName='게시글불러오기중 에러'
+          message='게시글상세정보를 불러오지못했습니다'
+        />
+      </div>
+    );
 
   return (
     <div className='mt-5 flex min-h-[calc(100vh-6rem)] items-center justify-center'>

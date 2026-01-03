@@ -9,6 +9,9 @@ import Button from '@/components/Button';
 import { useUserStore } from '@/store/useUserStore';
 import IncorrectAnswerSkeleton from '@/components/ui/Skeleton/IncorrectAnswerSkeleton';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
+import BackIcon from '@/assets/svg/BackIcon';
+import { useNavigate } from 'react-router-dom';
+import ErrorComp from '@/components/ui/ErrorComp';
 
 const IncorrectAnswerPage = () => {
   const { getIncorrectAnswers } = useQuiz();
@@ -31,6 +34,7 @@ const IncorrectAnswerPage = () => {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
+    isError,
   } = useInfiniteQuery<IncorrectAnswerResponse>({
     queryKey: ['incorrectAnswer', category, level],
     queryFn: ({ pageParam }) =>
@@ -54,8 +58,6 @@ const IncorrectAnswerPage = () => {
     setSelectedQuiz(null);
   };
 
-  if (error) return <>에러발생: {error.message}</>;
-
   const incorrectAnswers = data?.pages.flatMap((page) => page.items) ?? [];
 
   const targetRef = useInfiniteScroll({
@@ -64,11 +66,27 @@ const IncorrectAnswerPage = () => {
     onLoadMore: fetchNextPage,
   });
 
+  const navigate = useNavigate();
+
+  if (isError) {
+    return (
+      <div className='flex min-h-[calc(100vh-6rem)] flex-col items-center justify-center gap-5 overflow-auto'>
+        <ErrorComp
+          PageName='오답문제페이지 에러'
+          message='저장된 오답문제를 불러오는데 실패했습니다'
+        />
+      </div>
+    );
+  }
+
   return (
     <div className='mt-10 flex min-h-[calc(100vh-10rem)] w-full flex-col justify-center'>
       <div className='mb-5 flex items-center justify-center'>
-        <h2 className='text-[1.8rem] font-bold text-white md:text-[4rem]'>
+        <h2 className='flex items-center gap-2 text-[1.8rem] font-bold text-white md:text-[4rem]'>
           <span className='text-gray-600'>{user?.nickname}</span>님의 오답문제
+          <Button className='w-20' onClick={() => navigate(-1)}>
+            <BackIcon />
+          </Button>
         </h2>
       </div>
       <div className='flex flex-col items-center gap-4 px-10 md:flex-row md:justify-between'>

@@ -9,13 +9,14 @@ import { useNavigate } from 'react-router-dom';
 import BackIcon from '@/assets/svg/BackIcon';
 import UserStatisticsSkeleton from '@/components/ui/Skeleton/UserStatisticsSkeleton';
 import { useUserStore } from '@/store/useUserStore';
+import ErrorComp from '@/components/ui/ErrorComp';
 
 const UserStatisticPage = () => {
   const { getUserStatistics } = useQuiz();
 
   const navigate = useNavigate();
 
-  const { data, isLoading } = useQuery<UserStatistics | null>({
+  const { data, isLoading, error } = useQuery<UserStatistics | null>({
     queryKey: ['statistics'],
     queryFn: getUserStatistics,
   });
@@ -29,8 +30,15 @@ const UserStatisticPage = () => {
       </div>
     );
 
-  if (!data) {
-    return null;
+  if (error || !data) {
+    return (
+      <div className='flex min-h-[calc(100vh-6rem)] flex-col items-center justify-center gap-5 overflow-auto'>
+        <ErrorComp
+          PageName='유저통계페이지 에러'
+          message='유저통계데이터를 불러오는데 실패했습니다'
+        />
+      </div>
+    );
   }
 
   const totalCorrect = data.totalStats.correct;

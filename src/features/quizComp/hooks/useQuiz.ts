@@ -67,6 +67,7 @@ export const useQuiz = () => {
       }
     } catch (error) {
       console.error('채점 실패:', error);
+      addToast('error', '채점중 에러(다시시도해주세요)');
     } finally {
       setIsGrading(false);
     }

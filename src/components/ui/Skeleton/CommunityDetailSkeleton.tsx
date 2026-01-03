@@ -2,13 +2,12 @@ const CommunityDetailSkeleton = () => {
   return (
     <div className='mt-5 flex min-h-[calc(100vh-6rem)] animate-pulse items-center justify-center'>
       <div className='relative mx-auto w-full bg-white'>
-        {/* PostCard Skeleton */}
         <div className='rounded-md bg-white shadow-xl ring-1 ring-slate-100'>
           <header className='border-b border-slate-100 px-6 py-6 sm:px-8'>
             <div className='h-8 w-3/4 rounded bg-gray-300'></div>
             <div className='mt-4 flex items-center gap-4'>
+              <div className='h-6 w-10 rounded bg-gray-300'></div>
               <div className='h-6 w-1/4 rounded bg-gray-300'></div>
-              <div className='h-6 w-1/3 rounded bg-gray-300'></div>
             </div>
           </header>
           <div className='px-6 py-8 sm:px-8'>
@@ -23,7 +22,6 @@ const CommunityDetailSkeleton = () => {
           </div>
         </div>
 
-        {/* CommentList Skeleton */}
         <section className='mt-10'>
           <h2 className='mb-6 pl-5 text-[1.6rem] font-bold text-slate-900'>
             <div className='h-7 w-24 rounded bg-gray-300'></div>
@@ -47,7 +45,6 @@ const CommunityDetailSkeleton = () => {
           <div className='my-8 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent' />
         </section>
 
-        {/* CommentForm Skeleton */}
         <div className='p-6 shadow-sm ring-1 ring-slate-100'>
           <h3 className='mb-5 text-[1.6rem] font-bold'>
             <div className='h-7 w-32 rounded bg-gray-300'></div>

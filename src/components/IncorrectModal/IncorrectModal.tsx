@@ -75,7 +75,7 @@ const IncorrectModal = ({
                 });
               }}
             >
-              질문으로 올리기 ✍️
+              질문으로 올리기
             </Button>
           </Modal.Footer>
         </Modal.Content>

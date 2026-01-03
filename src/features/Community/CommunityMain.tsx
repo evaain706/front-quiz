@@ -10,6 +10,7 @@ import Button from '@/components/Button';
 import Input from '@/components/Input';
 import { useDebounce } from '@/hooks/useDebounce';
 import CommunityPageSkeleton from '@/components/ui/Skeleton/CommunityPostListSkeleton';
+import ErrorComp from '@/components/ui/ErrorComp';
 
 const CommunityMain = () => {
   const navigate = useNavigate();
@@ -26,7 +27,13 @@ const CommunityMain = () => {
   });
 
   if (isPending) return <CommunityPageSkeleton />;
-  if (error) return <>에러발생: {error.message}</>;
+  if (error)
+    return (
+      <ErrorComp
+        PageName='커뮤니티페이지에러'
+        message='데이터를 불러오는중 에러가 발생하였습니다'
+      />
+    );
 
   const categories = [
     { label: '전체', value: null },

@@ -16,7 +16,7 @@ const ImageUpload = ({ initialSrc }: ImageUploadProps) => {
 
   const { updateProfileImage } = useUserStore();
 
-  const { uploadImage } = useUploadImage();
+  const { uploadImage, loading } = useUploadImage();
 
   const handleClick = () => {
     InputRef.current?.click();
@@ -49,7 +49,12 @@ const ImageUpload = ({ initialSrc }: ImageUploadProps) => {
 
   return (
     <div className='relative flex cursor-pointer flex-col items-center'>
-      <ProfileImage src={preview} size='lg' onClick={handleClick} />
+      <ProfileImage
+        src={preview}
+        size='lg'
+        onClick={handleClick}
+        isloading={loading}
+      />
 
       <input
         type='file'
