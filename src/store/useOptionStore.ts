@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { devtools, persist } from 'zustand/middleware';
 
 interface OptionState {
   category: string;
@@ -9,15 +10,22 @@ interface OptionState {
   resetLevel: () => void;
 }
 
-export const useOptionStore = create<OptionState>((set) => ({
-  category: '',
-  level: '',
+export const useOptionStore = create<OptionState>()(
+  devtools(
+    persist(
+      (set) => ({
+        category: '',
+        level: '',
 
-  setCategory: (category) => set({ category: category }),
+        setCategory: (category) => set({ category }),
+        setLevel: (level) => set({ level }),
 
-  setLevel: (level) => set({ level: level }),
-
-  resetCategory: () => set({ category: '' }),
-
-  resetLevel: () => set({ level: '' }),
-}));
+        resetCategory: () => set({ category: '' }),
+        resetLevel: () => set({ level: '' }),
+      }),
+      {
+        name: 'option-store',
+      },
+    ),
+  ),
+);

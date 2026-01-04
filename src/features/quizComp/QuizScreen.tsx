@@ -13,6 +13,8 @@ const QuizScreen = () => {
   const quiz = useQuizStore((s) => s.quiz);
   const isGrading = useQuizStore((s) => s.isGrading);
   const category = useOptionStore((s) => s.category);
+  const userAnswer = useQuizStore((s) => s.userAnswer);
+  const result = useQuizStore((s) => s.result);
 
   useEffect(() => {
     fetchQuiz();
@@ -55,14 +57,16 @@ const QuizScreen = () => {
         >
           문제받기
         </Button>
-        <Button
-          className='w-50 bg-white/20 text-white hover:text-black'
-          onClick={handleSubmit}
-          disabled={isGrading || isLoading}
-          isLoading={isGrading || isLoading}
-        >
-          채점
-        </Button>
+        {userAnswer && !result && (
+          <Button
+            className='w-50 bg-white/20 text-white hover:text-black'
+            onClick={handleSubmit}
+            disabled={isGrading}
+            isLoading={isGrading}
+          >
+            채점
+          </Button>
+        )}
       </div>
     </div>
   );
