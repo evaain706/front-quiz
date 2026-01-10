@@ -5,6 +5,7 @@ export interface UserStatistics {
   };
   categoryStats: Record<string, StatDetail>;
   levelStats: Record<string, StatDetail>;
+  content?: string;
 }
 
 export interface StatDetail {

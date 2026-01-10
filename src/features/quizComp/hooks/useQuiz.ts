@@ -64,6 +64,9 @@ export const useQuiz = () => {
       setResult(response.data);
       if (user) {
         handleAddStatistics(response.data.isCorrect);
+        queryClient.invalidateQueries({
+          queryKey: ['statistics'],
+        });
       }
     } catch (error) {
       console.error('채점 실패:', error);

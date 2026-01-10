@@ -96,7 +96,7 @@ const IncorrectAnswerPage = () => {
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
-            <option value=''>카테고리를 선택하세요</option>
+            <option value=''>전체 카테고리</option>
 
             {categorylist.map((item) => (
               <option key={item.id} value={item.text}>
@@ -110,8 +110,8 @@ const IncorrectAnswerPage = () => {
             value={level}
             onChange={(e) => setLevel(e.target.value)}
           >
-            <option value='' disabled selected>
-              난이도 선택
+            <option value='' selected>
+              전체 난이도
             </option>
 
             <option value='쉬움'>쉬움</option>

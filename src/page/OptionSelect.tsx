@@ -72,27 +72,27 @@ const OptionSelect = () => {
           <h2 className='mb-2 text-2xl font-bold text-white md:text-3xl'>
             주제: {category}
           </h2>
-          <h3 className='mb-8 text-xl text-white md:text-2xl'>
+          <h2 className='mb-8 text-2xl font-bold text-white md:text-[4rem]'>
             난이도를 선택해주세요
-          </h3>
+          </h2>
           <div className='flex flex-col justify-center gap-4 md:flex-row'>
             <Button
               size='md'
-              className='bg-amber-100 py-20 font-bold text-black'
+              className='bg-amber-100 py-20 text-[2rem] font-bold text-black'
               onClick={() => handleLevelSelect('쉬움')}
             >
               쉬움
             </Button>
             <Button
               size='md'
-              className='bg-green-200 font-bold text-black'
+              className='bg-green-200 py-20 text-[2rem] font-bold text-black'
               onClick={() => handleLevelSelect('보통')}
             >
               보통
             </Button>
             <Button
               size='md'
-              className='bg-red-400 font-bold text-black'
+              className='bg-red-400 py-20 text-[2rem] font-bold text-black'
               onClick={() => handleLevelSelect('어려움')}
             >
               어려움

@@ -15,7 +15,7 @@ const QuestionCard = ({ error, isLoading, quiz }: QuestionCardProps) => {
 
   if (isLoading) {
     return (
-      <div className='bg-navy-black flex min-h-[15rem] w-full items-center justify-center rounded-md border-[5px] border-gray-500 p-6 md:w-[70rem] lg:w-[90rem]'>
+      <div className='bg-navy-black flex min-h-[15rem] w-full min-w-[34rem] items-center justify-center rounded-md border-[5px] border-gray-500 p-6 md:w-[70rem] lg:w-[90rem]'>
         <div className='animate-spinner h-12 w-12 rounded-full border-4 border-green-400 border-t-transparent' />
       </div>
     );

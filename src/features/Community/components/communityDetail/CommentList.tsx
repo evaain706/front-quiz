@@ -10,7 +10,7 @@ const CommentList = ({
   onClickDelete: (id: string) => void;
 }) => {
   return (
-    <section className='mt-10'>
+    <section className='mt-10 bg-white py-5'>
       <h2 className='mb-6 pl-5 text-[1.6rem] font-bold text-slate-900'>
         댓글 <span className='text-blue-600'>{comments.length}</span>
       </h2>

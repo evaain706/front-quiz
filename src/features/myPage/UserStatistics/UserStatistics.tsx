@@ -19,6 +19,7 @@ const UserStatisticPage = () => {
   const { data, isLoading, error } = useQuery<UserStatistics | null>({
     queryKey: ['statistics'],
     queryFn: getUserStatistics,
+    staleTime: 30 * 60 * 1000,
   });
 
   const user = useUserStore((s) => s.user);
@@ -58,6 +59,7 @@ const UserStatisticPage = () => {
         <div className='relative mb-6 flex flex-col items-center'>
           <h1 className='text-[3rem] font-bold'>
             <span className='text-gray-600'>{user?.nickname}</span> 님의 통계
+            <p>{data.content}</p>
           </h1>
 
           <Button

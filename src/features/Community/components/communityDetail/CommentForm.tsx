@@ -25,7 +25,7 @@ const CommentForm = ({
   };
 
   return (
-    <div className='p-6 shadow-sm ring-slate-100'>
+    <div className='bg-white p-6 shadow-sm ring-slate-100'>
       <h3 className='mb-5 text-[1.6rem] font-bold'>댓글 작성</h3>
 
       <div className='space-y-4'>

@@ -109,7 +109,7 @@ const CommunityDetail = () => {
 
   return (
     <div className='mt-5 flex min-h-[calc(100vh-6rem)] items-center justify-center'>
-      <div className='relative mx-auto w-full bg-white'>
+      <div className='relative mx-auto w-full'>
         <PostCard
           post={post}
           onDeleteClick={() => setDeleteModalOpen(true)}
@@ -117,7 +117,7 @@ const CommunityDetail = () => {
         />
         <Button
           onClick={() => navigate(-1)}
-          className='absolute top-0 right-5 mt-4 w-15'
+          className='absolute top-0 right-5 mt-17 w-15 md:mt-5'
         >
           <BackIcon />
         </Button>
