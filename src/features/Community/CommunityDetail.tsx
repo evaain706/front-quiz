@@ -14,6 +14,8 @@ import Button from '@/components/Button';
 import BackIcon from '@/assets/svg/BackIcon';
 import CommunityDetailSkeleton from '@/components/ui/Skeleton/CommunityDetailSkeleton';
 import ErrorComp from '@/components/ui/ErrorComp';
+import Dropdown from '@/components/ui/Dropdown';
+import DotIcon from '@/assets/svg/DotIcon';
 
 const CommunityDetail = () => {
   const { id } = useParams();
@@ -108,19 +110,33 @@ const CommunityDetail = () => {
     );
 
   return (
-    <div className='mt-5 flex min-h-[calc(100vh-6rem)] items-center justify-center'>
+    <div className='mt-[3rem] flex h-full items-center justify-center md:mt-[10rem]'>
       <div className='relative mx-auto w-full'>
-        <PostCard
-          post={post}
-          onDeleteClick={() => setDeleteModalOpen(true)}
-          onEditClick={() => setEditModalOpen(true)}
-        />
-        <Button
-          onClick={() => navigate(-1)}
-          className='absolute top-0 right-5 mt-17 w-15 md:mt-5'
-        >
-          <BackIcon />
-        </Button>
+        <PostCard post={post} />
+        <div className='mt-5 flex w-full items-center justify-end'>
+          <div className='relative text-white'>
+            <Dropdown>
+              <Dropdown.Trigger>
+                <DotIcon />
+              </Dropdown.Trigger>
+              <Dropdown.Content>
+                <Dropdown.Item onClick={() => handleDeletePost}>
+                  게시글 삭제
+                </Dropdown.Item>
+
+                <Dropdown.Item onClick={() => handleEditPost}>
+                  게시글 수정
+                </Dropdown.Item>
+              </Dropdown.Content>
+            </Dropdown>
+          </div>
+          <Button
+            onClick={() => navigate(-1)}
+            className='absolute top-0 right-5 mt-17 w-15 md:mt-5'
+          >
+            <BackIcon />
+          </Button>
+        </div>
 
         {isDeleteModalOpen && (
           <DeleteModal
@@ -144,14 +160,23 @@ const CommunityDetail = () => {
           />
         )}
 
-        <CommentList
-          comments={post.comments}
-          onClickDelete={(commentId) => {
-            setDeleteCommentId(commentId);
-            setCommentModalOpen(true);
-            setCommentDeleteError('');
-          }}
-        />
+        <div>
+          <CommentList
+            comments={post.comments}
+            onClickDelete={(commentId) => {
+              setDeleteCommentId(commentId);
+              setCommentModalOpen(true);
+              setCommentDeleteError('');
+            }}
+            isLoading={handleDeleteCommentMutate.isPending}
+          />
+
+          <CommentForm
+            postId={id!}
+            mutate={handleAddCommentMutate}
+            isLoading={handleAddCommentMutate.isPending}
+          />
+        </div>
 
         {commentModalOpen && (
           <DeleteModal
@@ -163,12 +188,6 @@ const CommunityDetail = () => {
             errorMessage={commentDeleteError}
           />
         )}
-
-        <CommentForm
-          postId={id!}
-          mutate={handleAddCommentMutate}
-          isLoading={handleAddCommentMutate.isPending}
-        />
       </div>
     </div>
   );

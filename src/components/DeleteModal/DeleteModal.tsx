@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Button from '../Button';
 import Input from '../Input';
 import Modal from '../Modal';
+import { cn } from '@/utils/cn';
 
 interface DeleteModalProps {
   isOpen: boolean;
@@ -56,7 +57,10 @@ const DeleteModal = ({
 
           <div className='mt-4 flex justify-center gap-2'>
             <Button
-              className='border-none bg-red-400 text-white hover:bg-red-300'
+              className={cn(
+                'border-none text-white hover:bg-red-300',
+                title.includes('삭제') ? 'bg-red-400' : 'bg-green-400',
+              )}
               onClick={handleDeleteClick}
               disabled={isLoading}
             >

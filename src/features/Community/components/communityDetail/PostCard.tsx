@@ -1,18 +1,9 @@
-import DotIcon from '@/assets/svg/DotIcon';
 import type { Post } from '@/types/communityTypes';
-import Dropdown from '@/components/ui/Dropdown';
+
 import { formatDate } from '@/utils/formatDate';
 import ReactMarkdown from 'react-markdown';
 
-const PostCard = ({
-  post,
-  onDeleteClick,
-  onEditClick,
-}: {
-  post: Post;
-  onDeleteClick: () => void;
-  onEditClick: () => void;
-}) => {
+const PostCard = ({ post }: { post: Post }) => {
   const markdownContent = post.content;
 
   return (
@@ -30,25 +21,10 @@ const PostCard = ({
         </div>
       </header>
 
-      <div className='rounded-md bg-white/20 px-6 py-8 sm:px-8'>
-        <p className='text-[1.8rem] leading-7 font-bold whitespace-pre-wrap text-white'>
+      <div className='max-h-[45rem] overflow-y-scroll rounded-md bg-white/20 px-6 py-8 sm:px-8'>
+        <p className='text-[1.4rem] leading-8 font-bold whitespace-pre-wrap text-white md:text-[1.8rem]'>
           <ReactMarkdown>{markdownContent}</ReactMarkdown>
         </p>
-
-        <div className='mt-8 flex justify-end border-t border-slate-100 pt-6'>
-          <div className='relative text-white'>
-            <Dropdown>
-              <Dropdown.Trigger>
-                <DotIcon />
-              </Dropdown.Trigger>
-              <Dropdown.Content>
-                <Dropdown.Item onClick={onDeleteClick}>삭제</Dropdown.Item>
-
-                <Dropdown.Item onClick={onEditClick}>수정</Dropdown.Item>
-              </Dropdown.Content>
-            </Dropdown>
-          </div>
-        </div>
       </div>
     </div>
   );

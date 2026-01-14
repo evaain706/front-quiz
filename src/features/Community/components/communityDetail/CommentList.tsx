@@ -1,13 +1,16 @@
 import DeleteIcon from '@/assets/svg/DeleteIcon';
+import Spinner from '@/components/ui/Spinner';
 
 import type { Comment } from '@/types/communityTypes';
 
 const CommentList = ({
   comments,
   onClickDelete,
+  isLoading,
 }: {
   comments: Comment[];
   onClickDelete: (id: string) => void;
+  isLoading: boolean;
 }) => {
   return (
     <section className='mt-10 bg-white py-5'>
@@ -30,12 +33,18 @@ const CommentList = ({
                   </p>
                 </div>
 
-                <div
-                  onClick={() => onClickDelete(c._id)}
-                  className='w-12 rounded-lg bg-red-50 px-4 py-2 text-[1.6rem] text-red-600'
-                >
-                  <DeleteIcon />
-                </div>
+                {isLoading ? (
+                  <div>
+                    <Spinner className='h-10 w-10' />
+                  </div>
+                ) : (
+                  <div
+                    onClick={() => onClickDelete(c._id)}
+                    className='w-12 cursor-pointer rounded-lg bg-red-50 px-4 py-2 text-[1.6rem] text-red-600'
+                  >
+                    <DeleteIcon />
+                  </div>
+                )}
               </div>
             </div>
           ))

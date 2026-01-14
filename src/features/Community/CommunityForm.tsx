@@ -30,24 +30,31 @@ const CommunityForm = () => {
     if (isEditMode && postToEdit) {
       reset({
         title: postToEdit.title,
+
         content: postToEdit.content,
+
         category: postToEdit.category,
+
         nickname: postToEdit.nickname,
       });
-      return;
     }
+  }, [isEditMode, postToEdit, reset]);
 
+  useEffect(() => {
     if (wrongQuiz) {
       const mapped = changeIncorrectToQuestion(wrongQuiz);
 
       reset({
         title: mapped.title ?? '',
+
         content: mapped.content ?? '',
+
         category: mapped.category ?? 'question',
+
         nickname: '',
       });
     }
-  }, [isEditMode, postToEdit, wrongQuiz, reset]);
+  }, [wrongQuiz, reset]);
 
   const onSubmit = async (data: PostForm) => {
     if (isEditMode) {

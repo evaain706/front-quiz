@@ -4,6 +4,7 @@ import { useUserStore } from '@/store/useUserStore';
 import { useQuiz } from './hooks/useQuiz';
 import ResultDisplay from './ResultDisplay';
 import React from 'react';
+import { getOptionsCardStyle } from '@/utils/getOptionsCardStyle';
 
 const OptionsCard = () => {
   const quiz = useQuizStore((s) => s.quiz);
@@ -43,27 +44,11 @@ const OptionsCard = () => {
             const isCorrectAnswer = key === quiz.answer;
             const isSelectedAnswer = key === userAnswer;
 
-            let optionStyles = '';
-
-            if (isSubmitted) {
-              if (isCorrectAnswer) {
-                optionStyles =
-                  'border-emerald-400 bg-emerald-600 ring-2 ring-emerald-400/20';
-              } else if (isSelectedAnswer) {
-                optionStyles =
-                  'border-rose-400 bg-rose-600 ring-2 ring-rose-400/20';
-              } else {
-                optionStyles = 'border-gray-100 bg-gray-50/50 opacity-60';
-              }
-            } else {
-              if (isSelectedAnswer) {
-                optionStyles =
-                  'border-blue-400 bg-blue-50 ring-2 bg-white/60 ring-blue-400/20  ';
-              } else {
-                optionStyles =
-                  'border-gray-200 bg-white/20 hover:border-blue-300 hover:bg-blue-50/30 hover:shadow-md';
-              }
-            }
+            const optionStyles = getOptionsCardStyle({
+              isSubmitted,
+              isCorrect: isCorrectAnswer,
+              isSelected: isSelectedAnswer,
+            });
 
             return (
               <label
