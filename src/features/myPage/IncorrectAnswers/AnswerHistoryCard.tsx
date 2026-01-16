@@ -2,17 +2,17 @@ import DeleteIcon from '@/assets/svg/DeleteIcon';
 
 import type { IncorrectQuiz } from '@/types/quizTypes';
 import { cn } from '@/utils/cn';
-import { useQuiz } from '@/features/quizComp/hooks/useQuiz';
 import Spinner from '@/components/ui/Spinner';
 import { getTopicColor } from '@/utils/getHistoryOptionStyles';
 import { getLevelColor } from '@/utils/getHistoryOptionStyles';
+import { useIncorrectAnswers } from '../hooks/useIncorrectAnswers';
 
 interface AnswerHistoryCardProps {
   data: IncorrectQuiz;
 }
 
 const AnswerHistoryCard = ({ data }: AnswerHistoryCardProps) => {
-  const { handleDeleteIncorrect } = useQuiz();
+  const { handleDeleteIncorrect } = useIncorrectAnswers();
 
   const handleDelete = (e: React.MouseEvent) => {
     e.stopPropagation();

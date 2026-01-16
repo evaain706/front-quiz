@@ -1,5 +1,4 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { useQuiz } from '@/features/quizComp/hooks/useQuiz';
 import type { IncorrectQuiz } from '@/types/quizTypes';
 import AnswerHistoryCard from './AnswerHistoryCard';
 import IncorrectModal from '@/components/IncorrectModal/IncorrectModal';
@@ -12,9 +11,10 @@ import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import BackIcon from '@/assets/svg/BackIcon';
 import { useNavigate } from 'react-router-dom';
 import ErrorComp from '@/components/ui/ErrorComp';
+import { useIncorrectAnswers } from '../hooks/useIncorrectAnswers';
 
 const IncorrectAnswerPage = () => {
-  const { getIncorrectAnswers } = useQuiz();
+  const { getIncorrectAnswers } = useIncorrectAnswers();
   const [open, setOpen] = useState(false);
   const [category, setCategory] = useState<string>('');
   const [level, setLevel] = useState('');

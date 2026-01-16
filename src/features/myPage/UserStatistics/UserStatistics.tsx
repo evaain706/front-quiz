@@ -1,5 +1,4 @@
 import type { UserStatistics } from '@/types/statTypes';
-import { useQuiz } from '@/features/quizComp/hooks/useQuiz';
 import { useQuery } from '@tanstack/react-query';
 import StatisticCard from '@/components/ui/MyPage/Statistics/StatisticsCard';
 import StatisticGrid from '@/components/ui/MyPage/Statistics/StatisticGrid';
@@ -10,9 +9,10 @@ import BackIcon from '@/assets/svg/BackIcon';
 import UserStatisticsSkeleton from '@/components/ui/Skeleton/UserStatisticsSkeleton';
 import { useUserStore } from '@/store/useUserStore';
 import ErrorComp from '@/components/ui/ErrorComp';
+import { useUserStatistics } from '../hooks/useUserStatistics';
 
 const UserStatisticPage = () => {
-  const { getUserStatistics } = useQuiz();
+  const { getUserStatistics } = useUserStatistics();
 
   const navigate = useNavigate();
 

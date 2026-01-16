@@ -2,7 +2,6 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { instance } from '@/apis/instance';
 import { useState } from 'react';
-import { useCommunity } from './hooks/useCommunity';
 import PostCard from './components/communityDetail/PostCard';
 import CommentList from './components/communityDetail/CommentList';
 import CommentForm from './components/communityDetail/CommentForm';
@@ -16,6 +15,7 @@ import CommunityDetailSkeleton from '@/components/ui/Skeleton/CommunityDetailSke
 import ErrorComp from '@/components/ui/ErrorComp';
 import Dropdown from '@/components/ui/Dropdown';
 import DotIcon from '@/assets/svg/DotIcon';
+import { useCommunityDetail } from './hooks/useCommunityDetail';
 
 const CommunityDetail = () => {
   const { id } = useParams();
@@ -35,7 +35,7 @@ const CommunityDetail = () => {
     handleAddCommentMutate,
     handleDeleteCommentMutate,
     handleCheckPasswordMutate,
-  } = useCommunity();
+  } = useCommunityDetail();
 
   const { data: post, isLoading } = useQuery<Post>({
     queryKey: ['post', id],
@@ -120,11 +120,16 @@ const CommunityDetail = () => {
                 <DotIcon />
               </Dropdown.Trigger>
               <Dropdown.Content>
-                <Dropdown.Item onClick={() => handleDeletePost}>
+                <Dropdown.Item
+                  onClick={() => {
+                    console.log('뉼림');
+                    setDeleteModalOpen(true);
+                  }}
+                >
                   게시글 삭제
                 </Dropdown.Item>
 
-                <Dropdown.Item onClick={() => handleEditPost}>
+                <Dropdown.Item onClick={() => setEditModalOpen(true)}>
                   게시글 수정
                 </Dropdown.Item>
               </Dropdown.Content>

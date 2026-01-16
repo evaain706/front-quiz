@@ -1,12 +1,12 @@
 import { useForm } from 'react-hook-form';
 import type { PostForm } from '@/types/communityTypes';
-import { useCommunity } from './hooks/useCommunity';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 import { useLocation, useNavigate } from 'react-router-dom';
 import BackIcon from '@/assets/svg/BackIcon';
 import { useEffect } from 'react';
 import { changeIncorrectToQuestion } from '@/utils/changeIncorrectToQuestion';
+import { useCommunityForm } from './hooks/useCommunityForm';
 
 const CommunityForm = () => {
   const location = useLocation();
@@ -24,7 +24,7 @@ const CommunityForm = () => {
     formState: { errors },
   } = useForm<PostForm>();
 
-  const { handleAddPostMutate, handleEditPostMutation } = useCommunity();
+  const { handleAddPostMutate, handleEditPostMutation } = useCommunityForm();
 
   useEffect(() => {
     if (isEditMode && postToEdit) {

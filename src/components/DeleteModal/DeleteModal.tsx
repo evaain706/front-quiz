@@ -58,8 +58,10 @@ const DeleteModal = ({
           <div className='mt-4 flex justify-center gap-2'>
             <Button
               className={cn(
-                'border-none text-white hover:bg-red-300',
-                title.includes('삭제') ? 'bg-red-400' : 'bg-green-400',
+                'border-none text-white',
+                title.includes('삭제')
+                  ? 'bg-red-400 hover:bg-red-600'
+                  : 'bg-green-400 hover:bg-green-500',
               )}
               onClick={handleDeleteClick}
               disabled={isLoading}

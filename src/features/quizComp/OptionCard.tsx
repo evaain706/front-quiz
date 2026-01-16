@@ -1,10 +1,10 @@
 import Button from '@/components/Button';
 import { useQuizStore } from '@/store/useQuizStore';
 import { useUserStore } from '@/store/useUserStore';
-import { useQuiz } from './hooks/useQuiz';
 import ResultDisplay from './ResultDisplay';
 import React from 'react';
 import { getOptionsCardStyle } from '@/utils/getOptionsCardStyle';
+import { useIncorrectAnswers } from '../myPage/hooks/useIncorrectAnswers';
 
 const OptionsCard = () => {
   const quiz = useQuizStore((s) => s.quiz);
@@ -13,7 +13,7 @@ const OptionsCard = () => {
   const result = useQuizStore((s) => s.result);
   const user = useUserStore((s) => s.user);
 
-  const { handleAddInCorrect } = useQuiz();
+  const { handleAddInCorrect } = useIncorrectAnswers();
 
   if (!quiz) {
     return (

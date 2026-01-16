@@ -9,7 +9,6 @@ import PostGrid from './components/communityMain/PostGrid';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import { useDebounce } from '@/hooks/useDebounce';
-import CommunityPageSkeleton from '@/components/ui/Skeleton/CommunityPostListSkeleton';
 import ErrorComp from '@/components/ui/ErrorComp';
 
 const CommunityMain = () => {
@@ -26,7 +25,6 @@ const CommunityMain = () => {
     staleTime: 5 * 60 * 1000,
   });
 
-  if (isPending) return <CommunityPageSkeleton />;
   if (error)
     return (
       <ErrorComp
@@ -81,15 +79,17 @@ const CommunityMain = () => {
         />
       </div>
 
-      <PostGrid data={data} />
+      <PostGrid data={data} isPending={isPending} />
 
       <div className='justify-end'>
-        <Pagination
-          currentPage={data.currentPage}
-          totalPages={data.totalPages}
-          totalItems={data.totalCount}
-          onPageChange={setPage}
-        />
+        {data && (
+          <Pagination
+            currentPage={data.currentPage}
+            totalPages={data.totalPages}
+            totalItems={data.totalCount}
+            onPageChange={setPage}
+          />
+        )}
       </div>
 
       <Button onClick={() => navigate('/community/create')}>새 글 작성</Button>

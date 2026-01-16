@@ -28,7 +28,7 @@ const Pagination = ({
   }
 
   return (
-    <div className='mt-4 flex w-full items-center justify-center gap-2 text-[1.6rem] font-bold'>
+    <div className='mt-4 flex w-full items-center justify-center gap-2 text-[1.4rem] font-bold md:text-[1.8rem]'>
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
