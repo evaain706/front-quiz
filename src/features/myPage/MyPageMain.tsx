@@ -1,28 +1,36 @@
-import Button from '@/components/Button';
+import MyPageCard from '@/components/ui/MyPage/MyPageCard';
 import { useNavigate } from 'react-router-dom';
+import { Settings, BarChart3, FileQuestion } from 'lucide-react';
 
 const MyPageMain = () => {
   const navigate = useNavigate();
   return (
-    <div className='flex flex-col gap-5 text-white'>
-      <Button
-        className='w-[30rem] bg-white p-10 text-[2rem] font-bold text-black'
+    <div className='flex w-full flex-col items-center gap-5 text-white'>
+      <div className='text-center'>
+        <h2 className='text-[3rem] font-bold'>마이페이지</h2>
+        <p className='text-[2rem] font-bold text-slate-500'>
+          메뉴를 선택해주세요
+        </p>
+      </div>
+
+      <MyPageCard
+        icon={Settings}
+        title='유저정보변경'
+        description='닉네임/프로필사진을 변경'
         onClick={() => navigate('/mypage/setting')}
-      >
-        유저정보수정
-      </Button>
-      <Button
-        className='w-[30rem] bg-white p-10 text-[2rem] font-bold text-black'
+      />
+      <MyPageCard
+        icon={BarChart3}
+        title='유저정보변경'
+        description='풀었던 문제들의 통계를 확인'
         onClick={() => navigate('/mypage/statistics')}
-      >
-        통계보기
-      </Button>
-      <Button
-        className='w-[30rem] bg-white p-10 text-[2rem] font-bold text-black'
+      />
+      <MyPageCard
+        icon={FileQuestion}
+        title='유저정보변경'
+        description='오답문제에 등록된 문제들을 확인'
         onClick={() => navigate('/mypage/IncorrectAnswer')}
-      >
-        오답문제에 저장된 문제 조회
-      </Button>
+      />
     </div>
   );
 };

@@ -201,12 +201,7 @@ const LandingPage = () => {
           exit={{ opacity: 0, y: 20 }}
           className='sticky bottom-20 flex justify-center pb-6'
         >
-          <Button
-            className='bg-white/20 text-white hover:text-black'
-            size='md'
-            variant='primary'
-            onClick={() => navigate('/main')}
-          >
+          <Button size='md' variant='primary' onClick={() => navigate('/main')}>
             이동하기
           </Button>
         </motion.div>

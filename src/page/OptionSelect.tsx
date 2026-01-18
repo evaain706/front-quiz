@@ -1,9 +1,12 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Card from '@/components/Card';
 import Button from '@/components/Button';
 import { useOptionStore } from '@/store/useOptionStore';
 import { categorylist } from '@/constants/categoryList';
+import { motion } from 'motion/react';
+
+import { cn } from '@/utils/cn';
 
 const OptionSelect = () => {
   const [step, setStep] = useState(0);
@@ -22,24 +25,18 @@ const OptionSelect = () => {
     setStep(0);
   }, []);
 
-  const handleCategorySelect = useCallback(
-    (selectedCat: string) => {
-      if (category === selectedCat) {
-        setCategory('');
-      } else {
-        setCategory(selectedCat);
-      }
-    },
-    [category, setCategory],
-  );
+  const handleCategorySelect = (selectedCat: string) => {
+    if (category === selectedCat) {
+      setCategory('');
+    } else {
+      setCategory(selectedCat);
+    }
+  };
 
-  const handleLevelSelect = useCallback(
-    (level: string) => {
-      setLevel(level);
-      navigate('/quiz');
-    },
-    [setLevel, navigate],
-  );
+  const handleLevelSelect = (level: string) => {
+    setLevel(level);
+    navigate('/quiz');
+  };
 
   useEffect(() => {
     if (step === 1 && !category) {
@@ -47,58 +44,90 @@ const OptionSelect = () => {
     }
   }, [step, category]);
 
+  const selectedCategory = categorylist.find((cat) => cat.text === category);
+
+  const SelectedIcon = selectedCategory?.icon;
+  const SelectedIconColor = selectedCategory?.color;
+
   return (
     <div className='flex min-h-[calc(100vh-6rem)] w-full flex-col items-center justify-center gap-10 p-4 md:gap-14 md:p-8'>
       {step === 0 && (
-        <div className='w-full text-center'>
-          <h2 className='mb-8 text-2xl font-bold text-white md:text-[4rem]'>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.3 }}
+          className='w-full text-center'
+        >
+          <h2 className='mb-8 text-[2rem] font-bold text-white md:text-[4rem]'>
             주제를 선택해주세요
           </h2>
-          <div className='grid max-h-[80rem] w-full grid-cols-2 gap-4 overflow-auto p-5 md:grid-cols-3 lg:grid-cols-4'>
+          <div className='grid max-h-[80rem] w-full grid-cols-2 gap-5 overflow-auto p-5 md:grid-cols-3 lg:grid-cols-5'>
             {categorylist.map((cat) => (
               <Card
                 key={cat.id}
                 text={cat.text}
                 isSelected={category === cat.text}
+                className={cat.color}
                 onClick={() => handleCategorySelect(cat.text)}
+                icon={cat.icon}
               />
             ))}
           </div>
-        </div>
+        </motion.div>
       )}
 
       {step === 1 && (
-        <div className='flex w-full flex-col items-center justify-center text-center'>
-          <h2 className='mb-2 text-2xl font-bold text-white md:text-3xl'>
-            주제: {category}
-          </h2>
-          <h2 className='mb-8 text-2xl font-bold text-white md:text-[4rem]'>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.3 }}
+          className='flex w-full flex-col items-center justify-center gap-5 text-center'
+        >
+          <div className='flex items-center justify-center gap-5 rounded-xl bg-gray-900 px-6 py-6'>
+            {SelectedIcon && (
+              <div
+                className={cn(
+                  'mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br text-white',
+                  SelectedIconColor,
+                )}
+              >
+                <SelectedIcon />
+              </div>
+            )}
+            <h2 className='mb-2 text-[2rem] font-bold text-white md:text-[3rem]'>
+              {category}
+            </h2>
+          </div>
+
+          <h2 className='mb-8 text-[1.6rem] font-bold text-white md:text-[4rem]'>
             난이도를 선택해주세요
           </h2>
           <div className='flex flex-col justify-center gap-4 md:flex-row'>
             <Button
               size='md'
-              className='bg-amber-100 py-20 text-[2rem] font-bold text-black'
+              className='bg-amber-400 py-10 text-[2rem] font-bold text-white hover:bg-amber-300'
               onClick={() => handleLevelSelect('쉬움')}
             >
-              쉬움
+              EASY
             </Button>
             <Button
               size='md'
-              className='bg-green-200 py-20 text-[2rem] font-bold text-black'
+              className='bg-green-400 py-10 text-[2rem] font-bold text-white hover:bg-green-300'
               onClick={() => handleLevelSelect('보통')}
             >
-              보통
+              MEDIUM
             </Button>
             <Button
               size='md'
-              className='bg-red-400 py-20 text-[2rem] font-bold text-black'
+              className='bg-red-400 py-10 text-[2rem] font-bold text-white hover:bg-red-300'
               onClick={() => handleLevelSelect('어려움')}
             >
-              어려움
+              HARD
             </Button>
           </div>
-        </div>
+        </motion.div>
       )}
 
       {step === 0 ? (
@@ -106,14 +135,15 @@ const OptionSelect = () => {
           variant='primary'
           size='md'
           disabled={!category}
+          className='fixed bottom-5'
           onClick={() => setStep(1)}
         >
           난이도 선택하기
         </Button>
       ) : (
         <div>
-          <Button variant='secondary' size='md' onClick={() => setStep(0)}>
-            뒤로 가기
+          <Button variant='primary' size='md' onClick={() => setStep(0)}>
+            주제 다시 선택하기
           </Button>
         </div>
       )}

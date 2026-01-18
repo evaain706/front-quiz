@@ -1,25 +1,34 @@
 import React from 'react';
+import { type LucideIcon } from 'lucide-react';
 
 interface CardProps {
   text: string;
   onClick?: () => void;
   isSelected?: boolean;
+  className?: string;
+  icon: LucideIcon;
 }
 
-const Card = ({ text, onClick, isSelected }: CardProps) => {
+const Card = ({ text, onClick, isSelected, className, icon }: CardProps) => {
+  const Icon = icon;
   return (
     <div
       onClick={onClick}
-      className={`flex max-h-[4rem] cursor-pointer items-center justify-center rounded-lg p-4 py-[3rem] transition-all md:py-[4rem] ${
+      className={`flex max-h-[14rem] cursor-pointer items-center justify-center rounded-lg px-2 py-[3rem] transition-all md:py-[5rem] ${
         isSelected
-          ? 'animate-pulse bg-blue-500/20 text-white ring-1 ring-blue-500'
-          : 'bg-white/20 hover:bg-gray-300'
+          ? 'animate-pulse bg-gray-600 ring-1 ring-blue-500'
+          : 'bg-gray-900'
       }`}
     >
-      <div className='flex flex-col items-center justify-center'>
-        <h2 className='text-[1.2rem] font-bold text-white md:text-[1.6rem]'>
+      <div className='group flex flex-col items-center justify-center gap-5'>
+        <div
+          className={`flex h-20 w-20 items-center justify-center rounded-lg bg-gradient-to-br ${className} shadow-lg transition-transform duration-300 group-hover:scale-110`}
+        >
+          <Icon className='h-12 w-12 text-white' />
+        </div>
+        <p className='text-foreground text-center text-[1.4rem] font-bold text-white md:text-[2rem]'>
           {text}
-        </h2>
+        </p>
       </div>
     </div>
   );
