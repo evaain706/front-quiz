@@ -2,6 +2,7 @@ import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { instance } from '@/apis/instance';
 import { useToastStore } from '@/store/useToastStore';
 import { useNavigate } from 'react-router-dom';
+import type { AxiosError } from 'axios';
 
 interface AddCommentParams {
   postId: string;
@@ -56,7 +57,7 @@ export const useCommunityDetail = () => {
       queryClient.invalidateQueries({ queryKey: ['post', variables.postId] });
       addToast('success', '댓글이 작성되었습니다.');
     },
-    onError: (error: any) => {
+    onError: (error: AxiosError) => {
       addToast('error', error.message || '댓글 작성 중 오류가 발생했습니다.');
     },
   });

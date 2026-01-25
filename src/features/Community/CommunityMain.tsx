@@ -19,13 +19,13 @@ const CommunityMain = () => {
   const debounceSearch = useDebounce(search, 300);
   const { fetchPosts } = useCommunity();
 
-  const { data, isPending, error } = useQuery<PostResponse, Error>({
+  const { data, isPending, isError } = useQuery<PostResponse, Error>({
     queryKey: ['post', page, category, debounceSearch],
     queryFn: () => fetchPosts(page, 5, category || undefined, debounceSearch),
     staleTime: 5 * 60 * 1000,
   });
 
-  if (error)
+  if (isError)
     return (
       <ErrorComp
         PageName='커뮤니티페이지에러'

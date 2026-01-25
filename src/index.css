@@ -116,6 +116,17 @@ body {
   }
 }
 
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #02000e;
+}
+::-webkit-scrollbar-thumb {
+  background: #fff;
+  border-radius: 6px;
+}
+
 @keyframes flicker {
   0%,
   100% {

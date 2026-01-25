@@ -6,7 +6,6 @@ export const useUserStatistics = () => {
       const response = await privateInstance.get('/api/quiz/statistics');
       return response.data;
     } catch (error) {
-      console.error(error);
       return null;
     }
   };

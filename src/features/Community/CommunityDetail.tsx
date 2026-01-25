@@ -173,6 +173,7 @@ const CommunityDetail = () => {
               setCommentModalOpen(true);
               setCommentDeleteError('');
             }}
+            deleteCommentId={deleteCommentId}
             isLoading={handleDeleteCommentMutate.isPending}
           />
 

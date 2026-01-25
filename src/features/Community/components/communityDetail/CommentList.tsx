@@ -7,10 +7,12 @@ const CommentList = ({
   comments,
   onClickDelete,
   isLoading,
+  deleteCommentId,
 }: {
   comments: Comment[];
   onClickDelete: (id: string) => void;
   isLoading: boolean;
+  deleteCommentId: string | null;
 }) => {
   return (
     <section className='mt-10 bg-white py-5'>
@@ -33,7 +35,7 @@ const CommentList = ({
                   </p>
                 </div>
 
-                {isLoading ? (
+                {deleteCommentId === c._id && isLoading ? (
                   <div>
                     <Spinner className='h-10 w-10' />
                   </div>

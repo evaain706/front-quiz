@@ -21,7 +21,7 @@ const PostCard = ({ post }: { post: Post }) => {
         </div>
       </header>
 
-      <div className='max-h-[45rem] overflow-y-scroll rounded-md bg-white/20 px-6 py-8 sm:px-8'>
+      <div className='max-h-[45rem] min-h-[20rem] overflow-y-scroll rounded-md bg-white/20 px-6 py-8 sm:px-8'>
         <p className='text-[1.4rem] leading-8 font-bold whitespace-pre-wrap text-white md:text-[1.8rem]'>
           <ReactMarkdown>{markdownContent}</ReactMarkdown>
         </p>

@@ -65,7 +65,12 @@ const IncorrectModal = ({
             </div>
           </Modal.Item>
           <Modal.Footer>
-            <Button onClick={() => setIsopen(false)}>닫기</Button>
+            <Button
+              className='bg-white/20 hover:bg-white/30'
+              onClick={() => setIsopen(false)}
+            >
+              닫기
+            </Button>
             <Button
               onClick={() => {
                 navigate('/community/create', {

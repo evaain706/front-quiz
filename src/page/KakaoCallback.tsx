@@ -27,7 +27,6 @@ const KakaoCallback = () => {
         setUser(response.data.user);
         navigate('/main', { replace: true });
       } catch (error) {
-        console.error('카카오 로그인 에러:', error);
         navigate('/main', { replace: true });
       }
     };

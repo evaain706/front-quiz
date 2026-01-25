@@ -1,7 +1,7 @@
 const CommunityDetailSkeleton = () => {
   return (
     <div className='mt-5 flex min-h-[calc(100vh-6rem)] animate-pulse items-center justify-center'>
-      <div className='relative mx-auto w-full bg-white'>
+      <div className='relative mx-auto flex w-full flex-col'>
         <div className='rounded-md bg-white shadow-xl ring-1 ring-slate-100'>
           <header className='border-b border-slate-100 px-6 py-6 sm:px-8'>
             <div className='h-8 w-3/4 rounded bg-gray-300'></div>
@@ -13,16 +13,16 @@ const CommunityDetailSkeleton = () => {
           <div className='px-6 py-8 sm:px-8'>
             <div className='space-y-3'>
               <div className='h-6 rounded bg-gray-300'></div>
+              <div className='h-6 rounded bg-gray-300'></div>
+              <div className='h-6 rounded bg-gray-300'></div>
               <div className='h-6 w-5/6 rounded bg-gray-300'></div>
               <div className='h-6 w-4/6 rounded bg-gray-300'></div>
-            </div>
-            <div className='mt-8 flex justify-end border-t border-slate-100 pt-6'>
-              <div className='h-8 w-8 rounded-full bg-gray-300'></div>
+              <div className='h-6 w-3/6 rounded bg-gray-300'></div>
             </div>
           </div>
         </div>
 
-        <section className='mt-10'>
+        <section className='mt-10 bg-white p-5'>
           <h2 className='mb-6 pl-5 text-[1.6rem] font-bold text-slate-900'>
             <div className='h-7 w-24 rounded bg-gray-300'></div>
           </h2>
@@ -45,7 +45,7 @@ const CommunityDetailSkeleton = () => {
           <div className='my-8 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent' />
         </section>
 
-        <div className='p-6 shadow-sm ring-1 ring-slate-100'>
+        <div className='bg-white p-5 shadow-sm ring-1 ring-slate-100'>
           <h3 className='mb-5 text-[1.6rem] font-bold'>
             <div className='h-7 w-32 rounded bg-gray-300'></div>
           </h3>

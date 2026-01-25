@@ -14,7 +14,7 @@ const BUTTON_ROUND = {
 
 const BUTTON_VARIANTS = {
   primary:
-    'bg-blue-500  font-bold text-white border-white border-1 hover:bg-blue-600',
+    'bg-[#6C63FF]  font-bold text-white border-white border-1 hover:bg-[#5A52E0]',
   secondary: 'bg-gray-200 text-white border border-primary-10',
   outline:
     'bg-white text-gray-800 border border-gray-300 enabled:hover:bg-gray-50',
