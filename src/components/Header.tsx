@@ -25,7 +25,10 @@ const Header = () => {
             <div className='relative'>
               <Dropdown>
                 <Dropdown.Trigger>
-                  <ProfileImage className='h-16 w-16' src={user.profileImage} />
+                  <ProfileImage
+                    className='h-16 w-16 md:h-24 md:w-24'
+                    src={user.profileImage}
+                  />
                 </Dropdown.Trigger>
                 <Dropdown.Content>
                   <Dropdown.Item onClick={() => navigate('/mypage')}>

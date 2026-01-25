@@ -54,8 +54,8 @@ const UserStatisticPage = () => {
   const isEmptyLevel = Object.keys(data.levelStats).length === 0;
 
   return (
-    <div className='flex min-h-[calc(100vh-6rem)] flex-col items-center justify-center gap-5 overflow-auto'>
-      <div className='w-full bg-gray-900 p-10 text-white'>
+    <div className='flex min-h-[calc(100vh-7rem)] flex-col items-center justify-center gap-5 overflow-auto'>
+      <div className='mt-8 w-full bg-gray-900 p-10 text-white'>
         <div className='relative mb-6 flex flex-col items-center'>
           <h1 className='text-[3rem] font-bold'>
             <span className='text-gray-600'>{user?.nickname}</span> 님의 통계

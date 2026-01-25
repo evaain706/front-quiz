@@ -21,13 +21,13 @@ const MyPageMain = () => {
       />
       <MyPageCard
         icon={BarChart3}
-        title='유저정보변경'
+        title='문제통계'
         description='풀었던 문제들의 통계를 확인'
         onClick={() => navigate('/mypage/statistics')}
       />
       <MyPageCard
         icon={FileQuestion}
-        title='유저정보변경'
+        title='오답문제확인'
         description='오답문제에 등록된 문제들을 확인'
         onClick={() => navigate('/mypage/IncorrectAnswer')}
       />
