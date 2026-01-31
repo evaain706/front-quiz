@@ -1,20 +1,17 @@
 import { useEffect } from 'react';
-import Button from '@/components/Button';
+import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
 import { useQuiz } from './hooks/useQuiz';
 import { useQuizStore } from '@/store/useQuizStore';
-import { useOptionStore } from '@/store/useOptionStore';
+import QuizHeader from './components/QuizHeader';
+import QuizErrorFallback from './components/QuizErrorFallback';
+import QuizActionButtons from './components/QuizActionButtons';
 import QuestionCard from './QuestionCard';
 import OptionsCard from './OptionCard';
-import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
 
 const QuizScreen = () => {
-  const { fetchQuiz, handleSubmit, error } = useQuiz();
+  const { fetchQuiz, error } = useQuiz();
   const isLoading = useQuizStore((s) => s.isLoading);
   const quiz = useQuizStore((s) => s.quiz);
-  const isGrading = useQuizStore((s) => s.isGrading);
-  const category = useOptionStore((s) => s.category);
-  const userAnswer = useQuizStore((s) => s.userAnswer);
-  const result = useQuizStore((s) => s.result);
 
   useEffect(() => {
     fetchQuiz();
@@ -23,24 +20,12 @@ const QuizScreen = () => {
   return (
     <div className='mt-7 flex flex-col gap-3'>
       <div className='flex flex-col items-center justify-center'>
-        <h2 className='text-[3rem] font-bold text-white md:text-[5rem]'>
-          {category}
-        </h2>
+        <QuizHeader />
       </div>
 
       <ErrorBoundary
         fallback={(reset) => (
-          <div className='flex flex-col items-center p-10 text-white'>
-            <p className='mb-4 text-2xl'>퀴즈 불러오기 실패</p>
-            <Button
-              onClick={() => {
-                reset();
-                fetchQuiz();
-              }}
-            >
-              다시 시도
-            </Button>
-          </div>
+          <QuizErrorFallback onRetry={fetchQuiz} reset={reset} />
         )}
       >
         <QuestionCard error={error} isLoading={isLoading} quiz={quiz} />
@@ -48,26 +33,7 @@ const QuizScreen = () => {
 
       <OptionsCard />
 
-      <div className='flex w-full items-center justify-between'>
-        <Button
-          className='w-50 bg-white/30 text-white hover:text-black'
-          onClick={fetchQuiz}
-          disabled={isLoading || isGrading}
-          isLoading={isGrading || isLoading}
-        >
-          문제받기
-        </Button>
-        {userAnswer && !result && (
-          <Button
-            className='w-50 bg-white/20 text-white hover:text-black'
-            onClick={handleSubmit}
-            disabled={isGrading}
-            isLoading={isGrading}
-          >
-            채점
-          </Button>
-        )}
-      </div>
+      <QuizActionButtons />
     </div>
   );
 };

@@ -42,8 +42,7 @@ export const useQuiz = () => {
       });
       setQuiz(response.data);
     } catch (error) {
-      console.error('퀴즈 요청 실패:', error);
-
+     
       setError(new Error('퀴즈 요청 실패'));
     } finally {
       setIsLoading(false);

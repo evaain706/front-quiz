@@ -1,6 +1,10 @@
-import ReactMarkdown from 'react-markdown';
+import React, { Suspense, lazy } from 'react';
 import type { Quiz } from '@/types/quizTypes';
-import React from 'react';
+import Spinner from '@/components/ui/Spinner';
+
+const LazyReactMarkdown = lazy(() =>
+  import('react-markdown').then((m) => ({ default: m.default })),
+);
 
 interface QuestionCardProps {
   error: Error | null;
@@ -8,25 +12,49 @@ interface QuestionCardProps {
   quiz: Quiz | null;
 }
 
+const SkeletonCard = () => (
+  <div className='bg-navy-black flex min-h-[20rem] w-full min-w-[34rem] animate-pulse items-center justify-center rounded-md border-5 border-gray-500 p-6'>
+    <Spinner className='h-10 w-10' />
+  </div>
+);
+
+const cardClassName =
+  'bg-navy-black flex min-h-[20rem] w-full min-w-[34rem] items-center justify-center rounded-md border-5 border-gray-500 p-6 md:w-[70rem] lg:w-[90rem]';
+
+const contentClass =
+  'max-h-[30rem] w-full items-center justify-center overflow-auto text-[1.4rem] leading-[3rem] font-bold text-green-400 md:text-[2rem] md:leading-[4rem]';
+
 const QuestionCard = ({ error, isLoading, quiz }: QuestionCardProps) => {
   if (error) {
     throw error;
   }
 
   if (isLoading) {
+    return <SkeletonCard />;
+  }
+
+  const markdownContent = quiz?.question;
+
+  if (!markdownContent) {
     return (
-      <div className='bg-navy-black flex min-h-[15rem] w-full min-w-[34rem] items-center justify-center rounded-md border-[5px] border-gray-500 p-6 md:w-[70rem] lg:w-[90rem]'>
-        <div className='animate-spinner h-12 w-12 rounded-full border-4 border-green-400 border-t-transparent' />
+      <div className={`${cardClassName} scanline-overlay`}>
+        <div className={contentClass} />
       </div>
     );
   }
 
-  const markdownContnet = quiz?.question;
-
   return (
-    <div className='bg-navy-black scanline-overlay flex min-h-[15rem] items-center justify-center rounded-md border-5 border-gray-500 p-6 md:w-[70rem] lg:w-[90rem]'>
-      <div className='text-glow-green animate-flicker max-h-[30rem] w-full items-center justify-center overflow-auto text-[1.4rem] leading-[3rem] font-bold text-green-400 md:text-[2rem] md:leading-[4rem]'>
-        <ReactMarkdown>{markdownContnet}</ReactMarkdown>
+    <div className={`${cardClassName} scanline-overlay`}>
+      <div className={contentClass}>
+        <p>
+          <Suspense
+            fallback={
+              <span className='whitespace-pre-wrap'>{markdownContent}</span>
+            }
+          >
+            <LazyReactMarkdown>{markdownContent}</LazyReactMarkdown>
+          </Suspense>
+        </p>
       </div>
     </div>
   );

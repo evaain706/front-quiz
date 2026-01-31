@@ -1,10 +1,11 @@
+import React, { lazy, Suspense } from 'react';
 import Button from '@/components/Button';
 import { useQuizStore } from '@/store/useQuizStore';
 import { useUserStore } from '@/store/useUserStore';
-import ResultDisplay from './ResultDisplay';
-import React from 'react';
 import { getOptionsCardStyle } from '@/utils/getOptionsCardStyle';
 import { useIncorrectAnswers } from '../myPage/hooks/useIncorrectAnswers';
+
+const ResultDisplay = lazy(() => import('./ResultDisplay'));
 
 const OptionsCard = () => {
   const quiz = useQuizStore((s) => s.quiz);
@@ -15,9 +16,12 @@ const OptionsCard = () => {
 
   const { handleAddInCorrect } = useIncorrectAnswers();
 
+  const containerClassName =
+    'mt-8 mb-8 min-h-[15rem] w-full md:w-[70rem] lg:w-[90rem]';
+
   if (!quiz) {
     return (
-      <div className='mt-8 mb-8 min-h-[15rem] md:w-[70rem] lg:w-[90rem]'>
+      <div className={containerClassName}>
         <div className='rounded-md border border-gray-200 bg-white/10 p-6 shadow-sm'>
           <div className='animate-pulse space-y-3'>
             {[...Array(4)].map((_, index) => (
@@ -37,7 +41,7 @@ const OptionsCard = () => {
   const isSubmitted = !!result;
 
   return (
-    <div className='mt-8 mb-8 min-h-[15rem] md:w-[70rem] lg:w-[90rem]'>
+    <div className={containerClassName}>
       <div className='flex flex-col rounded-xl border border-gray-200 bg-white/10 p-6 shadow-md'>
         <div className='space-y-3'>
           {Object.entries(quiz.options).map(([key, value]) => {
@@ -94,10 +98,16 @@ const OptionsCard = () => {
 
         {result && (
           <div className='w-full'>
-            <ResultDisplay
-              explanation={result.explanation}
-              isCorrect={result.isCorrect}
-            />
+            <Suspense
+              fallback={
+                <div className='mt-6 h-20 w-full animate-pulse rounded-md bg-white/10' />
+              }
+            >
+              <ResultDisplay
+                explanation={result.explanation}
+                isCorrect={result.isCorrect}
+              />
+            </Suspense>
           </div>
         )}
 
