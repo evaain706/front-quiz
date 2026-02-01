@@ -1,9 +1,9 @@
 import Button from '@/components/Button';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
-
 import QuizImg1 from '@/assets/img/quiz-img.png';
 import QuizImg2 from '@/assets/img/quiz-img2.png';
+import QuizImg3 from '@/assets/img/quiz-img3.png';
 import CommunityImg from '@/assets/img/community-img.png';
 import CommunityDetailImg from '@/assets/img//community-detail-img.png';
 import UserStatImg from '@/assets/img/user-statistic-img.png';
@@ -98,6 +98,7 @@ const LandingPage = () => {
           images={[
             { src: QuizImg1, alt: 'QuizImg' },
             { src: QuizImg2, alt: 'QuizImg2' },
+            { src: QuizImg3, alt: 'QuizImg3' },
           ]}
         />
       </section>

@@ -12,16 +12,29 @@ JavaScript, React, TypeScript 등 다양한 기술 스택에 대한 퀴즈를 �
 
 ## ✨ 주요 기능
 
-- OAuth 2.0기반 카카오 소셜 로그인(JWT기반) -> zustand Persist를 사용한 로그인유지
+- 퀴즈 : 카테고리별,난이도별 퀴즈를 제공받아 풀기, 채점 및 해설기능
+
+- 커뮤니티 : 질문,정보글 등록 및 댓글시스템
+
+- 마이페이지 : 유저정보 수정 , 풀었던문제 통계확인 , 오답노트에 저장한 문제 확인 및 오답문제를 커뮤니티에 질문글로 올리기
+
+## ✨ 적용한 기술
+
+- FallBackUI 및 SkeletonUI, ErrorBoundary를 사용한 UX 개선
+
 - 페이지별 Tanstack Query를 사용한 데이터 패칭 및 캐싱을 사용한 성능최적화 및 useInfinite Query를 사용한 무한스크롤 구현
-- LLM api를 시스템 프롬프트를 이용해 JSON형식출력을 강제하여 카테고리별,난이도별 퀴즈를 제공받아 풀기, 채점 및 해설기능
+
+- OAuth 2.0기반 카카오 소셜 로그인(JWT기반) -> zustand Persist를 사용한 로그인유지
+
+- 백엔드단 프롬프트 엔지니어링을 통해 텍스트를 일관된 JSON 스키마로 응답받도록 설계하여 Meta Llama 기반 퀴즈 생성 시스템 구축
 
 ### 1. 퀴즈 풀기
 
-<div style="display: flex; gap: 16px;">
-  <img src="src/assets/img/quiz-img.png" width="48%" />
-  <img src="src/assets/img/quiz-img2.png" width="48%" />
-</div>
+<p align="center">
+  <img src="src/assets/img/quiz-img.png" width="32%">
+  <img src="src/assets/img/quiz-img2.png" width="32%">
+  <img src="src/assets/img/quiz-img3.png" width="32%">
+</p>
 
 #### meta-llama/llama-4-maverick 모델을 사용하여 문제를 AI를 통해 생성 및 채점
 
@@ -35,16 +48,16 @@ JavaScript, React, TypeScript 등 다양한 기술 스택에 대한 퀴즈를 �
 
 ### 2. 마이페이지 풀었던 문제 통계
 
-![img](src\assets\img\user-statistic-img.png)
+<img src="src/assets/img/user-statistic-img.png" width="100%">
 
 - 전체/카테고리별/난이도별 통계 확인
 
 ### 3. 마이페이지 오답노트
 
-<div style="display: flex; gap: 16px;">
-  <img src="src/assets/img/incorrect-img.png" width="48%" />
-  <img src="src/assets/img/incorrect-modal-img.png" width="48%" />
-</div>
+<p align="center">
+  <img src="src/assets/img/incorrect-img.png" width="49%">
+  <img src="src/assets/img/incorrect-modal-img.png" width="49%">
+</p>
 
 - 저장된 오답문제의 내가 선택했던 답, 정답 , 해설을 확인가능
 
@@ -60,10 +73,10 @@ JavaScript, React, TypeScript 등 다양한 기술 스택에 대한 퀴즈를 �
 
 ### 5. 커뮤니티
 
-<div style="display: flex; gap: 16px;">
-  <img src="src/assets/img/community-img.png" width="48%" />
-  <img src="src/assets/img/community-detail-img.png" width="48%" />
-</div>
+<p align="center">
+  <img src="src/assets/img/community-img.png" width="49%">
+  <img src="src/assets/img/community-detail-img.png" width="49%">
+</p>
 
 - 게시글 작성/수정/삭제
 
@@ -96,12 +109,6 @@ JavaScript, React, TypeScript 등 다양한 기술 스택에 대한 퀴즈를 �
 ### HTTP 클라이언트
 
 - **Axios** - HTTP 요청 처리
-
-  - Public API 인스턴스 (재시도 로직 포함)
-
-  - Private API 인스턴스 (토큰 자동 갱신)
-
-  - Kakao OAuth 인스턴스
 
 ### 스타일링
 
@@ -178,153 +185,3 @@ front-quiz/
 └── package.json
 
 ```
-
-## 📖 주요 기능 상세
-
-### 1. 퀴즈 풀기 기능
-
-**핵심 스택:**
-
-- **Zustand** (`useQuizStore`, `useOptionStore`) - 퀴즈 상태 및 옵션 관리
-
-- **Axios** (`instance`) - 퀴즈 생성 및 채점 API 호출
-
-- **Axios** (`privateInstance`) - 통계 저장 API 호출
-
-- **React Query** - 서버 상태 캐싱 및 관리
-
-**주요 기능:**
-
-- 카테고리 및 난이도 선택
-
-- AI 기반 퀴즈 생성
-
-- 실시간 채점 및 피드백
-
-- 오답 자동 저장
-
-- 통계 데이터 자동 업데이트
-
-**관련 파일:**
-
-- `src/features/quizComp/QuizScreen.tsx`
-
-- `src/features/quizComp/hooks/useQuiz.ts`
-
-- `src/store/useQuizStore.ts`
-
-- `src/store/useOptionStore.ts`
-
-### 2. 커뮤니티 기능
-
-**핵심 스택:**
-
-- **React Query** - 게시글 데이터 페칭 및 캐싱
-
-- **Axios** (`instance`) - CRUD API 호출
-
-- **Zustand** (`useToastStore`) - 알림 메시지 관리
-
-- **React Hook Form** - 게시글 작성/수정 폼 관리
-
-- **React Markdown** - 마크다운 게시글 렌더링
-
-- **Rehype Highlight** - 코드 블록 하이라이팅
-
-**관련 파일:**
-
-- `src/features/Community/CommunityMain.tsx`
-
-- `src/features/Community/CommunityDetail.tsx`
-
-- `src/features/Community/CommunityForm.tsx`
-
-- `src/features/Community/hooks/useCommunity.ts`
-
-### 3. 학습 통계 기능
-
-**주요 기능:**
-
-- 전체 통계 조회
-
-- 카테고리별 통계
-
-- 난이도별 통계
-
-- 시각화된 통계 차트
-
-**관련 파일:**
-
-- `src/features/myPage/UserStatistics/UserStatistics.tsx`
-
-- `src/features/quizComp/hooks/useQuiz.ts` (getUserStatistics)
-
-### 4. 오답노트 기능
-
-**주요 기능:**
-
-- 오답 자동 저장
-
-- 오답 목록 조회 (무한 스크롤)
-
-- 카테고리/난이도 필터링
-
-- 오답 삭제
-
-- 오답 문제 재풀기
-
-**관련 파일:**
-
-- `src/features/myPage/IncorrectAnswers/IncorrectAnswer.tsx`
-
-- `src/features/quizComp/hooks/useQuiz.ts` (getIncorrectAnswers, handleDeleteIncorrect)
-
-### 5. 사용자 인증 기능
-
-**주요 기능:**
-
-- 카카오 OAuth 로그인
-
-- 자동 토큰 갱신
-
-- 로그아웃
-
-- 보호된 라우트 접근 제어
-
-**관련 파일:**
-
-- `src/page/KakaoCallback.tsx`
-
-- `src/apis/kakaoAuthInstance.ts`
-
-- `src/apis/privateInstance.ts`
-
-- `src/components/ProtectedRoute.tsx`
-
-- `src/store/useUserStore.ts`
-
-### 6. UI 컴포넌트 시스템
-
-**주요 컴포넌트:**
-
-- Modal (Context 기반 컴포넌트 조합)
-
-- Dropdown (Context 기반 컴포넌트 조합)
-
-- Toast (전역 알림 시스템)
-
-- Skeleton (로딩 상태 UI)
-
-- Button, Card 등 재사용 가능한 UI 컴포넌트
-
-**관련 파일:**
-
-- `src/components/Modal/`
-
-- `src/components/ui/Dropdown/`
-
-- `src/components/ui/Toast/`
-
-- `src/contexts/ModalContext.tsx`
-
-- `src/contexts/DropdownContext.tsx`
