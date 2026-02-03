@@ -122,7 +122,6 @@ const CommunityDetail = () => {
               <Dropdown.Content>
                 <Dropdown.Item
                   onClick={() => {
-                    console.log('뉼림');
                     setDeleteModalOpen(true);
                   }}
                 >

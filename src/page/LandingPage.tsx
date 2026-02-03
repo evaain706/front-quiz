@@ -1,18 +1,10 @@
 import Button from '@/components/Button';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
-import QuizImg1 from '@/assets/img/quiz-img.png';
-import QuizImg2 from '@/assets/img/quiz-img2.png';
-import QuizImg3 from '@/assets/img/quiz-img3.png';
-import CommunityImg from '@/assets/img/community-img.png';
-import CommunityDetailImg from '@/assets/img//community-detail-img.png';
-import UserStatImg from '@/assets/img/user-statistic-img.png';
-import IncorrectMainImg from '@/assets/img/incorrect-img.png';
-import IncorrectModalImg from '@/assets/img/incorrect-modal-img.png';
-
-import ImageSlider from '@/components/ui/ImgaSlider';
 import { useEffect, useRef, useState } from 'react';
 import MouseIcon from '@/assets/svg/MouseIcon';
+import LandingSection from '@/components/ui/LandingSection';
+import { LandingSectionData } from '@/constants/LandingSectionData';
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -68,132 +60,15 @@ const LandingPage = () => {
         </div>
       </section>
 
-      <section className='relative flex h-screen snap-center flex-col items-center justify-center gap-10 bg-black font-bold text-white'>
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className='text-foreground text-center text-[3rem] font-bold text-balance md:text-[6rem] lg:text-[8rem]'
-        >
-          여러가지 토픽 중
-          <br />
-          <p className='text-muted-foreground text-gray-500'>
-            선택해 문제를 풀어보세요
-          </p>
-        </motion.h2>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-          className='text-muted-foreground max-w-2xl text-center text-[1.6rem] md:text-[2rem]'
-        >
-          JavaScript, React, TypeScript등 다양한 프론트엔드 기술 토픽을 선택하고
-          난이도별로 학습하세요
-        </motion.p>
-
-        <ImageSlider
-          images={[
-            { src: QuizImg1, alt: 'QuizImg' },
-            { src: QuizImg2, alt: 'QuizImg2' },
-            { src: QuizImg3, alt: 'QuizImg3' },
-          ]}
+      {LandingSectionData.map((section, index) => (
+        <LandingSection
+          key={index}
+          mainText={section.mainText}
+          subText={section.subText}
+          explanationText={section.explanationText}
+          images={section.images}
         />
-      </section>
-
-      <section className='relative flex h-screen snap-center flex-col items-center justify-center gap-10 bg-black font-bold text-white'>
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className='text-foreground text-center text-[3rem] font-bold text-balance md:text-[6rem] lg:text-[8rem]'
-        >
-          풀었던 문제들에 대한
-          <br />
-          <p className='text-muted-foreground text-gray-500'>
-            통계를 확인해보세요
-          </p>
-        </motion.h2>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-          className='text-muted-foreground max-w-2xl text-center text-[1.6rem] md:text-[2rem]'
-        >
-          전체,카테고리별,난이도별 통계를 확인할수있습니다
-        </motion.p>
-
-        <ImageSlider images={[{ src: UserStatImg, alt: 'UserStatImg' }]} />
-      </section>
-
-      <section className='relative flex h-screen snap-center flex-col items-center justify-center gap-10 bg-black font-bold text-white'>
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className='text-foreground text-center text-[3rem] font-bold text-balance md:text-[6rem] lg:text-[8rem]'
-        >
-          문제를 오답노트에 등록하고
-          <br />
-          <p className='text-muted-foreground text-gray-500'>
-            다시 확인해보세요
-          </p>
-        </motion.h2>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-          className='text-muted-foreground max-w-2xl text-center text-[1.6rem] md:text-[2rem]'
-        >
-          틀렸던 문제를 저장하고 언제든지 다시 확인할수있습니다
-        </motion.p>
-
-        <ImageSlider
-          images={[
-            { src: IncorrectMainImg, alt: 'Incorrect Main' },
-            { src: IncorrectModalImg, alt: 'Incorrect Modal' },
-          ]}
-        />
-      </section>
-
-      <section className='flex min-h-screen snap-center flex-col items-center justify-center gap-10 bg-black px-4 text-white'>
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className='text-foreground text-center text-[3rem] font-bold text-balance md:text-[6rem] lg:text-[8rem]'
-        >
-          서로의 정보를
-          <br />
-          <p className='text-muted-foreground text-gray-500'>공유해보세요</p>
-        </motion.h2>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-          className='text-muted-foreground max-w-2xl text-center text-[1.6rem] font-bold md:text-[2rem]'
-        >
-          질문을 올리거나 정보를 올려 함께 학습하세요
-        </motion.p>
-
-        <ImageSlider
-          images={[
-            { src: CommunityImg, alt: 'Community Main' },
-            { src: CommunityDetailImg, alt: 'Community Detail' },
-          ]}
-        />
-      </section>
+      ))}
 
       {showButton && (
         <motion.div

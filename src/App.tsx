@@ -2,8 +2,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import './index.css';
 import Layout from '@/components/Layout';
-import OptionSelect from '@/page/OptionSelect';
-import Quiz from '@/page/Quiz';
+import OptionSelect from '@/page/OptionSelectPage';
+import Quiz from '@/page/QuizPage';
 import KakaoCallback from '@/page/KakaoCallback';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import MyPage from '@/page/MyPage';
@@ -20,7 +20,13 @@ import IncorrectAnswerPage from '@/features/myPage/IncorrectAnswers/IncorrectAns
 
 const queryClient = new QueryClient();
 
+
+
 function App() {
+
+  
+
+
   const router = createBrowserRouter([
     {
       path: '/',

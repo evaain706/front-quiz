@@ -42,7 +42,6 @@ export const useQuiz = () => {
       });
       setQuiz(response.data);
     } catch (error) {
-     
       setError(new Error('퀴즈 요청 실패'));
     } finally {
       setIsLoading(false);
@@ -58,7 +57,7 @@ export const useQuiz = () => {
         quiz,
         userAnswer,
       });
-      console.log(response.data);
+
       setResult(response.data);
       if (user) {
         handleAddStatistics(response.data.isCorrect);
@@ -67,7 +66,6 @@ export const useQuiz = () => {
         });
       }
     } catch (error) {
-      console.error('채점 실패:', error);
       addToast('error', '채점중 에러(다시시도해주세요)');
     } finally {
       setIsGrading(false);
