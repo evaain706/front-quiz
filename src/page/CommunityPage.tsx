@@ -1,4 +1,4 @@
-import CommunityMain from '@/features/communityFeat/CommunityMain';
+import CommunityMain from '@/features/community/CommunityMain';
 
 const CommunityPage = () => {
   return (
