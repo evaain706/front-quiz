@@ -10,13 +10,19 @@ import UserStatisticsSkeleton from '@/components/ui/Skeleton/UserStatisticsSkele
 import { useUserStore } from '@/store/useUserStore';
 import ErrorComp from '@/components/ui/ErrorComp';
 import { useUserStatistics } from '../hooks/useUserStatistics';
+import LevelStatisticGrid from '@/components/ui/MyPage/Statistics/LevelStatisticGrid';
+import { useMemo, useState } from 'react';
+import NavigateQuizModal from '@/components/NavigateQuizModal/NavigateQuizModal';
+import { checkStatistics } from '@/utils/checkStatistics';
 
 const UserStatisticPage = () => {
   const { getUserStatistics } = useUserStatistics();
 
+  const [open, setOpen] = useState(false);
+
   const navigate = useNavigate();
 
-  const { data, isLoading, error } = useQuery<UserStatistics | null>({
+  const { data, isLoading, isError } = useQuery<UserStatistics>({
     queryKey: ['statistics'],
     queryFn: getUserStatistics,
     staleTime: 30 * 60 * 1000,
@@ -24,14 +30,16 @@ const UserStatisticPage = () => {
 
   const user = useUserStore((s) => s.user);
 
-  if (isLoading)
-    return (
-      <div>
-        <UserStatisticsSkeleton />
-      </div>
-    );
+  const stats = useMemo(() => {
+    if (!data) return null;
+    return checkStatistics(data);
+  }, [data]);
 
-  if (error || !data) {
+  if (isLoading) {
+    return <UserStatisticsSkeleton />;
+  }
+
+  if (isError) {
     return (
       <div className='flex min-h-[calc(100vh-6rem)] flex-col items-center justify-center gap-5 overflow-auto'>
         <ErrorComp
@@ -42,16 +50,16 @@ const UserStatisticPage = () => {
     );
   }
 
-  const totalCorrect = data.totalStats.correct;
-  const totalIncorrect = data.totalStats.incorrect;
-  const totalCount = totalCorrect + totalIncorrect;
+  if (!stats || !data) return null;
 
-  const accuracy =
-    totalCount === 0 ? 0 : Math.floor((totalCorrect / totalCount) * 100);
-
-  const isEmptyStats = totalCount === 0;
-  const isEmptyCategory = Object.keys(data.categoryStats).length === 0;
-  const isEmptyLevel = Object.keys(data.levelStats).length === 0;
+  const {
+    totalCorrect,
+    totalIncorrect,
+    accuracy,
+    isEmptyStats,
+    isEmptyCategory,
+    isEmptyLevel,
+  } = stats;
 
   return (
     <div className='flex min-h-[calc(100vh-7rem)] flex-col items-center justify-center gap-5 overflow-auto'>
@@ -59,7 +67,7 @@ const UserStatisticPage = () => {
         <div className='relative mb-6 flex flex-col items-center'>
           <h1 className='text-[3rem] font-bold'>
             <span className='text-gray-600'>{user?.nickname}</span> 님의 통계
-            <p>{data.content}</p>
+            <p>{data?.content}</p>
           </h1>
 
           <Button
@@ -90,7 +98,10 @@ const UserStatisticPage = () => {
               아직 카테고리별 통계가 없어요
             </p>
           ) : (
-            <StatisticGrid data={data.categoryStats} />
+            <StatisticGrid
+              onClick={() => setOpen((prev) => !prev)}
+              data={data!.categoryStats}
+            />
           )}
         </StatisticSection>
 
@@ -100,7 +111,7 @@ const UserStatisticPage = () => {
               아직 레벨별 통계가 없어요
             </p>
           ) : (
-            <StatisticGrid data={data.levelStats} />
+            <LevelStatisticGrid data={data.levelStats} />
           )}
         </StatisticSection>
 
@@ -110,6 +121,8 @@ const UserStatisticPage = () => {
           </div>
         )}
       </div>
+
+      <NavigateQuizModal isOpen={open} onOpenChange={setOpen} />
     </div>
   );
 };

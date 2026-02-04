@@ -4,10 +4,19 @@ import { useNavigate } from 'react-router-dom';
 interface ErrorCompProps {
   PageName: string;
   message: string;
+  onReset?: () => void;
 }
 
-const ErrorComp = ({ PageName, message }: ErrorCompProps) => {
+const ErrorComp = ({ PageName, message, onReset }: ErrorCompProps) => {
   const navigate = useNavigate();
+
+  const handleReset = () => {
+    if (onReset) {
+      onReset();
+    } else {
+      location.reload();
+    }
+  };
 
   return (
     <div className='flex flex-col items-center justify-center gap-5'>
@@ -19,7 +28,7 @@ const ErrorComp = ({ PageName, message }: ErrorCompProps) => {
       </p>
 
       <div className='flex gap-5'>
-        <Button onClick={() => location.reload()}>새로고침</Button>
+        <Button onClick={handleReset}>새로고침</Button>
         <Button onClick={() => navigate('/main')}>메인페이지로 이동</Button>
       </div>
     </div>
