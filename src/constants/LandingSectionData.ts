@@ -1,6 +1,5 @@
 import QuizImg1 from '@/assets/img/quiz-img.png';
 import QuizImg2 from '@/assets/img/quiz-img2.png';
-import QuizImg3 from '@/assets/img/quiz-img3.png';
 import CommunityImg from '@/assets/img/community-img.png';
 import CommunityDetailImg from '@/assets/img//community-detail-img.png';
 import UserStatImg from '@/assets/img/user-statistic-img.png';
@@ -16,7 +15,6 @@ export const LandingSectionData = [
     images: [
       { src: QuizImg1, alt: 'QuizImage1' },
       { src: QuizImg2, alt: 'QuizImage2' },
-      { src: QuizImg3, alt: 'QuizImage3' },
     ],
   },
   {
