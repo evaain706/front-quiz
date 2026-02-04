@@ -12,21 +12,15 @@ import LandingPage from '@/page/LandingPage';
 import MainPage from '@/page/MainPage';
 import ToastContainer from '@/components/ui/Toast/ToastContainer';
 import CommunityPage from '@/page/CommunityPage';
-import CommunityForm from '@/features/Community/CommunityForm';
-import CommunityDetail from '@/features/Community/CommunityDetail';
+import CommunityForm from '@/features/communityFeat/CommunityForm';
+import CommunityDetail from '@/features/communityFeat/CommunityDetail';
 import UserStatisticPage from '@/features/myPage/UserStatistics/UserStatistics';
 import UserSettingPage from '@/features/myPage/UserSetting/UserSetting';
 import IncorrectAnswerPage from '@/features/myPage/IncorrectAnswers/IncorrectAnswer';
 
 const queryClient = new QueryClient();
 
-
-
 function App() {
-
-  
-
-
   const router = createBrowserRouter([
     {
       path: '/',

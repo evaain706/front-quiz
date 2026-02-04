@@ -11,7 +11,7 @@ import { useUserStore } from '@/store/useUserStore';
 import ErrorComp from '@/components/ui/ErrorComp';
 import { useUserStatistics } from '../hooks/useUserStatistics';
 import LevelStatisticGrid from '@/components/ui/MyPage/Statistics/LevelStatisticGrid';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import NavigateQuizModal from '@/components/NavigateQuizModal/NavigateQuizModal';
 import { checkStatistics } from '@/utils/checkStatistics';
 
@@ -30,11 +30,6 @@ const UserStatisticPage = () => {
 
   const user = useUserStore((s) => s.user);
 
-  const stats = useMemo(() => {
-    if (!data) return null;
-    return checkStatistics(data);
-  }, [data]);
-
   if (isLoading) {
     return <UserStatisticsSkeleton />;
   }
@@ -50,7 +45,16 @@ const UserStatisticPage = () => {
     );
   }
 
-  if (!stats || !data) return null;
+  if (!data) {
+    return (
+      <div className='flex min-h-[calc(100vh-6rem)] flex-col items-center justify-center gap-5 overflow-auto'>
+        <ErrorComp
+          PageName='유저통계페이지 데이터 오류'
+          message='통계 데이터에 이상이 존재합니다'
+        />
+      </div>
+    );
+  }
 
   const {
     totalCorrect,
@@ -59,7 +63,7 @@ const UserStatisticPage = () => {
     isEmptyStats,
     isEmptyCategory,
     isEmptyLevel,
-  } = stats;
+  } = checkStatistics(data);
 
   return (
     <div className='flex min-h-[calc(100vh-7rem)] flex-col items-center justify-center gap-5 overflow-auto'>
@@ -100,7 +104,7 @@ const UserStatisticPage = () => {
           ) : (
             <StatisticGrid
               onClick={() => setOpen((prev) => !prev)}
-              data={data!.categoryStats}
+              data={data.categoryStats}
             />
           )}
         </StatisticSection>
