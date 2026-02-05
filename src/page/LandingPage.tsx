@@ -30,10 +30,10 @@ const LandingPage = () => {
   }, []);
 
   return (
-    <div className='h-screen snap-y snap-mandatory overflow-y-scroll bg-black p-5 font-sans text-gray-800'>
+    <div className='h-screen-safe snap-y snap-mandatory overflow-y-scroll overflow-x-hidden bg-black p-5 font-sans text-gray-800'>
       <section
         ref={firstSectionRef}
-        className='bg-navy-black relative flex h-screen snap-center flex-col items-center justify-center gap-10 text-3xl font-bold text-white'
+        className='bg-navy-black relative flex h-screen-safe snap-center flex-col items-center justify-center gap-10 text-3xl font-bold text-white'
       >
         <motion.h1
           initial={{ opacity: 0, scale: 0.9 }}

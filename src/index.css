@@ -58,6 +58,40 @@ body {
 
   html {
     font-size: 10px;
+    overflow-x: hidden;
+  }
+
+  body {
+    overflow-x: hidden;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+}
+
+@layer utilities {
+  .min-h-screen-safe {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .min-h-content {
+    min-height: calc(100vh - 6rem);
+    min-height: calc(100dvh - 6rem);
+  }
+
+  .min-h-content-7 {
+    min-height: calc(100vh - 7rem);
+    min-height: calc(100dvh - 7rem);
+  }
+
+  .min-h-content-10 {
+    min-height: calc(100vh - 10rem);
+    min-height: calc(100dvh - 10rem);
+  }
+
+  .h-screen-safe {
+    height: 100vh;
+    height: 100dvh;
   }
 }
 

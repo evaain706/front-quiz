@@ -76,7 +76,7 @@ const CommunityForm = () => {
   };
 
   return (
-    <div className='flex min-h-[calc(100vh-6rem)] items-center justify-center'>
+    <div className='flex min-h-content items-center justify-center'>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className='mx-auto w-full border bg-white/5 p-10 shadow md:rounded-xl'

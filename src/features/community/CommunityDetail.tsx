@@ -101,7 +101,7 @@ const CommunityDetail = () => {
   if (isLoading) return <CommunityDetailSkeleton />;
   if (!post)
     return (
-      <div className='mt-5 flex min-h-[calc(100vh-6rem)] items-center justify-center'>
+      <div className='mt-5 flex min-h-content items-center justify-center'>
         <ErrorComp
           PageName='게시글불러오기중 에러'
           message='게시글상세정보를 불러오지못했습니다'

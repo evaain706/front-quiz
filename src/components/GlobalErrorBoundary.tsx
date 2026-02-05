@@ -32,7 +32,7 @@ class GlobalErrorBoundary extends React.Component<
   render() {
     if (this.state.hasError) {
       return (
-        <div className='flex min-h-screen flex-col items-center justify-center gap-6 bg-gray-900 px-4 text-center text-white'>
+        <div className='flex min-h-screen-safe flex-col items-center justify-center gap-6 bg-gray-900 px-4 text-center text-white'>
           <h1 className='text-3xl font-bold md:text-4xl'>
             알 수 없는 오류가 발생했어요
           </h1>

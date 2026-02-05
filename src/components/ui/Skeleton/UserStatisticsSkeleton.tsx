@@ -1,6 +1,6 @@
 const UserStatisticsSkeleton = () => {
   return (
-    <div className='flex min-h-[calc(100vh-6rem)] flex-col items-center justify-center gap-15 overflow-auto'>
+    <div className='flex min-h-content flex-col items-center justify-center gap-15 overflow-auto'>
       <div className='w-screen animate-pulse bg-gray-900 p-10 text-white md:w-[70rem] lg:w-[100rem]'>
         <div className='relative mb-6 flex flex-col items-center'>
           <div className='h-[3rem] w-48 rounded-md bg-gray-700'></div>

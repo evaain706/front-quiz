@@ -5,7 +5,7 @@ const NotFound = () => {
   const navigate = useNavigate();
 
   return (
-    <div className='flex h-screen w-screen flex-col items-center justify-center gap-5 bg-black'>
+    <div className='flex h-screen-safe w-full min-w-0 flex-col items-center justify-center gap-5 overflow-x-hidden bg-black'>
       <h2 className='text-[4rem] font-bold text-white/40 md:text-[5rem]'>
         404 NOT FOUND
       </h2>

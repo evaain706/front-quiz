@@ -69,7 +69,7 @@ const IncorrectAnswerPage = () => {
 
   if (isError) {
     return (
-      <div className='flex min-h-[calc(100vh-6rem)] flex-col items-center justify-center gap-5 overflow-auto'>
+      <div className='flex min-h-content flex-col items-center justify-center gap-5 overflow-auto'>
         <ErrorComp
           PageName='오답문제페이지 에러'
           message='저장된 오답문제를 불러오는데 실패했습니다'
@@ -79,7 +79,7 @@ const IncorrectAnswerPage = () => {
   }
 
   return (
-    <div className='mt-10 flex min-h-[calc(100vh-10rem)] w-full flex-col justify-center'>
+    <div className='mt-10 flex min-h-content-10 w-full flex-col justify-center'>
       <div className='mb-5 flex items-center justify-center'>
         <h2 className='flex items-center gap-2 text-[1.8rem] font-bold text-white md:text-[4rem]'>
           <span className='text-gray-600'>{user?.nickname}</span>님의 오답문제

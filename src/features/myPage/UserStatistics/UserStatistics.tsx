@@ -36,7 +36,7 @@ const UserStatisticPage = () => {
 
   if (isError) {
     return (
-      <div className='flex min-h-[calc(100vh-6rem)] flex-col items-center justify-center gap-5 overflow-auto'>
+      <div className='flex min-h-content flex-col items-center justify-center gap-5 overflow-auto'>
         <ErrorComp
           PageName='유저통계페이지 에러'
           message='유저통계데이터를 불러오는데 실패했습니다'
@@ -47,7 +47,7 @@ const UserStatisticPage = () => {
 
   if (!data) {
     return (
-      <div className='flex min-h-[calc(100vh-6rem)] flex-col items-center justify-center gap-5 overflow-auto'>
+      <div className='flex min-h-content flex-col items-center justify-center gap-5 overflow-auto'>
         <ErrorComp
           PageName='유저통계페이지 데이터 오류'
           message='통계 데이터에 이상이 존재합니다'
@@ -66,7 +66,7 @@ const UserStatisticPage = () => {
   } = checkStatistics(data);
 
   return (
-    <div className='flex min-h-[calc(100vh-7rem)] flex-col items-center justify-center gap-5 overflow-auto'>
+    <div className='flex min-h-content-7 flex-col items-center justify-center gap-5 overflow-auto'>
       <div className='mt-8 w-full bg-gray-900 p-10 text-white'>
         <div className='relative mb-6 flex flex-col items-center'>
           <h1 className='text-[3rem] font-bold'>

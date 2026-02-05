@@ -1,6 +1,6 @@
 const CommunityDetailSkeleton = () => {
   return (
-    <div className='mt-5 flex min-h-[calc(100vh-6rem)] animate-pulse items-center justify-center'>
+    <div className='mt-5 flex min-h-content animate-pulse items-center justify-center'>
       <div className='relative mx-auto flex w-full flex-col'>
         <div className='rounded-md bg-white shadow-xl ring-1 ring-slate-100'>
           <header className='border-b border-slate-100 px-6 py-6 sm:px-8'>

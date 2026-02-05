@@ -50,7 +50,7 @@ const OptionSelect = () => {
   const SelectedIconColor = selectedCategory?.color;
 
   return (
-    <div className='flex min-h-[calc(100vh-6rem)] w-full flex-col items-center justify-center gap-10 p-4 md:gap-14 md:p-8'>
+    <div className='flex min-h-content w-full flex-col items-center justify-center gap-10 p-4 md:gap-14 md:p-8'>
       {step === 0 && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}

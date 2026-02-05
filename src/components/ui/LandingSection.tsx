@@ -18,7 +18,7 @@ const LandingSection = ({
   images,
 }: LandingSectionProps) => {
   return (
-    <section className='relative flex h-screen snap-center flex-col items-center justify-center gap-10 bg-black font-bold text-white'>
+    <section className='relative flex h-screen-safe snap-center flex-col items-center justify-center gap-10 bg-black font-bold text-white'>
       <motion.h2
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}

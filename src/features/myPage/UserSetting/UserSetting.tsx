@@ -41,7 +41,7 @@ const UserSettingPage = () => {
   };
 
   return (
-    <div className='flex min-h-[calc(100vh-6rem)] w-full flex-col justify-center gap-4 p-10'>
+    <div className='flex min-h-content w-full flex-col justify-center gap-4 p-10'>
       <h2 className='text-center text-[2rem] font-bold text-white md:text-[3rem]'>
         유저정보변경
       </h2>
