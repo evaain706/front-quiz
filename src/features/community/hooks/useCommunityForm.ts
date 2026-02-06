@@ -3,6 +3,7 @@ import { instance } from '@/apis/instance';
 import { useToastStore } from '@/store/useToastStore';
 import { useNavigate } from 'react-router-dom';
 import type { PostForm, EditPostForm } from '@/types/communityTypes';
+import { queryKeys } from '@/queryKeys';
 
 export const useCommunityForm = () => {
   const addToast = useToastStore((s) => s.addToast);
@@ -16,7 +17,7 @@ export const useCommunityForm = () => {
     },
     onSuccess: () => {
       addToast('success', '게시글이 등록되었습니다.');
-      queryClient.invalidateQueries({ queryKey: ['post'] });
+      queryClient.invalidateQueries({ queryKey: queryKeys.community.all });
       navigate('/community');
     },
     onError: (error: any) => {
@@ -34,7 +35,7 @@ export const useCommunityForm = () => {
     },
     onSuccess: () => {
       addToast('success', '게시글이 수정되었습니다.');
-      queryClient.invalidateQueries({ queryKey: ['post'] });
+      queryClient.invalidateQueries({ queryKey: queryKeys.community.all });
       navigate('/community');
     },
     onError: (error: any) => {

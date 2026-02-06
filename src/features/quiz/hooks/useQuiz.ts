@@ -6,6 +6,7 @@ import { privateInstance } from '@/apis/privateInstance';
 import { useState } from 'react';
 import { useToastStore } from '@/store/useToastStore';
 import { useQueryClient } from '@tanstack/react-query';
+import { queryKeys } from '@/queryKeys';
 
 export const useQuiz = () => {
   const quiz = useQuizStore((s) => s.quiz);
@@ -62,7 +63,7 @@ export const useQuiz = () => {
       if (user) {
         handleAddStatistics(response.data.isCorrect);
         queryClient.invalidateQueries({
-          queryKey: ['statistics'],
+          queryKey: queryKeys.statistics.all,
         });
       }
     } catch (error) {

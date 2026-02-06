@@ -3,6 +3,7 @@ import { instance } from '@/apis/instance';
 import { useToastStore } from '@/store/useToastStore';
 import { useNavigate } from 'react-router-dom';
 import type { AxiosError } from 'axios';
+import { queryKeys } from '@/queryKeys';
 
 interface AddCommentParams {
   postId: string;
@@ -31,7 +32,7 @@ export const useCommunityDetail = () => {
     },
     onSuccess: () => {
       addToast('success', '게시글이 삭제되었습니다.');
-      queryClient.invalidateQueries({ queryKey: ['post'] });
+      queryClient.invalidateQueries({ queryKey: queryKeys.community.all });
       navigate('/community');
     },
   });
@@ -54,7 +55,9 @@ export const useCommunityDetail = () => {
       return response.data;
     },
     onSuccess: (_, variables) => {
-      queryClient.invalidateQueries({ queryKey: ['post', variables.postId] });
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.community.detail(variables.postId),
+      });
       addToast('success', '댓글이 작성되었습니다.');
     },
     onError: (error: AxiosError) => {
@@ -105,7 +108,9 @@ export const useCommunityDetail = () => {
       return response.data;
     },
     onSuccess: (_, variables) => {
-      queryClient.invalidateQueries({ queryKey: ['post', variables.postId] });
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.community.detail(variables.postId),
+      });
       addToast('success', '댓글이 삭제되었습니다.');
     },
   });

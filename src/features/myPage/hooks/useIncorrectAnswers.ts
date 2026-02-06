@@ -6,6 +6,7 @@ import { privateInstance } from '@/apis/privateInstance';
 
 import { useToastStore } from '@/store/useToastStore';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { queryKeys } from '@/queryKeys';
 
 export const useIncorrectAnswers = () => {
   const quiz = useQuizStore((s) => s.quiz);
@@ -34,7 +35,7 @@ export const useIncorrectAnswers = () => {
 
       addToast('success', '오답이 등록되었습니다.');
       queryClient.invalidateQueries({
-        queryKey: ['incorrectAnswer'],
+        queryKey: queryKeys.incorrectAnswer.all,
       });
     } catch (err) {
       addToast('error', '오답등록중 오류가 발생했습니다');
@@ -56,7 +57,9 @@ export const useIncorrectAnswers = () => {
     },
     onSuccess: () => {
       addToast('success', '오답이 삭제되었습니다.');
-      queryClient.invalidateQueries({ queryKey: ['incorrectAnswer'] });
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.incorrectAnswer.all,
+      });
     },
     onError: () => {
       addToast('error', '오답삭제중 오류가 발생했습니다');

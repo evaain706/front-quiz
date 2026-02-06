@@ -10,6 +10,7 @@ import Button from '@/components/Button';
 import Input from '@/components/Input';
 import { useDebounce } from '@/hooks/useDebounce';
 import ErrorComp from '@/components/ui/ErrorComp';
+import { queryKeys } from '@/queryKeys';
 
 const CommunityMain = () => {
   const navigate = useNavigate();
@@ -20,7 +21,11 @@ const CommunityMain = () => {
   const { fetchPosts } = useCommunity();
 
   const { data, isPending, isError } = useQuery<PostResponse, Error>({
-    queryKey: ['post', page, category, debounceSearch],
+    queryKey: queryKeys.community.list({
+      page,
+      category: category,
+      search: debounceSearch,
+    }),
     queryFn: () => fetchPosts(page, 5, category || undefined, debounceSearch),
     staleTime: 5 * 60 * 1000,
   });

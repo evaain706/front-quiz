@@ -12,6 +12,7 @@ import BackIcon from '@/assets/svg/BackIcon';
 import { useNavigate } from 'react-router-dom';
 import ErrorComp from '@/components/ui/ErrorComp';
 import { useIncorrectAnswers } from '../hooks/useIncorrectAnswers';
+import { queryKeys } from '@/queryKeys';
 
 const IncorrectAnswerPage = () => {
   const { getIncorrectAnswers } = useIncorrectAnswers();
@@ -35,7 +36,7 @@ const IncorrectAnswerPage = () => {
     isFetchingNextPage,
     isError,
   } = useInfiniteQuery<IncorrectAnswerResponse>({
-    queryKey: ['incorrectAnswer', category, level],
+    queryKey: queryKeys.incorrectAnswer.list({ category, level }),
     queryFn: ({ pageParam }) =>
       getIncorrectAnswers({
         category,
