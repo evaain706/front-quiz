@@ -1,8 +1,16 @@
 export const queryKeys = {
+  quiz: {
+    all: ['quiz'] as const,
+  },
+
   community: {
     all: ['post'] as const,
 
-    list: (params: { page: number; category: string | null; search: string | undefined }) =>
+    list: (params: {
+      page: number;
+      category: string | null;
+      search: string | undefined;
+    }) =>
       [
         ...queryKeys.community.all,
         'list',
