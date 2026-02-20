@@ -7,9 +7,11 @@ import { privateInstance } from '@/apis/privateInstance';
 import { useToastStore } from '@/store/useToastStore';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { queryKeys } from '@/queryKeys';
+import type { Quiz } from '@/types/quizTypes';
 
 export const useIncorrectAnswers = () => {
-  const quiz = useQuizStore((s) => s.quiz);
+  
+  const quiz = useQueryClient().getQueryData<Quiz>(queryKeys.quiz.all); // 캐시에 저장되어있는 데이터 꺼내오기
   const result = useQuizStore((s) => s.result);
   const userAnswer = useQuizStore((s) => s.userAnswer);
 

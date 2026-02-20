@@ -1,7 +1,5 @@
 import { useEffect } from 'react';
-import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
 import { useQuiz } from './hooks/useQuiz';
-import { useQuizStore } from '@/store/useQuizStore';
 import QuizHeader from './components/QuizHeader';
 import QuizErrorFallback from './components/QuizErrorFallback';
 import QuizActionButtons from './components/QuizActionButtons';
@@ -9,9 +7,8 @@ import QuestionCard from './QuestionCard';
 import OptionsCard from './OptionCard';
 
 const QuizScreen = () => {
-  const { fetchQuiz, error } = useQuiz();
-  const isLoading = useQuizStore((s) => s.isLoading);
-  const quiz = useQuizStore((s) => s.quiz);
+ throw new Error('테스트용에러');
+  const { quiz, isLoading, isError, fetchQuiz } = useQuiz();
 
   useEffect(() => {
     fetchQuiz();
@@ -23,15 +20,13 @@ const QuizScreen = () => {
         <QuizHeader />
       </div>
 
-      <ErrorBoundary
-        fallback={(reset) => (
-          <QuizErrorFallback onRetry={fetchQuiz} reset={reset} />
-        )}
-      >
-        <QuestionCard error={error} isLoading={isLoading} quiz={quiz} />
-      </ErrorBoundary>
+      {isError ? (
+        <QuizErrorFallback onRetry={fetchQuiz} />
+      ) : (
+        <QuestionCard isLoading={isLoading} quiz={quiz} />
+      )}
 
-      <OptionsCard />
+      <OptionsCard quiz={quiz} />
 
       <QuizActionButtons />
     </div>

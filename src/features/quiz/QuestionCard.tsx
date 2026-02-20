@@ -7,9 +7,8 @@ const LazyReactMarkdown = lazy(() =>
 );
 
 interface QuestionCardProps {
-  error: Error | null;
   isLoading: boolean;
-  quiz: Quiz | null;
+  quiz: Quiz | undefined;
 }
 
 const SkeletonCard = () => (
@@ -24,11 +23,7 @@ const cardClassName =
 const contentClass =
   'max-h-[30rem] w-full items-center justify-center overflow-auto text-[1.4rem] leading-[3rem] font-bold text-green-400 md:text-[2rem] md:leading-[4rem]';
 
-const QuestionCard = ({ error, isLoading, quiz }: QuestionCardProps) => {
-  if (error) {
-    throw error;
-  }
-
+const QuestionCard = ({ isLoading, quiz }: QuestionCardProps) => {
   if (isLoading) {
     return <SkeletonCard />;
   }

@@ -3,19 +3,29 @@ import { useOptionStore } from '@/store/useOptionStore';
 import { useUserStore } from '@/store/useUserStore';
 import { instance } from '@/apis/instance';
 import { privateInstance } from '@/apis/privateInstance';
-import { useState } from 'react';
 import { useToastStore } from '@/store/useToastStore';
-import { useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { queryKeys } from '@/queryKeys';
+import type { Quiz } from '@/types/quizTypes';
+
+const generateQuiz = async (category: string, level: string): Promise<Quiz> => {
+  const response = await instance.post('/api/quiz/generate-quiz', {
+    topic: category,
+    level,
+  });
+
+  if (!response.data || !response.data.question) {
+    throw new Error('유효하지 않은 퀴즈 데이터');
+  }
+
+  return response.data;
+};
 
 export const useQuiz = () => {
-  const quiz = useQuizStore((s) => s.quiz);
   const userAnswer = useQuizStore((s) => s.userAnswer);
 
-  const setQuiz = useQuizStore((s) => s.setQuiz);
   const setUserAnswer = useQuizStore((s) => s.setUserAnswer);
   const setResult = useQuizStore((s) => s.setResult);
-  const setIsLoading = useQuizStore((s) => s.setIsLoading);
   const setIsGrading = useQuizStore((s) => s.setIsGrading);
 
   const category = useOptionStore((s) => s.category);
@@ -27,26 +37,23 @@ export const useQuiz = () => {
 
   const queryClient = useQueryClient();
 
-  const [error, setError] = useState<Error | null>(null);
+  const {
+    data: quiz,
+    isLoading,
+    isError,
+    refetch,
+  } = useQuery<Quiz>({
+    queryKey: queryKeys.quiz.all,
+    queryFn: () => generateQuiz(category, level),
+    enabled: false,
+    retry: false,
+  });
 
-  const fetchQuiz = async () => {
-    setIsLoading(true);
-    setQuiz(null);
+  const fetchQuiz = () => {
     setResult(null);
     setUserAnswer('');
-    setError(null);
-
-    try {
-      const response = await instance.post('/api/quiz/generate-quiz', {
-        topic: category,
-        level,
-      });
-      setQuiz(response.data);
-    } catch (error) {
-      setError(new Error('퀴즈 요청 실패'));
-    } finally {
-      setIsLoading(false);
-    }
+    queryClient.resetQueries({ queryKey: queryKeys.quiz.all });
+    refetch();
   };
 
   const handleSubmit = async () => {
@@ -87,8 +94,10 @@ export const useQuiz = () => {
   };
 
   return {
+    quiz,
+    isLoading,
+    isError,
     fetchQuiz,
     handleSubmit,
-    error,
   };
 };

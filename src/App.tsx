@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import './index.css';
 import Layout from '@/components/Layout';
+import GlobalErrorFallback from '@/components/GlobalErrorFallback';
 import OptionSelect from '@/page/OptionSelectPage';
 import Quiz from '@/page/QuizPage';
 import KakaoCallback from '@/page/KakaoCallback';
@@ -33,6 +34,7 @@ function App() {
 
     {
       element: <Layout />,
+      errorElement: <GlobalErrorFallback />,
       children: [
         {
           path: '/select',

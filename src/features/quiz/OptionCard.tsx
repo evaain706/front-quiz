@@ -4,11 +4,15 @@ import { useQuizStore } from '@/store/useQuizStore';
 import { useUserStore } from '@/store/useUserStore';
 import { getOptionsCardStyle } from '@/utils/getOptionsCardStyle';
 import { useIncorrectAnswers } from '../myPage/hooks/useIncorrectAnswers';
+import type { Quiz } from '@/types/quizTypes';
 
 const ResultDisplay = lazy(() => import('./ResultDisplay'));
 
-const OptionsCard = () => {
-  const quiz = useQuizStore((s) => s.quiz);
+interface OptionsCardProps {
+  quiz: Quiz | undefined;
+}
+
+const OptionsCard = ({ quiz }: OptionsCardProps) => {
   const userAnswer = useQuizStore((s) => s.userAnswer);
   const setUserAnswer = useQuizStore((s) => s.setUserAnswer);
   const result = useQuizStore((s) => s.result);

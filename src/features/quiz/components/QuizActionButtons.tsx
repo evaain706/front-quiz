@@ -3,8 +3,7 @@ import { useQuiz } from '../hooks/useQuiz';
 import { useQuizStore } from '@/store/useQuizStore';
 
 const QuizActionButtons = () => {
-  const { fetchQuiz, handleSubmit } = useQuiz();
-  const isLoading = useQuizStore((s) => s.isLoading);
+  const { fetchQuiz, handleSubmit, isLoading } = useQuiz();
   const isGrading = useQuizStore((s) => s.isGrading);
   const userAnswer = useQuizStore((s) => s.userAnswer);
   const result = useQuizStore((s) => s.result);
