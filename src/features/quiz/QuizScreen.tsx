@@ -7,7 +7,6 @@ import QuestionCard from './QuestionCard';
 import OptionsCard from './OptionCard';
 
 const QuizScreen = () => {
- throw new Error('테스트용에러');
   const { quiz, isLoading, isError, fetchQuiz } = useQuiz();
 
   useEffect(() => {

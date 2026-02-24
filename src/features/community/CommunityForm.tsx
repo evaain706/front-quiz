@@ -4,9 +4,11 @@ import Input from '@/components/Input';
 import Button from '@/components/Button';
 import { useLocation, useNavigate } from 'react-router-dom';
 import BackIcon from '@/assets/svg/BackIcon';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { changeIncorrectToQuestion } from '@/utils/changeIncorrectToQuestion';
 import { useCommunityForm } from './hooks/useCommunityForm';
+import useEscapeBlocker from '@/hooks/useEscapeBlocker';
+import BlockerModal from '@/components/BlockerModal/BlockerModal';
 
 const CommunityForm = () => {
   const location = useLocation();
@@ -21,22 +23,39 @@ const CommunityForm = () => {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isDirty, isSubmitting },
   } = useForm<PostForm>();
+
+  const {
+    isBlocked,
+    proceed,
+    reset: cancelBlock,
+  } = useEscapeBlocker(isDirty && !isSubmitting);
+
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (isBlocked) {
+      setOpen(true);
+    }
+  }, [isBlocked]);
 
   const { handleAddPostMutate, handleEditPostMutation } = useCommunityForm();
 
   useEffect(() => {
     if (isEditMode && postToEdit) {
-      reset({
-        title: postToEdit.title,
+      reset(
+        {
+          title: postToEdit.title,
 
-        content: postToEdit.content,
+          content: postToEdit.content,
 
-        category: postToEdit.category,
+          category: postToEdit.category,
 
-        nickname: postToEdit.nickname,
-      });
+          nickname: postToEdit.nickname,
+        },
+        { keepDirty: false, keepTouched: false },
+      );
     }
   }, [isEditMode, postToEdit, reset]);
 
@@ -44,15 +63,21 @@ const CommunityForm = () => {
     if (wrongQuiz) {
       const mapped = changeIncorrectToQuestion(wrongQuiz);
 
-      reset({
-        title: mapped.title ?? '',
+      reset(
+        {
+          title: mapped.title ?? '',
 
-        content: mapped.content ?? '',
+          content: mapped.content ?? '',
 
-        category: mapped.category ?? 'question',
+          category: mapped.category ?? 'question',
 
-        nickname: '',
-      });
+          nickname: '',
+        },
+        {
+          keepDirty: false,
+          keepTouched: false,
+        },
+      );
     }
   }, [wrongQuiz, reset]);
 
@@ -62,6 +87,7 @@ const CommunityForm = () => {
         { ...data, postId: postToEdit._id },
         {
           onSuccess: () => {
+            reset(data, { keepDirty: false });
             navigate(`/community/detail/${postToEdit._id}`);
           },
         },
@@ -69,6 +95,7 @@ const CommunityForm = () => {
     } else {
       handleAddPostMutate.mutate(data, {
         onSuccess: () => {
+          reset(data, { keepDirty: false });
           navigate('/community');
         },
       });
@@ -76,7 +103,7 @@ const CommunityForm = () => {
   };
 
   return (
-    <div className='flex min-h-content items-center justify-center'>
+    <div className='min-h-content flex items-center justify-center'>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className='mx-auto w-full border bg-white/5 p-10 shadow md:rounded-xl'
@@ -193,6 +220,24 @@ const CommunityForm = () => {
           </Button>
         </div>
       </form>
+
+      {open && (
+        <BlockerModal
+          isOpen={open}
+          onOpenChange={(next) => {
+            setOpen(next);
+            if (!next) cancelBlock();
+          }}
+          onProceed={() => {
+            setOpen(false);
+            proceed();
+          }}
+          onCancel={() => {
+            setOpen(false);
+            cancelBlock();
+          }}
+        />
+      )}
     </div>
   );
 };
