@@ -1,6 +1,8 @@
 export const queryKeys = {
   quiz: {
     all: ['quiz'] as const,
+    generate: (category: string, level: string) =>
+      [...queryKeys.quiz.all, 'generate', { category, level }] as const,
   },
 
   community: {

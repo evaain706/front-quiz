@@ -26,7 +26,7 @@ JavaScript, React, TypeScript 등 다양한 기술 스택에 대한 퀴즈를 �
 
 - OAuth 2.0기반 카카오 소셜 로그인(JWT기반) -> zustand Persist를 사용한 로그인유지
 
-- 백엔드단 프롬프트 엔지니어링을 통해 텍스트를 일관된 JSON 스키마로 응답받도록 설계하여 Meta Llama 기반 퀴즈 생성 시스템 구축
+- 백엔드단 프롬프트 엔지니어링을 통해 텍스트를 일관된 JSON 스키마로 응답받도록 설계하여 Google GEMINI 2.5 flash 기반 퀴즈 생성 시스템 구축
 
 
 ## 🛠 기술 스택

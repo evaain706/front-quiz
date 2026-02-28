@@ -10,9 +10,10 @@ const ResultDisplay = lazy(() => import('./ResultDisplay'));
 
 interface OptionsCardProps {
   quiz: Quiz | undefined;
+  isFetching : boolean
 }
 
-const OptionsCard = ({ quiz }: OptionsCardProps) => {
+const OptionsCard = ({ quiz,isFetching }: OptionsCardProps) => {
   const userAnswer = useQuizStore((s) => s.userAnswer);
   const setUserAnswer = useQuizStore((s) => s.setUserAnswer);
   const result = useQuizStore((s) => s.result);
@@ -23,7 +24,7 @@ const OptionsCard = ({ quiz }: OptionsCardProps) => {
   const containerClassName =
     'mt-8 mb-8 min-h-[15rem] w-full md:w-[70rem] lg:w-[90rem]';
 
-  if (!quiz) {
+  if (!quiz || isFetching) {
     return (
       <div className={containerClassName}>
         <div className='rounded-md border border-gray-200 bg-white/10 p-6 shadow-sm'>

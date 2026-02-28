@@ -7,7 +7,8 @@ import QuestionCard from './QuestionCard';
 import OptionsCard from './OptionCard';
 
 const QuizScreen = () => {
-  const { quiz, isLoading, isError, fetchQuiz } = useQuiz();
+  const { quiz, isLoading, isError, fetchQuiz, handleSubmit, isFetching } =
+    useQuiz();
 
   useEffect(() => {
     fetchQuiz();
@@ -22,12 +23,17 @@ const QuizScreen = () => {
       {isError ? (
         <QuizErrorFallback onRetry={fetchQuiz} />
       ) : (
-        <QuestionCard isLoading={isLoading} quiz={quiz} />
+        <QuestionCard isLoading={isFetching} quiz={quiz} />
       )}
 
-      <OptionsCard quiz={quiz} />
+      <OptionsCard quiz={quiz} isFetching={isFetching} />
 
-      <QuizActionButtons />
+      <QuizActionButtons
+        fetchQuiz={fetchQuiz}
+        handleSubmit={handleSubmit}
+        isLoading={isLoading}
+        isFetching={isFetching}
+      />
     </div>
   );
 };

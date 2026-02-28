@@ -1,9 +1,18 @@
 import Button from '@/components/Button';
-import { useQuiz } from '../hooks/useQuiz';
+
 import { useQuizStore } from '@/store/useQuizStore';
 
-const QuizActionButtons = () => {
-  const { fetchQuiz, handleSubmit, isLoading } = useQuiz();
+const QuizActionButtons = ({
+  fetchQuiz,
+  handleSubmit,
+  isLoading,
+  isFetching,
+}: {
+  fetchQuiz: () => void;
+  handleSubmit: () => void;
+  isLoading: boolean;
+  isFetching: boolean;
+}) => {
   const isGrading = useQuizStore((s) => s.isGrading);
   const userAnswer = useQuizStore((s) => s.userAnswer);
   const result = useQuizStore((s) => s.result);
@@ -13,8 +22,8 @@ const QuizActionButtons = () => {
       <Button
         className='w-50 bg-white/30 text-white hover:text-black'
         onClick={fetchQuiz}
-        disabled={isLoading || isGrading}
-        isLoading={isGrading || isLoading}
+        disabled={isFetching || isGrading}
+        isLoading={isFetching || isLoading}
       >
         문제받기
       </Button>

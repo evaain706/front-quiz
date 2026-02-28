@@ -42,8 +42,9 @@ export const useQuiz = () => {
     isLoading,
     isError,
     refetch,
+    isFetching,
   } = useQuery<Quiz>({
-    queryKey: queryKeys.quiz.all,
+    queryKey: queryKeys.quiz.generate(category, level),
     queryFn: () => generateQuiz(category, level),
     enabled: false,
     retry: false,
@@ -52,7 +53,6 @@ export const useQuiz = () => {
   const fetchQuiz = () => {
     setResult(null);
     setUserAnswer('');
-    queryClient.resetQueries({ queryKey: queryKeys.quiz.all });
     refetch();
   };
 
@@ -65,11 +65,10 @@ export const useQuiz = () => {
         quiz,
         userAnswer,
       });
-
       setResult(response.data);
       if (user) {
-        handleAddStatistics(response.data.isCorrect);
-        queryClient.invalidateQueries({
+        await handleAddStatistics(response.data.isCorrect);
+        await queryClient.invalidateQueries({
           queryKey: queryKeys.statistics.all,
         });
       }
@@ -97,6 +96,7 @@ export const useQuiz = () => {
     quiz,
     isLoading,
     isError,
+    isFetching,
     fetchQuiz,
     handleSubmit,
   };
