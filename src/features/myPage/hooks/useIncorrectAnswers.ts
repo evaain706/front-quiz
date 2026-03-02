@@ -10,8 +10,6 @@ import { queryKeys } from '@/queryKeys';
 import type { Quiz } from '@/types/quizTypes';
 
 export const useIncorrectAnswers = () => {
-  
-  const quiz = useQueryClient().getQueryData<Quiz>(queryKeys.quiz.all); // 캐시에 저장되어있는 데이터 꺼내오기
   const result = useQuizStore((s) => s.result);
   const userAnswer = useQuizStore((s) => s.userAnswer);
 
@@ -23,6 +21,10 @@ export const useIncorrectAnswers = () => {
   const addToast = useToastStore((s) => s.addToast);
 
   const queryClient = useQueryClient();
+
+  const quiz = useQueryClient().getQueryData<Quiz>(
+    queryKeys.quiz.generate(category, level),
+  ); // 캐시에 저장되어있는 데이터 꺼내오기
 
   const handleAddInCorrect = async () => {
     try {
